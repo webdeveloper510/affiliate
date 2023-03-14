@@ -4,24 +4,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import logo from '../assets/logo.png';
 
-function Home (){
+function Header (){
     return (
         <>
 
-<header class="header-area absulate-header cssanimation d-none d-xl-block navbar-fixed-top sticky fadeInTop animated">
-  <div class="container">
-    <div class="row">
-      <div class="col-9 col-md-3">
-        <div class="site-logo">
+<header className="header-area absulate-header cssanimation d-none d-xl-block navbar-fixed-top sticky fadeInTop animated">
+  <div className="container">
+    <div className="row">
+      <div className="col-9 col-md-3">
+        <div className="site-logo">
           <a href="/">
             <img src={logo} alt="Logo" />
           </a>
         </div>
       </div>
-      <div class="col-3 col-md-9">
-        <div class="main-menu-wrap">
-          <nav class="proone-nav">
-            <ul class="menu">
+      <div className="col-3 col-md-9">
+        <div className="main-menu-wrap">
+          <nav className="proone-nav">
+            <ul className="menu">
               <li>
               <NavLink className="" to="/">Home</NavLink>
               </li>
@@ -40,7 +40,7 @@ function Home (){
             </ul>
           </nav>
         </div>
-        <div class="mobile-menu-area"></div>
+        <div className="mobile-menu-area"></div>
       </div>
     </div>
   </div>
@@ -50,4 +50,4 @@ function Home (){
     ) ;
 }
   
-export default Home;
+export default Header;
