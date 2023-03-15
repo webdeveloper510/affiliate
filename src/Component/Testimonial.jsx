@@ -4,10 +4,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import testi1 from '../assets/testi-1.png';
 import testi2 from '../assets/testi-2.png';
+
+
 function Testimonial (){
-
-    
-
     return (
         <>
         <div className='testimonial-area pt-110'>

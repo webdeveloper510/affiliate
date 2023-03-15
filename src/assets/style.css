@@ -35253,7 +35253,7 @@ a.slick-prev.slick-arrow {
 .section-title h2 {
     font-size: 38px;
     line-height: 48px;
-    color: #3c368c
+    color: #5271FD;
 }
 
 .section-title h2 p {
@@ -35347,7 +35347,7 @@ a.slick-prev.slick-arrow {
 }
 
 .angleindouble.color-1 {
-    background-color: #6860fb;
+    background-color: #1032bb;
     color: #fff;
     z-index: 1
 }
@@ -36039,7 +36039,8 @@ header .col-3.col-md-9 {
 .single-feature h2 {
     font-size: 24px;
     line-height: 30px;
-    color: #3c368c
+    color: #5271FD;
+    text-transform: uppercase;
 }
 
 .features-wrap {
@@ -36334,19 +36335,19 @@ header .col-3.col-md-9 {
     margin-bottom: 60px
 }
 .notification-area.pt-120pb-115 h2 {
-    color: #6860fb !important;
+    color: #5271FD !important;
 }
 .custom-color p{
     color: #707070!important;
 }
 .notification-content h3 {
-    color: #6860fb !important;
+    color: #5271FD !important;
     font-weight: 700;
 }
 .notification-content h2 {
     font-size: 38px;
     line-height: 48px;
-    color:#6860fb;
+    color:#5271FD;
     margin-bottom: 25px
 }
 
@@ -36377,7 +36378,7 @@ header .col-3.col-md-9 {
 .video-area {
     background-size: cover;
     background-position: 50%;
-    background-image: url('./video.svg');
+    background-image: url('./video.png');
 }
 
 .video-area .section-title {
@@ -36660,7 +36661,7 @@ section.google-assistant img {
 .google-assistant i {
     font-size: 22px;
     color: #fff;
-    background: #6860fb;
+    background: #5271FD;
     padding: 10px;
     border-radius: 100%;
 }
@@ -36712,7 +36713,7 @@ section.google-assistant img {
 .single-testimonial .testi-img {
     display: inline-block;
     margin-top: -65px;
-    border: 5px solid #6860fb;
+    border: 5px solid #3b32bb;
     border-radius: 50%
 }
 
@@ -36737,21 +36738,21 @@ section.google-assistant img {
 
 .single-testimonial .testi-content>i {
     font-size: 30px;
-    color: #6860fb;
+    color: #3b32bb;
     line-height: 48px;
     margin: 3px 0 1px;
     display: block
 }
 
 .single-testimonial .testi-content h5 {
-    color: #6860fb;
+    color: #3b32bb;
     font-weight: 500;
     margin: 5px 0 6px
 }
 
 .single-testimonial .testi-content h6 {
     font-size: 13px;
-    color: #707070;
+    color: #fff;
     font-weight: 500;
     text-transform: uppercase
 }
@@ -36785,10 +36786,10 @@ section.google-assistant img {
     margin: 0 8px;
 }
 .carousel .control-next.control-arrow:before {
-    border-left: 17px solid #6861fb;
+    border-left: 17px solid #1032bb
 }
 .carousel .control-prev.control-arrow:before{
-    border-right: 17px solid #6861fb;
+    border-right: 17px solid #1032bb;
 }
 .newsleater-area {
     position: relative
@@ -36800,14 +36801,14 @@ p.carousel-status {
     display: none;
 }
 .testimonial-area {
-    background-image: url(./technical.svg);
+    background-image: url(./technical.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 10%;
     text-align:center;
 }
 .testimonial-area h2{
-    color: #6860fb !important;
+    color: #fff !important;
     width: 100% !important;
     text-transform: uppercase;
 }
@@ -37300,7 +37301,7 @@ form.contact-us-form h5 {
 
 footer.footer-area {
     position: relative;
-    background-color: rgb(89 48 135 / 9%);
+    background-color: rgb(16 50 187 / 19%);
     background-image:url('./footer-shape.png');
     background-size: cover;
     background-position: 50%;
@@ -37356,7 +37357,7 @@ footer.footer-area:before {
 .footer-menu h3 {
     font-size: 20px;
     font-weight: 700;
-    color:#6860fb;
+    color:#5271FD;
 }
 .widget.footer-menu ul li a:hover {
     color: #feac01;
@@ -37384,7 +37385,7 @@ footer.footer-area:before {
 }
 
 .footer-social ul li a {
-    background-color: #6860fb;
+    background-color: #5271FD;
     color: #fff;
     width: 36px;
     height: 36px;
@@ -37553,7 +37554,7 @@ footer.footer-area.style-3 {
     width: 70%;
 }
 section.google-assistant h2 {
-    color: #6860fb !important;
+    color: #5271FD !important;
 }
 
 .google-assistant .content-part .google-icon p {
@@ -39752,7 +39753,7 @@ img.mfp-img {
     width: 100%
 }
 .faq-area h2 {
-    color: #6860fb !important;
+    color: #5271FD !important;
     text-transform: uppercase;
 }
 .faq-area p {
