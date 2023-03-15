@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import logo from '../assets/logo.png';
-import signup from '../assets/account-login.png';
+import forgotpassword from '../assets/forgot.webp';
   
 function ForgotPassword (){
 
@@ -31,7 +31,7 @@ function ForgotPassword (){
                
     
         <div className='col-md-6 left-desktop'>
-        <img src={signup} alt="Logo" />
+        <img src={forgotpassword} alt="Logo" />
             </div>
                
               <div className='col-md-6 right-desktop'>
@@ -46,7 +46,7 @@ function ForgotPassword (){
                       </a>
                       </div>
                       </h2>
-                      <div className="mb-3">
+                      <div className="mb-3"> 
                         <h3>Forgot Password</h3>
                         <p>Enter your email address and your password will be reset and emailed to you</p>
                         <Form>
