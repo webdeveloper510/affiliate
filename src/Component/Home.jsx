@@ -1,13 +1,14 @@
 import React from 'react';
 import Icofont from 'react-icofont';
-import growimage1 from '../assets/grow11.png';
-import growimage2 from '../assets/grow2.svg';
-import growimage3 from '../assets/grow31.png';
+import growimage1 from '../assets/coontent.webp';
+import growimage2 from '../assets/market.webp';
+import growimage3 from '../assets/online.webp';
 import growimage4 from '../assets/grow5.png';
-import feature1 from '../assets/feature-1.png';
-import feature2 from '../assets/feature-2.png';
-import feature3 from '../assets/feature-3.png';
-import feature4 from '../assets/feature-4-1.png';
+import feature1 from '../assets/Group1.avif';
+import feature2 from '../assets/Group2.avif';
+import feature3 from '../assets/Group3.avif';
+import feature4 from '../assets/Group4.avif';
+import feature5 from '../assets/Group5.avif';
 import heroimage from '../assets/top-image.png';
 import growimage6 from '../assets/grow6.webp';
 import  Testimonial from './Testimonial';
@@ -23,8 +24,8 @@ function Home (){
             <div className="row">
               <div className="col-md-6">
                 <div className="hero-content">
-                  <h1>Where does it come from ?</h1>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                  <h1>Your Risk Free <br></br> Influencer Marketing <br></br>Platform</h1>
+                  <p>Contact and expand your reach with the right content creators from different categories including: Fashion, Beauty, Health, Fitness, Travel</p>
                   <a className="buttonfx angleindouble color-1 mb-2" href="/">
                    <i className="icofont-airplane-alt"></i>Start For Free </a>
                   <a className="starting" href="/">Watch a Demo Video</a>
@@ -56,21 +57,21 @@ function Home (){
     <div className="row">
       <div className="col-md-6">
         <div className="section-title width-80" data-aos="fade-up">
-          <h2>EVERYTHING YOU NEED FOR AFFILIATE MANAGEMENT</h2>
+          <h2>HOW IT WORKS</h2>
           <p>Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her.</p>
         </div>
         <div className="row">
           <div className="col-md-6">
             <div className="single-feature animation-1" data-aos="fade-right">
               <img src={feature1}  alt="feature" />
-              <h2>Recruit</h2>
+              <h3>Pick one or more influencers</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
             </div>
           </div>
           <div className="col-md-6">
             <div className="single-feature animation-1" data-aos="fade-right">
             <img src={feature2} alt="feature" />
-              <h2>Customize</h2>
+              <h3>Fill out your store and product info</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
             </div>
           </div>
@@ -79,14 +80,23 @@ function Home (){
           <div className="col-md-6">
             <div className="single-feature" data-aos="fade-up">
             <img src={feature3} alt="feature"/>
-              <h2>Manage</h2>
+              <h3>Request <br></br>Campaign</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
             </div>
           </div>
           <div className="col-md-6">
             <div className="single-feature" data-aos="fade-down">
             <img src={feature4} alt="feature"/>
-              <h2>Reward</h2>
+              <h3>Once accepted, Share the tracking coupon to the influencer</h3>
+              <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="single-feature" data-aos="fade-up">
+            <img src={feature5} alt="feature"/>
+              <h3>Watch your sales grow</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
             </div>
           </div>
@@ -111,8 +121,7 @@ function Home (){
                 <div className="col-md-12">
                 <div className="video">
                   
-                    <iframe width="100%" height="700" src="https://www.youtube.com/embed/W-nbsnXtSZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                   
+                  <img src={growimage2} alt="markte place video"/>          
                    
                 </div>
                 </div>
@@ -137,20 +146,10 @@ function Home (){
       </div>
       <div className="col-md-6">
         <div className="notification-content" data-aos="fade-up">
-          <h3>BUILD YOUR TEAM</h3>
-          <p>Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her.</p>
-          <ul>
-            <li>
-              <i className="icofont-check"></i>Delay rapid joy share allow age manor six.
-            </li>
-            <li>
-              <i className="icofont-check"></i>Exquisite excellent son gentleman acuteness her.
-            </li>
-            <li>
-              <i className="icofont-check"></i>Went why far saw many knew.
-            </li>
-          </ul>
-          <a className="buttonfx angleindouble color-2" href="/cart">
+          <h3>Reach Influencers</h3>
+          <p>Hand pick content creators to promote your products with just a few clicks</p>
+         
+          <a className="buttonfx angleindouble color-2" href="/">
           <i className="icofont-read-book-alt"></i> Learn More </a>
         </div>
       </div>
@@ -158,20 +157,10 @@ function Home (){
     <div className="row">
       <div className="col-md-6">
         <div className="notification-content" data-aos="fade-right">
-          <h3>EMPOWER & MANAGE AFFILIATES</h3>
-          <p>Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her.</p>
-          <ul>
-            <li>
-              <i className="icofont-check"></i>Delay rapid joy share allow age manor six.
-            </li>
-            <li>
-              <i className="icofont-check"></i>Exquisite excellent son gentleman acuteness her.
-            </li>
-            <li>
-              <i className="icofont-check"></i>Went why far saw many knew.
-            </li>
-          </ul>
-          <a className="buttonfx angleindouble color-2" href="/cart">
+          <h3>For Marketplace</h3>
+          <p>Increase your revenue stream to your business collect recurring fees from stors who use affeli in your Market place.</p>
+          
+          <a className="buttonfx angleindouble color-2" href="/">
           <i className="icofont-read-book-alt"></i> Learn More </a>
         </div>
       </div>
@@ -189,19 +178,9 @@ function Home (){
       </div>
       <div className="col-md-6">
         <div className="notification-content" data-aos="fade-up">
-          <h3>GROW YOUR TEAM, GROW YOUR BUSINESS</h3>
-          <p>Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her.</p>
-          <ul>
-            <li>
-              <i className="icofont-check"></i>Delay rapid joy share allow age manor six.
-            </li>
-            <li>
-              <i className="icofont-check"></i>Exquisite excellent son gentleman acuteness her.
-            </li>
-            <li>
-              <i className="icofont-check"></i>Went why far saw many knew.
-            </li>
-          </ul>
+          <h3>For Vendor</h3>
+          <p>With our partners smart payment solutions, you will get instant payouts!</p>
+          
           <a className="buttonfx angleindouble color-2" href="/cart">
           <i className="icofont-read-book-alt"></i> Learn More </a>
         </div>

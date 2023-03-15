@@ -18,7 +18,7 @@ function Header (){
           </a>
         </div>
       </div>
-      <div className="col-3 col-md-9">
+      <div className="col-md-3 col-md-9">
         <div className="main-menu-wrap">
           <nav className="proone-nav">
             <ul className="menu">
@@ -29,13 +29,21 @@ function Header (){
                 <NavLink to="/product"> Product </NavLink>
                 </li>
                 <li>
-                <NavLink to="/marketplace"> Market Place </NavLink>
+                <NavLink> Market Place </NavLink>
+                <ul class="subpage">
+                <li><NavLink to="/marketplace"> Home </NavLink></li>
+                <li><NavLink to="/offers"> Offers </NavLink></li>
+                <li><NavLink to="/products"> Products </NavLink></li>
+                </ul>
                 </li>
                 <li>
                 <NavLink to="/resources"> Resources </NavLink>
                 </li>
                 <li>
                 <NavLink to="/login" className='login'> Login</NavLink>
+                </li>
+                <li>
+                <NavLink to="/signup" className='buttonfx angleindouble color-1 Signup'> <i class="icofont-sign-in"></i> SignUp</NavLink>
                 </li>
             </ul>
           </nav>

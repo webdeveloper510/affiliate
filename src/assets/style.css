@@ -35573,7 +35573,7 @@ nav.proone-nav {
 }
 
 .proone-nav .menu>li ul {
-    background-color: #c065de;
+    background-color: #1032bb;
     border-top: 2px solid #feac01;
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -35651,7 +35651,7 @@ header .col-3.col-md-9 {
 .hero-area.style-1 {
     background-position: 50%;
     background-size: cover;
-    height: 100vh;
+    height: 110vh;
     position: relative;
     background-image: url('./Clip.png');
 }
@@ -36033,7 +36033,8 @@ header .col-3.col-md-9 {
 }
 
 .single-feature img {
-    margin-bottom: 25px
+    margin-bottom: 25px;
+    width: 150px;
 }
 
 .single-feature h2 {
@@ -36343,6 +36344,8 @@ header .col-3.col-md-9 {
 .notification-content h3 {
     color: #5271FD !important;
     font-weight: 700;
+    font-size: 21px;
+    text-transform: uppercase;
 }
 .notification-content h2 {
     font-size: 38px;
@@ -36377,10 +36380,16 @@ header .col-3.col-md-9 {
 
 .video-area {
     background-size: cover;
-    background-position: 50%;
+    /* background-position: 50%; */
     background-image: url('./video.png');
 }
-
+.single-feature h3 {
+    font-size: 21px;
+    line-height: 26px;
+    color: #5271FD;
+    font-weight: 700;
+    text-transform: uppercase;
+}
 .video-area .section-title {
     position: relative;
     top: 90px
@@ -36416,7 +36425,11 @@ div#video h2 {
     width: 100%;
     height: 100%;
     position: relative;
-    top: 130px
+    top: 130px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .video a {
@@ -39764,7 +39777,89 @@ img.mfp-img {
 }
 .faq-area button {
     background: #fff !important;
+    font-weight: 700;
 }
 .faq-area .accordion {
     margin-top: 65px;
+}
+.notification-img {
+    margin-top: 53px;
+}
+
+a.buttonfx.angleindouble.color-1.Signup {
+    padding: 6px 12px;
+    color: #fff;
+    background-color: #1032bb;
+}
+
+.right-desktop {
+    height: 100vh;
+}
+.content {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.left-desktop {
+    background-position: 50%;
+    background-size: cover;
+    height: 100vh;
+    background: #0080FF;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 0 100em 100em 0;
+    background-image: linear-gradient(to right, #0044ff00, #1c4ed7);
+}
+.left-desktop img {
+    width: 53%;
+    margin: 0 auto;
+}
+.login-div {
+    box-shadow: -2px 2px 15px rgba(9, 44, 76, 0.05);
+    border: 2px solid #e8e9f2;
+    padding: 20px;
+    background: #EDEAF2;
+}
+.login-div .site-logo {
+    margin-bottom: 55px;
+}
+.login-div h3 {
+    font-size: 21px;
+    line-height: 26px;
+    color: #5271FD;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+span.loginby , .forgot-password {
+    font-size: 13px;
+    text-align: center;
+    font-weight: 600;
+    cursor:pointer;
+}
+
+.loginshopifyremove {
+    display: none;
+}
+.loginnameremove {
+    display: block !important;
+}
+.inline-style {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+.loginnameremove .form-check-label {
+    font-size: 14px;
+}
+.forgot-password {
+    text-align: center;
+    width: 100%;
+    display: block; 
+    color: #0062cc;
+    margin-top: 15px;
+}
+.login-div button {
+    background: #1032bb;
 }
