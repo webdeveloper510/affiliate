@@ -29,7 +29,7 @@ function Header (){
                 <NavLink to="/product"> Product </NavLink>
                 </li>
                 <li>
-                <NavLink> Market Place </NavLink>
+                <span> Market Place </span>
                 <ul class="subpage">
                 <li><NavLink to="/marketplace"> Home </NavLink></li>
                 <li><NavLink to="/offers"> Offers </NavLink></li>
