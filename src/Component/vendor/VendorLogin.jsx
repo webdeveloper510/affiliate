@@ -31,12 +31,19 @@ function VendorLogin() {
 
     console.log(isActive)
     const logVendor = (e) => {
+        let data;
+            if (!isActive) {
+                data = {
+                    password: password,
+                    email: email,
+                };
+            } else {
+                data = {
+                    shop: shopifyUrl,
+                };
+        }
         e.preventDefault();
-        axios.post(API.BASE_URL + 'campaign/vendor/login/', {
-            password: password,
-            email: email,
-            shop_url: shopifyUrl,
-        },)
+        axios.post(API.BASE_URL + 'campaign/vendor/login/', data)
         .then(function (response) {
             console.log("Vendor Login", response);
             toast.success("Logged In Successfully!");
