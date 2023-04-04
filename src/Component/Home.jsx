@@ -1,5 +1,6 @@
 import React from 'react';
 import Icofont from 'react-icofont';
+import { useLocation } from 'react-router-dom';
 import growimage1 from '../assets/coontent.webp';
 import growimage2 from '../assets/market.webp';
 import growimage3 from '../assets/online.webp';
@@ -23,7 +24,7 @@ function Home (){
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <div className="hero-content">
+                <div className="hero-content text-start">
                   <h1>Your Risk Free <br></br> Influencer Marketing <br></br>Platform</h1>
                   <p>Contact and expand your reach with the right content creators from different categories including: Fashion, Beauty, Health, Fitness, Travel</p>
                   <a className="buttonfx angleindouble color-1 mb-2" href="/">
@@ -62,14 +63,14 @@ function Home (){
         </div>
         <div className="row">
           <div className="col-md-6">
-            <div className="single-feature animation-1" data-aos="fade-right">
+            <div className="single-feature animation-1 d-flex flex-column justify-content-start align-items-start" data-aos="fade-right">
               <img src={feature1}  alt="feature" />
               <h3>Pick one or more influencers</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
             </div>
           </div>
           <div className="col-md-6">
-            <div className="single-feature animation-1" data-aos="fade-right">
+            <div className="single-feature animation-1 d-flex flex-column justify-content-start align-items-start" data-aos="fade-right">
             <img src={feature2} alt="feature" />
               <h3>Fill out your store and product info</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
@@ -78,14 +79,14 @@ function Home (){
         </div>
         <div className="row">
           <div className="col-md-6">
-            <div className="single-feature" data-aos="fade-up">
+            <div className="single-feature d-flex flex-column justify-content-start align-items-start" data-aos="fade-up">
             <img src={feature3} alt="feature"/>
               <h3>Request <br></br>Campaign</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
             </div>
           </div>
           <div className="col-md-6">
-            <div className="single-feature" data-aos="fade-down">
+            <div className="single-feature d-flex flex-column justify-content-start align-items-start" data-aos="fade-down">
             <img src={feature4} alt="feature"/>
               <h3>Once accepted, Share the tracking coupon to the influencer</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
@@ -94,7 +95,7 @@ function Home (){
         </div>
         <div className="row">
           <div className="col-md-6">
-            <div className="single-feature" data-aos="fade-up">
+            <div className="single-feature  d-flex flex-column justify-content-start align-items-start" data-aos="fade-up">
             <img src={feature5} alt="feature"/>
               <h3>Watch your sales grow</h3>
               <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>

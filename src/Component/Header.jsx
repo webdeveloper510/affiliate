@@ -34,6 +34,7 @@ function Header (){
                 <li><NavLink to="/marketplace"> Home </NavLink></li>
                 <li><NavLink to="/offers"> Offers </NavLink></li>
                 <li><NavLink to="/products"> Products </NavLink></li>
+                <li><NavLink to="/vendor-signup"> Vendor Login/  Signup </NavLink></li>
                 </ul>
                 </li>
                 <li>
