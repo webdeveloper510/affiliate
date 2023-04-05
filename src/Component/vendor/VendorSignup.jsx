@@ -72,6 +72,9 @@ function VendorSignup() {
             else if(error.response.data.email== "Password must be more than 8 character.") {
                 toast.warn("Password must be more than 8 character.");
             }
+            else if(error.response.data.shopify_url) {
+                toast.warn("User with this shopify url already exists.");
+            }
           })
     }
 
