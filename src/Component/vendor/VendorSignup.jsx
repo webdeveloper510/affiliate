@@ -72,6 +72,18 @@ function VendorSignup() {
             else if(error.response.data.email== "Password must be more than 8 character.") {
                 toast.warn("Password must be more than 8 character.");
             }
+            else if(error.response.data.username) {
+                toast.warn("Username may not be blank.");
+            }
+            else if(error.response.data.email == "This field may not be blank.") {
+                toast.warn("Email may not be blank.");
+            }
+            else if(error.response.data.password) {
+                toast.warn("Password may not be blank.");
+            }
+            else if(error.response.data.confirm_password) {
+                toast.warn("Confirm Password may not be blank.");
+            }
             else if(error.response.data.shopify_url) {
                 toast.warn("User with this shopify url already exists.");
             }
