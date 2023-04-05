@@ -66,26 +66,38 @@ function VendorSignup() {
           })
           .catch(function (error) {
             console.log(error);
-            if(error.response.data.email== "user with this email already exists.") {
-                toast.warn("User with this email already exists.");
-            }
-            else if(error.response.data.email== "Password must be more than 8 character.") {
-                toast.warn("Password must be more than 8 character.");
-            }
-            else if(error.response.data.username) {
+             if(error.response.data.username) {
                 toast.warn("Username may not be blank.");
+            }
+            else if(error.response.data.email== "user with this email already exists.") {
+                toast.warn("User with this email already exists.");
             }
             else if(error.response.data.email == "This field may not be blank.") {
                 toast.warn("Email may not be blank.");
             }
-            else if(error.response.data.password) {
+            else if(error.response.data.email == "Enter a valid email address.") {
+                toast.warn("Enter a valid email address");
+            }
+            else if(error.response.data.password == "Password must be more than 8 character.") {
+                toast.warn("Password must be more than 8 character.");
+            }
+            else if(error.response.data.password == "This field may not be blank.") {
                 toast.warn("Password may not be blank.");
             }
-            else if(error.response.data.confirm_password) {
+            else if(error.response.data.confirm_password == "This field may not be blank.") {
                 toast.warn("Confirm Password may not be blank.");
             }
-            else if(error.response.data.shopify_url) {
+            else if(error.response.data.shopify_url == "Shopify_url cannot be empty") {
+                toast.warn("Shopify url cannot be empty");
+            }
+            else if(error.response.data.shopify_url == "user with this shopify url already exists.") {
                 toast.warn("User with this shopify url already exists.");
+            }
+            else if(error.response.data.instagram_url == "instagram_url cannot be empty") {
+                toast.warn("Instagram url cannot be empty");
+            }
+            else if(error.response.data.non_field_errors == "Password fields did not match.") {
+                toast.warn("Passwords did not match");
             }
           })
     }
