@@ -4,6 +4,7 @@ import Logo from '../../assets/logo.png';
 import VendorSign from '../../assets/login-img.svg';
 import { toast } from 'react-toastify';
 import { API } from '../../config/Api';
+import { Link } from 'react-router-dom';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -99,7 +100,10 @@ function VendorLogin() {
                 <button onClick={handleClick} className='log'>
                     {isActive==true ? "Login by Email" : "Login by Shop URL"}
                 </button>
-                <button className='buttonfx angleindouble color-1 Signup mt-4' onClick={logVendor}>Login</button>
+                <div className="links d-flex align-items-center mt-4">
+                    <button className='buttonfx angleindouble color-1 Signup' onClick={logVendor}>Login</button>
+                    <p className='mb-0 ms-3'>Or <Link to='/vendor-signup'> Sign Up</Link></p>
+                </div>
             </div>
         </div>
     </div>
