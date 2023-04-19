@@ -16,8 +16,17 @@ function VendorSignup() {
     const [category, setCategory] = useState('')
     const [shopifyUrl, setShopifyUrl] = useState('')
     const [instagramUrl, setInstagramUrl] = useState('')
-
+    const [selectedFile, setSelectedFile] = useState(null);
     const navigate = useNavigate();
+
+    const onFileChange = event => {
+        setSelectedFile(event.target.files[0]);
+        console.log(event.target.files[0])
+        
+    };
+
+
+    console.log("Selected File", selectedFile)
 
     const handleName = (event) => {
         setName(event.target.value);
@@ -49,21 +58,27 @@ function VendorSignup() {
 
     const createVendor = (e) => {
         e.preventDefault();
-        console.log("SHOP" ,shopifyUrl)
-        axios.post(API.BASE_URL + 'campaign/vendor/register/', {
-            password: password,
-            email: email,
-            confirm_password: confirmPassword,
-            shopify_url: shopifyUrl,
-            instagram_url: instagramUrl,
-            category: category,
-            username: name
-        },)
-          .then(function (response) {
+        const formData = new FormData();
+        formData.append('image',selectedFile);
+        formData.append('username', name);
+        formData.append('category', category);
+        formData.append('instagram_url', instagramUrl);
+        formData.append('email', email);
+        formData.append('shopify_url', shopifyUrl);
+        formData.append('password', password);
+        formData.append('confirm_password', confirmPassword);
+        formData.append('type','normal');
+        console.log(formData)
+        axios.post(API.BASE_URL + 'campaign/vendor/register/',formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        })
+        .then(function (response) {
             console.log("Created New Vendor", response);
             toast.success("Signup Successfully!");
             navigate('/vendor-signin');
-          })
+        })
           .catch(function (error) {
             console.log(error);
              if(error.response.data.username) {
@@ -117,6 +132,7 @@ function VendorSignup() {
                     <input type="email" placeholder='Email' value={email} onChange={handleEmail} />
                     <input type="password" placeholder='Password' value={password} onChange={handlePassword} />
                     <input type="password" placeholder='Confirm Password' value={confirmPassword} onChange={handleConfirmPassword} />
+                    <input type="file" onChange={onFileChange} />
                     <input type="text" placeholder='Category' value={category} onChange={handleCategory} />
                     <div className="input-container w-100 d-flex">
                         <label htmlFor="">https://</label>
