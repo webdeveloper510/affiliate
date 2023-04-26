@@ -11,81 +11,58 @@ function Login (){
 
 
     return (
-
-        <>
         <div className='margin-outer'>
-        <div className='container-fluid'>
-        <div className="row vh-100 d-flex justify-content-center align-items-center">
-               
-        
-        <div className='col-md-6 left-desktop'>
-        <img src={login} alt="Logo" />
-            </div>
-               
+          <div className='container-fluid'>
+            <div className="row vh-100 d-flex justify-content-center align-items-center">
+              <div className='col-md-6 left-desktop'>
+                <img src={login} alt="Logo" />
+              </div>
               <div className='col-md-6 right-desktop'>
                 <div className="content login-content">
-                    <div className="col-xs-12 col-md-8">
-              
+                  <div className="col-xs-12 col-md-8">
                     <div className="mb-3 mt-md-4 login-div">
-                      <h2 className="fw-bold mb-2 text-center text-uppercase ">
-                      <div className="site-logo">
-                        <a href="/">
-                      <img src={logo} alt="Logo" />
-                      </a>
-                      </div>
-                      </h2>
                       <div className="mb-3">
                         <h3>Affiliate login</h3>
                         <Form>
-                        <div className= "loginnameremove">
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label className="text-center">
-                              Email
-                            </Form.Label>
-                            <Form.Control type="email" placeholder="Enter Email" />
-                          </Form.Group> 
+                          <div className= "loginnameremove">
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label className="text-center">
+                                  Email
+                                </Form.Label>
+                                <Form.Control type="email" placeholder="Enter Email" />
+                            </Form.Group> 
+                            <Form.Group className="mb-3" controlId="formname">
+                              <Form.Label className="text-center">
+                                Password
+                              </Form.Label>
+                              <Form.Control type="password" placeholder="Enter Password" />
+                            </Form.Group>
 
-                          <Form.Group className="mb-3" controlId="formname">
-                            <Form.Label className="text-center">
-                              Password
-                            </Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" />
-                          </Form.Group>
+                            <a href='#/forgotpassword' className='forgot-password'>Forgot Password</a>
 
-                          <a href='#/forgotpassword' className='forgot-password'>ForgotPassword</a>
-
-                          <div className="d-grid">
-                            <Button variant="primary" type="submit">
-                              Login
-                            </Button>
+                            <div className="d-grid">
+                              <Button variant="primary" type="submit">
+                                Login
+                              </Button>
+                            </div>
                           </div>
-                          
-                         </div>
-
-                         
-                          
                         </Form>
                         <div className="mt-3">
                           <p className="mb-0  text-center">
-                           Haven't created an account yet? {' '}
+                          Haven't created an account yet? {' '}
                             <a href="#/signup" className="text-primary fw-bold">
-                              Sign In
+                              Sign Up
                             </a>
                           </p>
                         </div>
                       </div>
                     </div>
-                 
+                  </div>
                 </div>
-                </div>
-              </div>
               </div>
             </div>
-        
-    </div>
-     
-     
-     </>
+          </div>
+        </div>
     ) ;
 }
   

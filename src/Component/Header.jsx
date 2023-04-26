@@ -3,6 +3,7 @@ import { NavLink} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 function Header (){
     return (
@@ -13,9 +14,9 @@ function Header (){
     <div className="row">
       <div className="col-9 col-md-3">
         <div className="site-logo">
-          <a href="/">
+          <Link to="/">
             <img src={logo} alt="Logo" />
-          </a>
+          </Link>
         </div>
       </div>
       <div className="col-md-3 col-md-9">
