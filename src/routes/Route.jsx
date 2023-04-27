@@ -9,6 +9,8 @@ import SignUp from '../Component/SignUp';
 import Forgotpassword from '../Component/Forgotpassword';
 import VendorSignup from '../Component/vendor/VendorSignup';
 import VendorLogin from '../Component/vendor/VendorLogin';
+import Dashboard from '../Component/dashboard/Dashboard';
+import CampList from '../Component/dashboard/CampList';
 
 const Routing = () => {
     return(
@@ -24,6 +26,8 @@ const Routing = () => {
             <Route exact path='/forgotpassword' element={< Forgotpassword />}></Route>
             <Route exact path='/vendor-signup' element={< VendorSignup />}></Route>
             <Route exact path='/vendor-signin' element={< VendorLogin />}></Route>
+            <Route exact path='/dashboard' element={<Dashboard />}></Route>
+            <Route exact path='/list' element={<CampList />}></Route>
         </Routes>
     </div>
     )

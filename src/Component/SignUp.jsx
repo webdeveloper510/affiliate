@@ -5,6 +5,8 @@ import Select from 'react-select';
 import axios from 'axios';
 import { API } from '../config/Api';
 import { toast } from 'react-toastify';
+import MailPop from '../assets/mail-pop.jpg'
+import { Link } from 'react-router-dom';
 
 function Signup (){
 
@@ -29,6 +31,7 @@ function Signup (){
    const [showGender, setShowGender] = useState(false);
    const [showPromotionOptions, setShowPromotionOptions] = useState(false);
    const [showLocation, setShowLocation] = useState(false);
+   const [mailPopup, setMailPopup] = useState(false);
 
   const options = useMemo(() => countryList().getData(), [])
   const changeHandler = country => {
@@ -36,10 +39,13 @@ function Signup (){
   }
 
   const stepAhead = () => {
-  //  if(name && email && password && confirmPassword &&country && userHandle != "") {
+   if(name && email && password && confirmPassword &&country && userHandle != "") {
     setStepOne(false)
     setStepTwo(true)
-  //  }
+   }
+   else {
+    toast.warn("Please Select all Values")
+   }
   }
 
   const stepBehind = () => {
@@ -49,7 +55,7 @@ function Signup (){
 
   const industry = ["Fashion", "Jewellery", "Beauty & Health", "Sport & entertainment", "Grocery & food"];
   const promotionData = ["Affiliate Link", 'Coupon'];
-  const ageData = ['Under 18', '18-24', '25-34', '35-44'];
+  const ageData = ["Under 18", "18-24", "25-34", "35-44"];
   const genderData = ['Male', 'Female', 'Others'];
   const locationData = ['Afghanistan', 'Albania', 'Algeria', 'Austria', 'Belgium', 'Canada', 'Denmark', 'Finland', 'France', 'Ghana', 'Hungary', 'India', 'USA'];
 
@@ -70,26 +76,26 @@ function Signup (){
   };
 
   const handleAgeSelect = (value) => {
-    if (ageData.includes(value)) {
-      setAge(ageData.filter((v) => v !== value));
+    if (age.includes(value)) {
+      setAge(age.filter((v) => v !== value));
     } else {
-      setAge([...ageData, value]);
+      setAge([...age, value]);
     }
   };
 
   const handleGenderSelect = (value) => {
-    if (genderData.includes(value)) {
-      setGender(genderData.filter((v) => v !== value));
+    if (gender.includes(value)) {
+      setGender(gender.filter((v) => v !== value));
     } else {
-      setGender([...genderData, value]);
+      setGender([...gender, value]);
     }
   };
   
   const handleLocationSelect = (value) => {
-    if (locationData.includes(value)) {
-      setLocation(locationData.filter((v) => v !== value));
+    if (location.includes(value)) {
+      setLocation(location.filter((v) => v !== value));
     } else {
-      setLocation([...locationData, value]);
+      setLocation([...location, value]);
     }
   };
 
@@ -113,7 +119,8 @@ function Signup (){
     setShowLocation(!showLocation);
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
     axios.post(API.BASE_URL + 'influencer/create/', {
       username: name,
       email: email,
@@ -130,22 +137,20 @@ function Signup (){
     })
     .then(function (response) {
       console.log("Vendor Login", response);
-      toast.success("Logged In Successfully!");
+      toast.success("Sign Up Successfully!");
+      setMailPopup(true);
     })
     .catch(function (error) {
       console.log(error);
     })
   }
 
-  console.log("Industries", industries);
-  console.log(showPromotionOptions)
-
   return (
     <div className='margin-outer-signup'>
       <div className='container-fluid'>
-        <div className="row d-flex justify-content-center align-items-center">
+        <div className="row d-flex justify-content-center">
           <div className='col-md-6 left-desktop'>
-            <img src={signup} alt="Logo"  style={{"width" : "50%"}} />
+            <img src={signup} alt="Logo" />
           </div>
           <div className='col-md-6 right-desktop'>
             <div className="content col-xs-12 login-div d-flex flex-column">
@@ -186,7 +191,7 @@ function Signup (){
                 }
                 {stepTwo && <>
                   <div className="input-container d-flex flex-column mb-3">
-                    <input type="text" placeholder="Your Industry" onClick={toggleOptions} readOnly />
+                    <input type="text" placeholder={industries?.length > 0 ? industries : "Your Industry"}  onClick={toggleOptions} readOnly />
                     {showOptions && (
                       <ul>
                         {industry.map((option) => (
@@ -210,7 +215,7 @@ function Signup (){
                     </select>
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
-                    <input type="text" placeholder="Preferred promotion options" onClick={promotionToggleOptions} readOnly />
+                    <input type="text" placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"} onClick={promotionToggleOptions} readOnly />
                     {showPromotionOptions && (
                       <ul>
                         {promotionData.map((option) => (
@@ -227,7 +232,7 @@ function Signup (){
                     )}
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
-                    <input type="text" placeholder="Select age range (max 3 options)" onClick={toggleAgeOptions} readOnly />
+                    <input type="text" placeholder= {age?.length > 0 ? age : "Select age range (max 3 options)"} onClick={toggleAgeOptions} readOnly />
                     {showAge && (
                       <ul>
                         {ageData.map((option) => (
@@ -244,7 +249,7 @@ function Signup (){
                     )}
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
-                    <input type="text" placeholder="Select age range (max 3 options)" onClick={toggleGenderOptions} readOnly />
+                    <input type="text" placeholder={gender?.length > 0 ? gender : "Please Select Gender"} onClick={toggleGenderOptions} readOnly />
                     {showGender && (
                       <ul>
                         {genderData.map((option) => (
@@ -261,7 +266,7 @@ function Signup (){
                     )}
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
-                    <input type="text" placeholder="Location" onClick={toggleLocationOptions} readOnly />
+                    <input type="text" placeholder={location?.length > 0 ?location : "Location"} onClick={toggleLocationOptions} readOnly />
                     {showLocation && (
                       <ul>
                         {locationData.map((option) => (
@@ -277,9 +282,9 @@ function Signup (){
                       </ul>
                     )}
                   </div>
-                  <div className="buttons">
-                    <button type='button' className='buttonfx color-1 angleindouble me-3' onClick={() => {stepBehind()}}>Previous</button>
-                    <button type='button' className='buttonfx color-1 angleindouble' onClick={(e) => {handleSignUp(e)}}>Next</button>
+                  <div className="buttons d-flex flex-column">
+                    <button type='button' style={{minWidth: 140}} className='buttonfx color-1 angleindouble' onClick={() => {stepBehind()}}>Previous</button>
+                    <button type='button w-100' style={{marginTop: 15, minWidth: 140 }} className='buttonfx color-1 angleindouble' onClick={(e) => {handleSignUp(e)}}>Sign Up</button>
                   </div>
                 </>}
               </form>
@@ -291,6 +296,17 @@ function Signup (){
                   </a>
                 </p>
               </div>
+
+              {mailPopup && (
+                <div className="mail-popup">
+                  <div className="mail-pop-container">
+                    <img src={MailPop} alt="mail-pop" />
+                    <h3>Signed Up Successfully</h3>
+                    <p>Please check you mail to confirm</p>
+                    <Link to='/' className='button buttonfx color-1 angleindouble'>Go Back</Link>
+                  </div>
+                  </div>
+              )}
             </div>
           </div>
         </div>

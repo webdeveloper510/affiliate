@@ -13,7 +13,16 @@ body {
     line-height: 24px;
     margin: 0;
     padding: 0;
-    position: relative
+}
+
+a {
+    text-decoration: none;
+}
+
+.routes {
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 body , p , span ,a ,h1 , h2 , h3 , h4 ,h5 , h6{
@@ -923,6 +932,7 @@ select, input {
     font-size: 14px;
     z-index: 4;
     border-radius: 5px;
+    text-decoration: none;
 }
 
 .buttonfx i {
@@ -3937,7 +3947,7 @@ a.buttonfx.angleindouble.color-1.Signup {
 }
 
 .right-desktop {
-    height: 100vh;
+    min-height: 100vh;
     background: #edeaf2;
 }
 
@@ -3951,15 +3961,16 @@ a.buttonfx.angleindouble.color-1.Signup {
 .left-desktop {
     background-position: 50%;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     background: #0080FF;
     justify-content: center;
     align-items: center;
     display: flex;
     background-image: linear-gradient(to right, #0044ff00, #1c4ed7);
     img {
-        width: 70%;
+        width: 100%;
         margin: 0 auto;
+        padding: 0 15%;
     }
 }
 
@@ -3982,6 +3993,8 @@ a.buttonfx.angleindouble.color-1.Signup {
         background: #1032bb;
     }
 }
+
+
 
 span.loginby, .forgot-password {
     font-size: 13px;
@@ -4041,6 +4054,32 @@ ul.menu li span {
     margin-top:110px;
     float:left;
     width:100%;
+}
+
+.mail-popup {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    top: 0;
+    left: 0;
+    
+    .mail-pop-container {
+        background: #fff;
+        padding: 2rem;
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: fit-content;
+    }
 }
 
 .login-content{
@@ -4122,6 +4161,7 @@ ul.menu li span {
                     align-items: center;
                     justify-content: center;
                     margin-bottom: 0;
+                    z-index: 1;
                 }
                 input {
                     padding-left: 90px;
