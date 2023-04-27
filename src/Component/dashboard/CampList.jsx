@@ -12,7 +12,11 @@ import NoData from '../../assets/no-data.png'
 function CampList() {
     const [campListPending, setCampListPending] = useState([]);
     const [campListApproval, setCampListApproval] = useState([]);
+    const [campViewDetails, setCampViewDetails] = useState([]);
+    const [showDetails, setShowDetails] = useState(false);
+    const [declineList, setDeclineList] = useState([]);
     const [pendingId, setPendingId] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [productNames, setProductNames] = useState([]);
     const token = localStorage.getItem("Token");
     const [actionTaken, setActionTaken] = useState(null);
@@ -44,9 +48,23 @@ function CampList() {
         .catch(function (error) {
             console.log(error);
         })
+
+        axios.get(API.BASE_URL + 'influencer/decline',{
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        })
+        .then(function (response) {
+            setDeclineList(response.data.data);
+            console.log("Decline", response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
     }, [token, actionTaken])
 
     const handleAction = (id, action) => {
+        setLoading(true);
         console.log("ID", id)
         let apiEndpoint = action === "accept" ? "/influencer/accept/" : "influencer/decline/";
         axios.post(API.BASE_URL + apiEndpoint + id + '/', {}, {
@@ -62,10 +80,35 @@ function CampList() {
         .catch(function (error) {
             console.log(error);
         })
+        .finally(() => setLoading(false));
     }
-console.log("Action", actionTaken)
+
+    const couponCross = () => {
+        setShowDetails(false)
+    }
+
+    const handleViewDetails = (id) => {
+        setLoading(true);
+        axios.get(API.BASE_URL + 'influencer/single/' + id + '/',{
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        })
+        .then(function (response) {
+            setCampViewDetails(response.data.data[0]);
+            console.log("Details", response)
+            setShowDetails(true)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .finally(() => setLoading(false));
+    }
+
+    console.log("Action", actionTaken)
   return (
     <div className='influencer-list p-4'>
+        {loading && <div className='loader'><span></span></div>}
         <h2 className='mb-4'>Influencer List</h2>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Col sm={12}>
@@ -74,7 +117,10 @@ console.log("Action", actionTaken)
                     <Nav.Link eventKey="first">Pending Campaigns</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="second">Approved Campaigns</Nav.Link>
+                    <Nav.Link eventKey="second">Accepted Campaigns</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="third">Declined Campaigns</Nav.Link>
                 </Nav.Item>
             </Nav>
             </Col>
@@ -82,7 +128,14 @@ console.log("Action", actionTaken)
             <Tab.Content>
                 <Tab.Pane eventKey="first">
                     {campListPending?.length > 0 ? (
-                        <TableList data={campListPending} handleAction={handleAction} />
+                        <TableList 
+                            data={campListPending}
+                            handleAction={handleAction}
+                            viewDetails={handleViewDetails}
+                            showDetails={showDetails} 
+                            userDetails={campViewDetails}
+                            couponCross={couponCross} 
+                        />
                     ): (
                         <>
                             <h5 className='mt-4 text-center'>No Pending Campaigns right now</h5>
@@ -93,7 +146,16 @@ console.log("Action", actionTaken)
                 <Tab.Pane eventKey="second" className='campaign'>
                     {campListApproval?.length > 0 ? (<TableList data={campListApproval} showButtons={false} />) : (
                         <>
-                        <h5 className='mt-4 text-center'>No Approved Campaigns right now</h5>
+                        <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
+                        <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                    </>
+                    )}
+                
+                </Tab.Pane>
+                <Tab.Pane eventKey="third" className='campaign'>
+                    {declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} />) : (
+                        <>
+                        <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
                         <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
                     </>
                     )}
