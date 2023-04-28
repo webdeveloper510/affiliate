@@ -9,7 +9,7 @@ function Verify() {
     const { token, id } = useParams();
     const navigate = useNavigate();
     useEffect(() => {})
-        axios.get(API.BASE_URL + 'influencer/activate/' + token + '/' + id + '/')
+        axios.get(API.BASE_URL + 'influencer/activate/' + token + '/' + id)
         .then(function (response) {
             console.log("Verified", response.data);
             toast.success("Email Verified")
