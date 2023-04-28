@@ -145,6 +145,9 @@ function Signup (){
     })
     .catch(function (error) {
       console.log(error);
+      if(error.response.data.email[0] = "user with this email already exists.") {
+        toast.warn("User with this email already exists")
+      }
     })
   }
 
@@ -169,15 +172,15 @@ function Signup (){
                 </div>
                 <div className="input-container d-flex flex-column mb-3">
                   <label htmlFor="">Email</label>
-                  <input placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} />
+                  <input type='email' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
                 </div>
                 <div className="input-container d-flex flex-column mb-3">
                   <label htmlFor="">Password</label>
-                  <input placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                  <input type='password' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
                 </div>
                 <div className="input-container d-flex flex-column mb-3">
                   <label htmlFor="">Confirm Password</label>
-                  <input placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
+                  <input type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
                 </div>
                 <div className="input-container d-flex flex-column mb-3">
                   <label htmlFor="">Country</label>
