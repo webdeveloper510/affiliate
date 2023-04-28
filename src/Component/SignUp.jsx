@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API } from '../config/Api';
 import { toast } from 'react-toastify';
 import MailPop from '../assets/mail-pop.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Signup (){
 
@@ -32,6 +32,7 @@ function Signup (){
    const [showPromotionOptions, setShowPromotionOptions] = useState(false);
    const [showLocation, setShowLocation] = useState(false);
    const [mailPopup, setMailPopup] = useState(false);
+   const navigate = useNavigate();
 
   const options = useMemo(() => countryList().getData(), [])
   const changeHandler = country => {
@@ -136,8 +137,10 @@ function Signup (){
       location: location.join(", ")
     })
     .then(function (response) {
-      console.log("Vendor Login", response);
+      console.log("Vendor Signup", response);
       toast.success("Sign Up Successfully!");
+      localStorage.setItem("Token", response.data.token);
+      localStorage.setItem("id", response.data.id);
       setMailPopup(true);
     })
     .catch(function (error) {
