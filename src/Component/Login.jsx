@@ -22,6 +22,7 @@ function Login (){
       console.log("Vendor Login", response);
       toast.success("Logged In Successfully!");
       localStorage.setItem("Token", response.data.Token);
+      localStorage.setItem("username", response.data.username);
       navigate('/dashboard')
     })
     .catch(function (error) {

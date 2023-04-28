@@ -22,7 +22,7 @@ import User from '../../assets/user.png';
 import CampList from './CampList';
 
 const SideBar = () => {
-    
+    const userName = localStorage.getItem("username");
   return (
     <div className="sidebar">
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -32,7 +32,7 @@ const SideBar = () => {
                     <Nav.Item className='d-flex align-items-center mb-4 px-3 user'>
                         <img src={User} alt='notification' style={{width: 45}} />
                         
-                        <p className='text-white mb-0 ms-3'>Hello, Test</p>
+                        <p className='text-white mb-0 ms-3'>Hello, {userName}</p>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey="first">

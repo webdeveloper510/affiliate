@@ -1,4 +1,4 @@
-import React , { useState, useMemo } from 'react';
+import React , { useState, useMemo, useRef, useEffect } from 'react';
 import signup from '../assets/sign1.webp';
 import countryList from 'react-select-country-list';
 import Select from 'react-select';
@@ -9,8 +9,6 @@ import MailPop from '../assets/mail-pop.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 
 function Signup (){
-
-   //state for steps
    const [step, setstep] = useState(1);
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
@@ -33,6 +31,11 @@ function Signup (){
    const [showLocation, setShowLocation] = useState(false);
    const [mailPopup, setMailPopup] = useState(false);
    const navigate = useNavigate();
+   const inputRef = useRef(null);
+   const ageRef = useRef(null);
+   const genderRef = useRef(null);
+   const locationRef = useRef(null);
+   const promotionRef = useRef(null);
 
   const options = useMemo(() => countryList().getData(), [])
   const changeHandler = country => {
@@ -53,6 +56,36 @@ function Signup (){
     setStepOne(true)
     setStepTwo(false)
   }
+
+  const handleClickOutside = (event) => {
+    if (inputRef.current && !inputRef.current.contains(event.target)) {
+      setShowOptions(false);
+    }
+  };
+
+  const handleAgeOutside = (event) => {
+    if (ageRef.current && !ageRef.current.contains(event.target)) {
+      setShowAge(false);
+    }
+  };
+
+  const handleGenderOutside = (event) => {
+    if (genderRef.current && !genderRef.current.contains(event.target)) {
+      setShowGender(false);
+    }
+  };
+
+  const handlePromotionOutside = (event) => {
+    if (promotionRef.current && !promotionRef.current.contains(event.target)) {
+      setShowPromotionOptions(false);
+    }
+  };
+
+  const handleLocationOutside = (event) => {
+    if (locationRef.current && !locationRef.current.contains(event.target)) {
+      setShowLocation(false);
+    }
+  };
 
   const industry = ["Fashion", "Jewellery", "Beauty & Health", "Sport & entertainment", "Grocery & food"];
   const promotionData = ["Affiliate Link", 'Coupon'];
@@ -151,6 +184,22 @@ function Signup (){
     })
   }
 
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("click", handleAgeOutside);
+    document.addEventListener("click", handleGenderOutside);
+    document.addEventListener("click", handlePromotionOutside);
+    document.addEventListener("click", handleLocationOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+      document.addEventListener("click", handleAgeOutside);
+      document.addEventListener("click", handleGenderOutside);
+      document.addEventListener("click", handlePromotionOutside);
+      document.addEventListener("click", handleLocationOutside);
+    };
+  }, []);
+
   return (
     <div className='margin-outer-signup'>
       <div className='container-fluid'>
@@ -190,27 +239,27 @@ function Signup (){
                   <label htmlFor="">User Handle</label>
                   <input placeholder='User Handle' value={userHandle} onChange={(e) => {setUserHandle(e.target.value)}} />
                 </div>
-                <button type='button' className="button buttonfx color-1 angleindouble" onClick={() => {stepAhead()}}>
+                <button type='button' style={{zIndex: 0}} className="button buttonfx color-1 angleindouble" onClick={() => {stepAhead()}}>
                   Continue
                 </button>
                 </>
                 }
                 {stepTwo && <>
-                  <div className="input-container d-flex flex-column mb-3">
+                  <div className="input-container d-flex flex-column mb-3" ref={inputRef}>
                     <input type="text" placeholder={industries?.length > 0 ? industries : "Your Industry"}  onClick={toggleOptions} readOnly />
-                    {showOptions && (
-                      <ul>
-                        {industry.map((option) => (
-                          <li className='d-flex' key={option} onClick={() => handleSelect(option)}>
-                            <input
-                              type="checkbox"
-                              checked={industries.includes(option)}
-                              readOnly
-                            />
-                            <span>{option}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {showOptions && (
+                        <ul>
+                          {industry.map((option) => (
+                            <li className='d-flex' key={option} onClick={() => handleSelect(option)}>
+                              <input
+                                type="checkbox"
+                                checked={industries.includes(option)}
+                                readOnly
+                              />
+                              <span>{option}</span>
+                            </li>
+                          ))}
+                        </ul>
                     )}
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
@@ -220,7 +269,7 @@ function Signup (){
                       <option value="three">I am a professional affiliate marketer</option>
                     </select>
                   </div>
-                  <div className="input-container d-flex flex-column mb-3">
+                  <div className="input-container d-flex flex-column mb-3" ref={promotionRef}>
                     <input type="text" placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"} onClick={promotionToggleOptions} readOnly />
                     {showPromotionOptions && (
                       <ul>
@@ -237,7 +286,7 @@ function Signup (){
                       </ul>
                     )}
                   </div>
-                  <div className="input-container d-flex flex-column mb-3">
+                  <div className="input-container d-flex flex-column mb-3" ref={ageRef}>
                     <input type="text" placeholder= {age?.length > 0 ? age : "Select age range (max 3 options)"} onClick={toggleAgeOptions} readOnly />
                     {showAge && (
                       <ul>
@@ -254,7 +303,7 @@ function Signup (){
                       </ul>
                     )}
                   </div>
-                  <div className="input-container d-flex flex-column mb-3">
+                  <div className="input-container d-flex flex-column mb-3" ref={genderRef}>
                     <input type="text" placeholder={gender?.length > 0 ? gender : "Please Select Gender"} onClick={toggleGenderOptions} readOnly />
                     {showGender && (
                       <ul>
@@ -271,7 +320,7 @@ function Signup (){
                       </ul>
                     )}
                   </div>
-                  <div className="input-container d-flex flex-column mb-3">
+                  <div className="input-container d-flex flex-column mb-3" ref={locationRef}>
                     <input type="text" placeholder={location?.length > 0 ?location : "Location"} onClick={toggleLocationOptions} readOnly />
                     {showLocation && (
                       <ul>
