@@ -18,7 +18,7 @@ function CampList() {
     const [pendingId, setPendingId] = useState([]);
     const [loading, setLoading] = useState(false);
     const [productNames, setProductNames] = useState([]);
-    const token = localStorage.getItem("Token");
+    const token = localStorage.getItem("logToken");
     const [actionTaken, setActionTaken] = useState(null);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ function CampList() {
             console.log(error);
         })
 
-        axios.get(API.BASE_URL + 'influencer/decline',{
+        axios.get(API.BASE_URL + 'influencer/decline/',{
             headers: {
                 Authorization: `Token ${token}`
             }

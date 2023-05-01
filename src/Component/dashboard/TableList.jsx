@@ -18,23 +18,20 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
           return (
             <>
             <tr key={i}>
-              <td>{list.campaign_name}</td>
+              <td>{list?.campaign_name}</td>
               <td>
-                {list.product?.map((prod) => prod.product_name).join(", ")}
+                {list?.product?.map((prod) => prod?.product_name).join(", ")}
               </td>
               <td>
-                {list.product
-                  ?.map((prod) =>
+                {list?.product?.map((prod) =>
                     prod.coupon_name?.map((coupon) => coupon).join(", ")
                   )
                   .join(", ")}
               </td>
               <td>
-                {list.product
-                  ?.map((prod) =>
-                    prod.amount?.map((amount) => amount).join(", ")
-                  )
-                  .join(", ")}
+              {list?.product?.map((prod) =>
+              Array.isArray(prod.amount) ? prod.amount.map((amount) => amount).join(", ") : ""
+              ).join(", ")}
               </td>
               {showButtons && (
                 <td className="d-flex justify-content-center">

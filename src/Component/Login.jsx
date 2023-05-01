@@ -11,8 +11,10 @@ function Login (){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = (e) => {
+    setLoading(true);
     e.preventDefault();
     axios.post(API.BASE_URL + 'influencer/login/', {
       email: email,
@@ -21,7 +23,7 @@ function Login (){
     .then(function (response) {
       console.log("Vendor Login", response);
       toast.success("Logged In Successfully!");
-      localStorage.setItem("Token", response.data.Token);
+      localStorage.setItem("logToken", response.data.Token);
       localStorage.setItem("username", response.data.username);
       navigate('/dashboard')
     })
@@ -31,9 +33,11 @@ function Login (){
         toast.warn(error.response.data.error)
       }
     })
+    .finally(() => setLoading(false));
   }
     return (
         <div className='margin-outer'>
+          {loading && <div className='loader'><span></span></div>}
           <div className='container-fluid'>
             <div className="row vh-100 d-flex justify-content-center align-items-center">
               <div className='col-md-6 left-desktop'>

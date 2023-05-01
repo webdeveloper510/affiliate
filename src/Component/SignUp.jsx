@@ -31,6 +31,7 @@ function Signup (){
    const [showLocation, setShowLocation] = useState(false);
    const [mailPopup, setMailPopup] = useState(false);
    const navigate = useNavigate();
+   const [loading, setLoading] = useState(false);
    const inputRef = useRef(null);
    const ageRef = useRef(null);
    const genderRef = useRef(null);
@@ -154,6 +155,7 @@ function Signup (){
   };
 
   const handleSignUp = (e) => {
+    setLoading(true);
     e.preventDefault();
     axios.post(API.BASE_URL + 'influencer/create/', {
       username: name,
@@ -178,10 +180,29 @@ function Signup (){
     })
     .catch(function (error) {
       console.log(error);
-      if(error.response.data.email[0] = "user with this email already exists.") {
+      if(error.response.data.email && error.response.data.email[0] == "user with this email already exists.") {
         toast.warn("User with this email already exists")
       }
+      else if(error.response.data.industries && error.response.data.industries[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one industry")
+      }
+      else if(error.response.data.promotion && error.response.data.promotion[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one promotion")
+      }
+      else if(error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one age range")
+      }
+      else if(error.response.data.gender && error.response.data.gender[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one gender")
+      }
+      else if(error.response.data.location && error.response.data.location[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one age location")
+      }
+      else {
+        toast.warn("Unable to Sign up right now.")
+      }
     })
+    .finally(() => setLoading(false));
   }
 
   useEffect(() => {
@@ -202,6 +223,7 @@ function Signup (){
 
   return (
     <div className='margin-outer-signup'>
+      {loading && <div className='loader'><span></span></div>}
       <div className='container-fluid'>
         <div className="row d-flex justify-content-center">
           <div className='col-md-6 left-desktop'>
