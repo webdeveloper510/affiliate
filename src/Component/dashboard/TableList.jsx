@@ -118,13 +118,13 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                       <p>{userDetails?.influencer_visit}</p></div>
                     <div className="details-content">
                       <h6>Product Name: </h6>
-                      <p>{userDetails?.product?.map((product) =>product.product_name)}</p></div>
+                      <p>{userDetails?.product?.map((product) =>product.product_name).join(", ")}</p></div>
                     <div className="details-content">
                       <h6>Coupons: </h6>
-                      <p>{userDetails?.product?.map((product) =>product.name?.map((name) => name))}</p></div>
+                      <p>{userDetails?.product?.map((product) =>Array.isArray(product.name) ? product.name?.map((name) => name).join(", ") : "")}</p></div>
                     <div className="details-content">
                       <h6>Amount: </h6>
-                      <p>{userDetails?.product?.map((product) =>product.amount?.map((name) => name))}</p></div>
+                      <p>{userDetails?.product?.map((product) =>product.amount?.map((name) => name)).join(", ")}</p></div>
                   </div>
                 </div>
               </div>
