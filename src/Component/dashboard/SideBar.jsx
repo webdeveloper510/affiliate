@@ -1,9 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import { Container } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import axios from 'axios';
-import { API } from '../../config/Api';
+import React from 'react';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
@@ -11,20 +8,23 @@ import Tab from 'react-bootstrap/Tab';
 
 // Images
 import CampaignOverview from '../../assets/campaign-over.png';
-import Manage from '../../assets/manage.png';
-import CampNew from '../../assets/campaign-new.png';
-import MarketPlace from '../../assets/marketplace.png';
-import Coupon from '../../assets/coupon.png';
-import AnalyticsImg from '../../assets/analytics.png';
-import SalesImg from '../../assets/sales.png';
-import ProfileImg from '../../assets/profile.png';
 import User from '../../assets/user.png';
 import CampList from './CampList';
 
 const SideBar = () => {
     const userName = localStorage.getItem("username");
+    const navigate = useNavigate();
+    const handleLogOut = () => {
+        localStorage.removeItem("username");
+        localStorage.removeItem("logToken");
+        toast.success("Logged Out Successfully")
+        navigate('/login');
+    }
     return (
         <div className="sidebar">
+           <div className='d-flex justify-content-end logout-button'>
+            <button onClick={(e) => {handleLogOut(e)}}>Logout</button>
+           </div>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <Row>
                     <Col sm={3} className='side-menu py-4'>
@@ -41,7 +41,7 @@ const SideBar = () => {
                         </Nav.Item>
                     </Nav>
                     </Col>
-                    <Col sm={9} className='side-content'>
+                    <Col sm={9} className='side-content mt-2'>
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
                         <CampList />
