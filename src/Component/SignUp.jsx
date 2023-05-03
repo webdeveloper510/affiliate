@@ -368,7 +368,7 @@ function Signup (){
               <div className="mt-3">
                 <p className="mb-0  text-center">
                   Haven't created an account yet? {' '}
-                  <a href="#/signup" className="text-primary fw-bold">
+                  <a href="#/login" className="text-primary fw-bold">
                     Sign In
                   </a>
                 </p>
