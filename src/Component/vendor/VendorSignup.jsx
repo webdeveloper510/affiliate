@@ -25,7 +25,6 @@ function VendorSignup() {
         
     };
 
-
     console.log("Selected File", selectedFile)
 
     const handleName = (event) => {
@@ -147,7 +146,6 @@ function VendorSignup() {
             </div>
         </div>
     </div>
-    
   )
 }
 

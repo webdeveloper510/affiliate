@@ -24,7 +24,7 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
               </td>
               <td>
                 {list?.product?.map((prod) =>
-                    prod.coupon_name?.map((coupon) => coupon).join(", ")
+                    Array.isArray(prod.coupon_name) ? prod.coupon_name?.map((coupon) => coupon).join(", ") : ""
                   )
                   .join(", ")}
               </td>
