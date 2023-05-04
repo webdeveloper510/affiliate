@@ -109,7 +109,7 @@ function CampList() {
   return (
     <div className='influencer-list p-4'>
         {loading && <div className='loader'><span></span></div>}
-        <h2 className='mb-4'>Influencer List</h2>
+        <h2 className='mb-4'>Manage Campaigns</h2>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Col sm={12}>
             <Nav variant="pills" className="flex-row mb-4 tab-header">
@@ -134,7 +134,7 @@ function CampList() {
                             viewDetails={handleViewDetails}
                             showDetails={showDetails} 
                             userDetails={campViewDetails}
-                            couponCross={couponCross} 
+                            couponCross={couponCross}
                         />
                     ): (
                         <>
@@ -144,7 +144,7 @@ function CampList() {
                     )}
                 </Tab.Pane>
                 <Tab.Pane eventKey="second" className='campaign'>
-                    {campListApproval?.length > 0 ? (<TableList data={campListApproval} showButtons={false} />) : (
+                    {campListApproval?.length > 0 ? (<TableList data={campListApproval} showButtons={false} pending={false} />) : (
                         <>
                         <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
                         <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
@@ -153,7 +153,7 @@ function CampList() {
                 
                 </Tab.Pane>
                 <Tab.Pane eventKey="third" className='campaign'>
-                    {declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} />) : (
+                    {declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
                         <>
                         <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
                         <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />

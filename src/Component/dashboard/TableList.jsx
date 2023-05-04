@@ -1,14 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark, faEye, faClose } from "@fortawesome/free-solid-svg-icons";
-const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, couponCross, showButtons = true }) => {
+const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, couponCross, showButtons = true, pending = true }) => {
   return (
     <table>
       <thead>
         <tr>
           <th>Campaign Name</th>
           <th>Product Name</th>
-          <th>Coupon Name</th>
           <th>Coupon Price</th>
           {showButtons && (<th>Action</th>)}
         </tr>
@@ -17,21 +16,28 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
         {data?.map((list, i) => {
           return (
             <>
-            <tr key={i}>
+            <tr key={list.product.product_name}>
               <td>{list?.campaign_name}</td>
               <td>
-                {list?.product?.map((prod) => prod?.product_name).join(", ")}
+                {list?.product?.map((prod, index) => (
+                  <React.Fragment key={index}>
+                    {prod?.product_name} {!pending && prod?.coupon_name && (
+                      <>
+                      - <span><strong>Discount Code:</strong> {pending == true ? ("Please accept to get the price") : (prod?.coupon_name?.join(", "))}</span>
+                      <br />
+                      </>
+                    )} 
+                  </React.Fragment>
+                ))}
               </td>
               <td>
-                {list?.product?.map((prod) =>
-                    Array.isArray(prod.coupon_name) ? prod.coupon_name?.map((coupon) => coupon).join(", ") : ""
-                  )
-                  .join(", ")}
-              </td>
-              <td>
-              {list?.product?.map((prod) =>
-              Array.isArray(prod.amount) ? prod.amount.map((amount) => amount).join(", ") : ""
-              ).join(", ")}
+              {pending == true ? (
+                "Please accept to get the price"
+              ) : (
+                list?.product?.map((prod) =>
+                  Array.isArray(prod.amount) ? prod.amount.map((amount) => amount).join(", ") : "No Price"
+                  ).filter(Boolean).join(", ")
+              )}
               </td>
               {showButtons && (
                 <td className="d-flex justify-content-center">
@@ -118,13 +124,14 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                       <p>{userDetails?.influencer_visit}</p></div>
                     <div className="details-content">
                       <h6>Product Name: </h6>
-                      <p>{userDetails?.product?.map((product) =>product.product_name).join(", ")}</p></div>
-                    <div className="details-content">
-                      <h6>Coupons: </h6>
-                      <p>{userDetails?.product?.map((product) =>Array.isArray(product.name) ? product.name?.map((name) => name).join(", ") : "")}</p></div>
-                    <div className="details-content">
-                      <h6>Amount: </h6>
-                      <p>{userDetails?.product?.map((product) =>product.amount?.map((name) => name)).join(", ")}</p></div>
+                      <p>
+                      {userDetails?.product?.map((product) =>
+                        product != null && product.product_name != null
+                          ? product.product_name
+                          : "No Products"
+                      ).filter(Boolean).join(", ")}
+                    </p></div>
+                      
                   </div>
                 </div>
               </div>
