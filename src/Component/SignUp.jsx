@@ -37,20 +37,46 @@ function Signup (){
    const genderRef = useRef(null);
    const locationRef = useRef(null);
    const promotionRef = useRef(null);
+   const [errors, setErrors] = useState({});
+   const [locationInput, setLocationInput] = useState("");
 
   const options = useMemo(() => countryList().getData(), [])
+
   const changeHandler = country => {
     setCountry(country)
   }
 
   const stepAhead = () => {
-   if(name && email && password && confirmPassword &&country && userHandle != "") {
-    setStepOne(false)
-    setStepTwo(true)
-   }
-   else {
-    toast.warn("Please Select all Values")
-   }
+    const newErrors = {};
+    if(!name) {
+      newErrors.name = true;
+    }
+    if(!email) {
+      newErrors.email = true;
+    }
+    if(!password) {
+      newErrors.password = true;
+    }
+    if(!confirmPassword) {
+      newErrors.confirmPassword = true;
+    }
+    if(!country) {
+      newErrors.country = true;
+    }
+    if(!userHandle) {
+      newErrors.userHandle = true;
+    }
+    if(Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      toast.warn("Please Select all the fields");
+    } else if (password !== confirmPassword) {
+      setErrors(newErrors);
+      toast.error("Passwords do not match");
+    } else {
+      setErrors({});
+      setStepOne(false);
+      setStepTwo(true);
+    }
   }
 
   const stepBehind = () => {
@@ -94,6 +120,15 @@ function Signup (){
   const genderData = ['Male', 'Female', 'Others'];
   const locationData = ['Afghanistan', 'Albania', 'Algeria', 'Austria', 'Belgium', 'Canada', 'Denmark', 'Finland', 'France', 'Ghana', 'Hungary', 'India', 'USA'];
 
+  const filteredLocationData = locationData.filter(
+    (location) =>
+      location.toLowerCase().indexOf(locationInput.toLowerCase()) !== -1
+  );
+  
+  const handleLocationInputChange = (e) => {
+    setLocationInput(e.target.value);
+  };
+
   const handleSelect = (value) => {
     if (industries.includes(value)) {
       setIndustries(industries.filter((v) => v !== value));
@@ -110,11 +145,13 @@ function Signup (){
     }
   };
 
-  const handleAgeSelect = (value) => {
-    if (age.includes(value)) {
-      setAge(age.filter((v) => v !== value));
+  const handleAgeSelect = (option) => {
+    if (age.includes(option)) {
+      setAge(age.filter((item) => item !== option));
     } else {
-      setAge([...age, value]);
+      if (age.length < 3) {
+        setAge([...age, option]);
+      }
     }
   };
 
@@ -125,12 +162,14 @@ function Signup (){
       setGender([...gender, value]);
     }
   };
-  
-  const handleLocationSelect = (value) => {
-    if (location.includes(value)) {
-      setLocation(location.filter((v) => v !== value));
+
+  const handleLocationSelect = (option) => {
+    if (location.includes(option)) {
+      setLocation(location.filter((item) => item !== option));
     } else {
-      setLocation([...location, value]);
+      if (location.length < 10) {
+        setLocation([...location, option]);
+      }
     }
   };
 
@@ -237,27 +276,27 @@ function Signup (){
               <form action="">
                 {stepOne && 
                 <>
-                <div className="input-container d-flex flex-column mb-3">
+                <div className={`input-container d-flex flex-column mb-3 ${errors.name ? 'error' : ''}`}>
                   <label htmlFor="">Username</label>
                   <input placeholder='UserName' value={name} onChange={(e) => {setName(e.target.value)}} />
                 </div>
-                <div className="input-container d-flex flex-column mb-3">
+                <div className={`input-container d-flex flex-column mb-3 ${errors.email ? 'error' : ''}`}>
                   <label htmlFor="">Email</label>
                   <input type='email' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
                 </div>
-                <div className="input-container d-flex flex-column mb-3">
+                <div className={`input-container d-flex flex-column mb-3 ${errors.password ? 'error' : ''}`}>
                   <label htmlFor="">Password</label>
                   <input type='password' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
                 </div>
-                <div className="input-container d-flex flex-column mb-3">
+                <div className={`input-container d-flex flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`}>
                   <label htmlFor="">Confirm Password</label>
                   <input type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
                 </div>
-                <div className="input-container d-flex flex-column mb-3">
+                <div className={`input-container d-flex flex-column mb-3 ${errors.country ? 'error' : ''}`}>
                   <label htmlFor="">Country</label>
                   <Select options={options} value={country} onChange={changeHandler} placeholder="Choose your country"/>
                 </div>
-                <div className="input-container d-flex flex-column mb-3">
+                <div className={`input-container d-flex flex-column mb-3 ${errors.userHandle ? 'error' : ''}`}>
                   <label htmlFor="">User Handle</label>
                   <input placeholder='User Handle' value={userHandle} onChange={(e) => {setUserHandle(e.target.value)}} />
                 </div>
@@ -285,13 +324,14 @@ function Signup (){
                     )}
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
-                    <select onChange={(e) => {setExperience(e.target.value)}}>
+                    <select onChange={(e) => {setExperience(e.target.value)}} style={{color: '#707070'}}>
+                      <option disabled>Experience with Affiliate Marketing</option>
                       <option value="one">I'm starting with Affiliate Marketing and want to learn more about it</option>
                       <option value="two">I've worked with few brands but haven't optimized my promoting process</option>
                       <option value="three">I am a professional affiliate marketer</option>
                     </select>
                   </div>
-                  <div className="input-container d-flex flex-column mb-3" ref={promotionRef}>
+                  <div className="input-container d-flex flex-column mb-3 w-100" ref={promotionRef}>
                     <input type="text" placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"} onClick={promotionToggleOptions} readOnly />
                     {showPromotionOptions && (
                       <ul>
@@ -308,56 +348,61 @@ function Signup (){
                       </ul>
                     )}
                   </div>
-                  <div className="input-container d-flex flex-column mb-3" ref={ageRef}>
-                    <input type="text" placeholder= {age?.length > 0 ? age : "Select age range (max 3 options)"} onClick={toggleAgeOptions} readOnly />
-                    {showAge && (
-                      <ul>
-                        {ageData.map((option) => (
-                          <li className='d-flex' key={option} onClick={() => handleAgeSelect(option)}>
-                            <input
-                              type="checkbox"
-                              checked={age.includes(option)}
-                              readOnly
-                            />
-                            <span>{option}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <div className="input-container d-flex flex-column mb-3" ref={genderRef}>
-                    <input type="text" placeholder={gender?.length > 0 ? gender : "Please Select Gender"} onClick={toggleGenderOptions} readOnly />
-                    {showGender && (
-                      <ul>
-                        {genderData.map((option) => (
-                          <li className='d-flex' key={option} onClick={() => handleGenderSelect(option)}>
-                            <input
-                              type="checkbox"
-                              checked={gender.includes(option)}
-                              readOnly
-                            />
-                            <span>{option}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <div className="input-container d-flex flex-column mb-3" ref={locationRef}>
-                    <input type="text" placeholder={location?.length > 0 ?location : "Location"} onClick={toggleLocationOptions} readOnly />
-                    {showLocation && (
-                      <ul>
-                        {locationData.map((option) => (
-                          <li className='d-flex' key={option} onClick={() => handleLocationSelect(option)}>
-                            <input
-                              type="checkbox"
-                              checked={location.includes(option)}
-                              readOnly
-                            />
-                            <span>{option}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                  <div className='target w-100 mb-4'>
+                    <p className='w-100'>Your Target Customers</p>
+                    <div className="input-container d-flex flex-column mb-3" ref={ageRef}>
+                      <input type="text" placeholder= {age?.length > 0 ? age : "Select age range (max 3 options)"} onClick={toggleAgeOptions} readOnly />
+                      {showAge && (
+                        <ul>
+                          {ageData.map((option) => (
+                            <li className='d-flex' key={option} onClick={() => handleAgeSelect(option)}>
+                              <input
+                                type="checkbox"
+                                checked={age.includes(option)}
+                                readOnly
+                              />
+                              <span>{option}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <div className="input-container d-flex flex-column mb-3" ref={genderRef}>
+                      <input type="text" placeholder={gender?.length > 0 ? gender : "Please Select Gender"} onClick={toggleGenderOptions} readOnly />
+                      {showGender && (
+                        <ul>
+                          {genderData.map((option) => (
+                            <li className='d-flex' key={option} onClick={() => handleGenderSelect(option)}>
+                              <input
+                                type="checkbox"
+                                checked={gender.includes(option)}
+                                readOnly
+                              />
+                              <span>{option}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <div className="input-container d-flex flex-column mb-3" ref={locationRef}>
+                      <input
+                        type="text"
+                        placeholder={location?.length > 0 ? location : "Search and select country (max 10 options)"}
+                        onClick={toggleLocationOptions}
+                        value={locationInput}
+                        onChange={handleLocationInputChange}
+                      />
+                      {showLocation && (
+                        <ul>
+                          {filteredLocationData.map((option) => (
+                            <li className="d-flex" key={option} onClick={() => handleLocationSelect(option)}>
+                              <input type="checkbox" checked={location.includes(option)} readOnly />
+                              <span>{option}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
                   </div>
                   <div className="buttons d-flex flex-column">
                     <button type='button' style={{minWidth: 140}} className='buttonfx color-1 angleindouble' onClick={() => {stepBehind()}}>Previous</button>

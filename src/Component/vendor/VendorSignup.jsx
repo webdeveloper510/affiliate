@@ -124,33 +124,34 @@ function VendorSignup() {
                 <img src={VendorSign} alt="vendor-signup" className='w-100' />
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
-                <img src={Logo} alt="logo" />
                 <h3 className='mb-4'>Merchant Sign Up</h3>
                 <form className='d-flex flex-column justify-content-between align-items-center w-100'>
                     <label className='text-start w-100 mb-2 text-dark'>Username</label>
-                    <input type="text" placeholder='Username' value={name} onChange={handleName} />
+                    <input type="text" value={name} onChange={handleName} />
                     
                     <label className='text-start w-100 mb-2 text-dark'>Email</label>
-                    <input type="email" placeholder='Email' value={email} onChange={handleEmail} />
+                    <input type="email" value={email} onChange={handleEmail} />
                     
                     <label className='text-start w-100 mb-2 text-dark'>Password</label>
-                    <input type="password" placeholder='Password' value={password} onChange={handlePassword} />
+                    <input type="password" value={password} onChange={handlePassword} />
                     
                     <label className='text-start w-100 mb-2 text-dark'>Confirm Password</label>
-                    <input type="password" placeholder='Confirm Password' value={confirmPassword} onChange={handleConfirmPassword} />
+                    <input type="password" value={confirmPassword} onChange={handleConfirmPassword} />
                     
                     <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image</label>
                     <input type="file" onChange={onFileChange} />
                     
                     <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
-                    <input type="text" placeholder='Category' value={category} onChange={handleCategory} />
+                    <input type="text" value={category} onChange={handleCategory} />
+
+                    <label className='text-start w-100 mb-2 text-dark'>Shopify URL</label>
                     <div className="input-container w-100 d-flex">
                         <label htmlFor="">https://</label>
                         <input type="url" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
                     </div>
                     
                     <label className='text-start w-100 mb-2 text-dark'>Instagram Handle</label>
-                    <input type="url" placeholder='Instagram URL' value={instagramUrl} onChange={handleInstagram} />
+                    <input type="url" value={instagramUrl} onChange={handleInstagram} />
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">
                     <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor}>Signup</button>

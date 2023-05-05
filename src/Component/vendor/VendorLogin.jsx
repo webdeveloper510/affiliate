@@ -78,7 +78,6 @@ function VendorLogin() {
                 <img src={VendorSign} alt="vendor-sign" className='w-100' />
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
-                <img src={Logo} alt="logo" />
                 <h3 className='mb-4'>Merchant Sign In</h3>
                 <form className={isActive ? 'active d-flex flex-column justify-content-between align-items-center w-100' : 'd-flex flex-column justify-content-between align-items-center w-100'} >
                     {isActive == true ? (

@@ -4015,6 +4015,21 @@ span.loginby, .forgot-password {
     font-size: 14px;
 }
 
+.target {
+    border: 1px solid #dbdbdb;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .input-container {
+        width: 49% !important;
+        margin-right: 0 !important;
+        &:last-child {
+            width: 100% !important;
+        }
+    }
+}
+
 .forgot-password {
     text-align: center;
     width: 100%;
@@ -4082,6 +4097,12 @@ ul.menu li span {
         justify-content: center;
         align-items: center;
         height: fit-content;
+    }
+}
+
+.error {
+    input, select, textarea, .css-b62m3t-container {
+        border: 1px solid red;
     }
 }
 

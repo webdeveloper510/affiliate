@@ -34,6 +34,21 @@ const SideBar = () => {
     }
 
     useEffect(() => {
+        axios.get(API.BASE_URL + 'influencer/notification/',{
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        })
+        .then(function (response) {
+            console.log("Notification", response.data)
+            setNotifications(response.data.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }, [])
+
+    useEffect(() => {
         const intervalId = setInterval(() => {
         axios.get(API.BASE_URL + 'influencer/notification/',{
             headers: {
