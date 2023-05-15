@@ -99,6 +99,15 @@
                             padding: 8px 13px;
                             text-align: left;
                         }
+                        th {
+                            
+                            &:nth-child(1) {
+                                border-left: none !important;
+                            }
+                            &:last-child {
+                                border-right: none !important;
+                            }
+                        }
                         td {
                             font-size: 14px;
                             line-height: 2.4;
