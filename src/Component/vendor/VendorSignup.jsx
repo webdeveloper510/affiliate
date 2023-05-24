@@ -5,6 +5,8 @@ import VendorSign from '../../assets/login-img.svg';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 import { API } from '../../config/Api';
 
@@ -17,12 +19,23 @@ function VendorSignup() {
     const [shopifyUrl, setShopifyUrl] = useState('')
     const [instagramUrl, setInstagramUrl] = useState('')
     const [selectedFile, setSelectedFile] = useState(null);
+    const [showPassword, setShowPassword] = useState(false);
+    const [confirmType, setConfirmType] = useState(false);
+
     const navigate = useNavigate();
 
     const onFileChange = event => {
         setSelectedFile(event.target.files[0]);
         console.log(event.target.files[0])
         
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmVisibility = () => {
+        setConfirmType(!confirmType);
     };
 
     console.log("Selected File", selectedFile)
@@ -80,8 +93,11 @@ function VendorSignup() {
         })
           .catch(function (error) {
             console.log(error);
-             if(error.response.data.username) {
+             if(error.response.data.username == "This field may not be blank.") {
                 toast.warn("Username may not be blank.");
+            }
+            else if (error.response.data.username == "Ensure this field has no more than 30 characters.") {
+                toast.warn("Ensure this field has no more than 30 characters.");
             }
             else if(error.response.data.email== "user with this email already exists.") {
                 toast.warn("User with this email already exists.");
@@ -125,33 +141,67 @@ function VendorSignup() {
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
                 <h3 className='mb-4'>Merchant Sign Up</h3>
-                <form className='d-flex flex-column justify-content-between align-items-center w-100'>
-                    <label className='text-start w-100 mb-2 text-dark'>Username</label>
-                    <input type="text" value={name} onChange={handleName} />
-                    
-                    <label className='text-start w-100 mb-2 text-dark'>Email</label>
-                    <input type="email" value={email} onChange={handleEmail} />
-                    
-                    <label className='text-start w-100 mb-2 text-dark'>Password</label>
-                    <input type="password" value={password} onChange={handlePassword} />
-                    
-                    <label className='text-start w-100 mb-2 text-dark'>Confirm Password</label>
-                    <input type="password" value={confirmPassword} onChange={handleConfirmPassword} />
-                    
-                    <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image</label>
-                    <input type="file" onChange={onFileChange} />
-                    
-                    <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
-                    <input type="text" value={category} onChange={handleCategory} />
-
-                    <label className='text-start w-100 mb-2 text-dark'>Shopify URL</label>
-                    <div className="input-container w-100 d-flex">
-                        <label htmlFor="">https://</label>
-                        <input type="url" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
+                <form className='d-flex flex-wrap justify-content-between align-items-center w-100'>
+                    <div className="input-field">
+                        <label className='text-start w-100 mb-2 text-dark'>Username</label>
+                        <input type="text" className='mb-0' maxLength='30' value={name} onChange={handleName} />
                     </div>
                     
-                    <label className='text-start w-100 mb-2 text-dark'>Instagram Handle</label>
-                    <input type="url" value={instagramUrl} onChange={handleInstagram} />
+                    <div className="input-field">
+                        <label className='text-start w-100 mb-2 text-dark'>Email</label>
+                        <input type="email" maxLength='35' className='mb-0' value={email} onChange={handleEmail} />
+                    </div>
+                    
+                    <div className="input-field position-relative">
+                        <label className='text-start w-100 mb-2 text-dark'>Password</label>
+                        <input type={showPassword ? 'text' : 'password'} maxLength='30' className='mb-0' value={password} onChange={handlePassword} />
+                        <FontAwesomeIcon
+                            icon={faEye}
+                            style={{
+                                color: "#1032bb",
+                                width: "20px",
+                                height: "20px",
+                            }}
+                            onClick={togglePasswordVisibility}
+                        />
+                    </div>
+                    
+                    <div className="input-field position-relative">
+                        <label className='text-start w-100 mb-2 text-dark'>Confirm Password</label>
+                        <input type={confirmType ? 'text' : 'password'} className='mb-0' value={confirmPassword} onChange={handleConfirmPassword} />
+                        <FontAwesomeIcon
+                            icon={faEye}
+                            style={{
+                                color: "#1032bb",
+                                width: "20px",
+                                height: "20px",
+                            }}
+                            onClick={toggleConfirmVisibility}
+                        />
+                    </div>
+                    
+                    <div className="input-field">
+                        <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image</label>
+                        <input type="file" className='mb-0' onChange={onFileChange} accept="image/*" />
+                    </div>
+                    
+                    <div className="input-field">
+                        <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
+                        <input type="text" className='mb-0' maxLength='30' value={category} onChange={handleCategory} />
+                    </div>
+
+                    <div className="input-field">
+                        <label className='text-start w-100 mb-2 text-dark'>Shopify URL</label>
+                        <div className="input-container w-100 d-flex mb-0">
+                            <label htmlFor="">https://</label>
+                            <input type="url" className='mb-0' placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
+                        </div>
+                    </div>
+                    
+                    <div className="input-field">
+                        <label className='text-start w-100 mb-2 text-dark'>Instagram Handle</label>
+                        <input type="url" className='mb-0' value={instagramUrl} onChange={handleInstagram} />
+                    </div>
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">
                     <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor}>Signup</button>

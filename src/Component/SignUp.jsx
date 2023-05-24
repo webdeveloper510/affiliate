@@ -48,28 +48,43 @@ function Signup (){
 
   const stepAhead = () => {
     const newErrors = {};
-    if(!name) {
+    
+    if (!name) {
       newErrors.name = true;
     }
-    if(!email) {
+    if (!email && !newErrors.name) {
       newErrors.email = true;
+    } else if (!newErrors.name) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        newErrors.email = true;
+        newErrors.name = true;
+        toast.error("Invalid email format");
+        return;
+      }
     }
-    if(!password) {
+
+    if (!password) {
       newErrors.password = true;
     }
-    if(!confirmPassword) {
+    
+    if (!confirmPassword) {
       newErrors.confirmPassword = true;
     }
-    if(!country) {
+    
+    if (!country) {
       newErrors.country = true;
     }
-    if(!userHandle) {
+    
+    if (!userHandle) {
       newErrors.userHandle = true;
     }
-    if(Object.keys(newErrors).length > 0) {
+    
+    if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      toast.warn("Please Select all the fields");
+      toast.warn("Please fill in all the required fields");
     } else if (password !== confirmPassword) {
+      newErrors.confirmPassword = true;
       setErrors(newErrors);
       toast.error("Passwords do not match");
     } else {
@@ -78,6 +93,7 @@ function Signup (){
       setStepTwo(true);
     }
   }
+  
 
   const stepBehind = () => {
     setStepOne(true)
@@ -277,27 +293,27 @@ function Signup (){
                 {stepOne && 
                 <>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.name ? 'error' : ''}`}>
-                  <label htmlFor="">Username</label>
-                  <input placeholder='UserName' value={name} onChange={(e) => {setName(e.target.value)}} />
+                  <label htmlFor="">Username <strong style={{color: 'red'}}>*</strong></label>
+                  <input placeholder='UserName' maxLength='30' value={name} onChange={(e) => {setName(e.target.value)}} />
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.email ? 'error' : ''}`}>
-                  <label htmlFor="">Email</label>
-                  <input type='email' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
+                  <label htmlFor="">Email <strong style={{color: 'red'}}>*</strong></label>
+                  <input type='email' maxLength='35' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.password ? 'error' : ''}`}>
-                  <label htmlFor="">Password</label>
-                  <input type='password' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                  <label htmlFor="">Password <strong style={{color: 'red'}}>*</strong></label>
+                  <input type='password' maxLength='30' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`}>
-                  <label htmlFor="">Confirm Password</label>
-                  <input type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
+                  <label htmlFor="">Confirm Password <strong style={{color: 'red'}}>*</strong></label>
+                  <input type='password' maxLength='30' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.country ? 'error' : ''}`}>
-                  <label htmlFor="">Country</label>
+                  <label htmlFor="">Country <strong style={{color: 'red'}}>*</strong></label>
                   <Select options={options} value={country} onChange={changeHandler} placeholder="Choose your country"/>
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.userHandle ? 'error' : ''}`}>
-                  <label htmlFor="">User Handle</label>
+                  <label htmlFor="">User Handle <strong style={{color: 'red'}}>*</strong></label>
                   <input placeholder='User Handle' value={userHandle} onChange={(e) => {setUserHandle(e.target.value)}} />
                 </div>
                 <button type='button' style={{zIndex: 0}} className="button buttonfx color-1 angleindouble" onClick={() => {stepAhead()}}>
