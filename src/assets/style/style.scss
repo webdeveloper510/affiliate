@@ -3947,7 +3947,7 @@ a.buttonfx.angleindouble.color-1.Signup {
 }
 
 .right-desktop {
-    min-height: 100vh;
+    min-height: 86vh;
     background: #edeaf2;
 }
 
@@ -3961,7 +3961,7 @@ a.buttonfx.angleindouble.color-1.Signup {
 .left-desktop {
     background-position: 50%;
     background-size: cover;
-    min-height: 100vh;
+    min-height: 86vh;
     background: #0080FF;
     justify-content: center;
     align-items: center;
@@ -4143,6 +4143,22 @@ ul.menu li span {
                 }
             }
         }
+    }
+}
+
+.vendor-login {
+    .right-desktop {
+        min-height: 88.5vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .content {
+            width: 100%;
+        }
+    }
+    .left-desktop {
+        min-height: 88.5vh;
     }
 }
 

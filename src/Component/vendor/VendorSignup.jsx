@@ -141,7 +141,7 @@ function VendorSignup() {
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
                 <h3 className='mb-4'>Merchant Sign Up</h3>
-                <form className='d-flex flex-wrap justify-content-between align-items-center w-100'>
+                <form className='d-flex flex-wrap justify-content-between align-items-center w-100' onSubmit={createVendor}>
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Username</label>
                         <input type="text" className='mb-0' maxLength='30' value={name} onChange={handleName} />
@@ -204,7 +204,7 @@ function VendorSignup() {
                     </div>
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">
-                    <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor}>Signup</button>
+                    <button className='buttonfx angleindouble color-1 Signup'>Signup</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signin'> Sign In</Link></p>
                 </div>
             </div>

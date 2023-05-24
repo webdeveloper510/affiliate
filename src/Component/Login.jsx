@@ -36,10 +36,10 @@ function Login (){
     .finally(() => setLoading(false));
   }
     return (
-        <div className='margin-outer'>
+        <div className='margin-outer vendor-login'>
           {loading && <div className='loader'><span></span></div>}
           <div className='container-fluid'>
-            <div className="row vh-100 d-flex justify-content-center align-items-center">
+            <div className="row d-flex justify-content-center align-items-center">
               <div className='col-md-6 left-desktop'>
                 <img src={login} alt="Logo" />
               </div>
