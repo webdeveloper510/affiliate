@@ -4067,6 +4067,11 @@ ul.menu li span {
     width:100%;
 }
 
+button:disabled,
+button[disabled] {
+    background-color: #1032bb47;
+}
+
 .margin-outer-signup{
     margin-top:110px;
     float:left;

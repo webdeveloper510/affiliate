@@ -48,8 +48,7 @@ function Signup (){
 
   const stepAhead = () => {
     const newErrors = {};
-    
-    if (!name) {
+    if(!name) {
       newErrors.name = true;
     }
     if (!email && !newErrors.name) {
@@ -87,7 +86,8 @@ function Signup (){
       newErrors.confirmPassword = true;
       setErrors(newErrors);
       toast.error("Passwords do not match");
-    } else {
+    }
+     else {
       setErrors({});
       setStepOne(false);
       setStepTwo(true);
