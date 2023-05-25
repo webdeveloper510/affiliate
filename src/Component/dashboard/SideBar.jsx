@@ -101,6 +101,20 @@ const SideBar = () => {
         <div className="sidebar">
            <div className='d-flex justify-content-end logout-button'>
             <button onClick={(e) => {handleLogOut(e)}}>Logout</button>
+
+            <div className='notifications' style={{marginLeft: 30, cursor: 'pointer',marginTop:'10px',marginRight:'8px'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
+                                <span>{notifications?.length ? notifications.length : 0}</span>
+                                <FontAwesomeIcon 
+                                icon={faBell}
+                                style={{
+                                    color: "#000",
+                                    width: "20px",
+                                    height: "20px",
+                                    marginTop:'5px',
+                                }}
+                                />
+                            </div>
+
            </div>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <Row>
@@ -110,7 +124,7 @@ const SideBar = () => {
                             <img src={User} alt='notification' style={{width: 45}} />
                             
                             <p className='text-white mb-0 ms-3'>Hello, {userName}</p>
-                            <div className='notifications' style={{marginLeft: 40, cursor: 'pointer'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
+                            {/* <div className='notifications' style={{marginLeft: 40, cursor: 'pointer'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
                                 <span>{notifications?.length ? notifications.length : 0}</span>
                                 <FontAwesomeIcon 
                                 icon={faBell}
@@ -120,12 +134,12 @@ const SideBar = () => {
                                     height: "20px",
                                 }}
                                 />
-                            </div>
+                            </div> */}
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="first">
                             <img src={CampaignOverview} className="me-2" alt='menu-img' />
-                            Camp List</Nav.Link>
+                            Campaigns List</Nav.Link>
                         </Nav.Item>
                     </Nav>
                     {shownotification === true && (

@@ -48,6 +48,9 @@ function Signup (){
 
   const stepAhead = () => {
     const newErrors = {};
+    // if(!email.includes('@') || !email.includes('.')){
+    //   return toast.warn("Enter a valid Email.")
+    // }
     if(!name) {
       newErrors.name = true;
     }
@@ -72,7 +75,8 @@ function Signup (){
     } else if (password !== confirmPassword) {
       setErrors(newErrors);
       toast.error("Passwords do not match");
-    } else {
+    }
+     else {
       setErrors({});
       setStepOne(false);
       setStepTwo(true);
