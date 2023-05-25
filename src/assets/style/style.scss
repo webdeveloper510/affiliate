@@ -4071,6 +4071,12 @@ ul.menu li span {
     margin-top:110px;
     float:left;
     width:100%;
+    p.error.mb-0 {
+        position: absolute;
+        bottom: -23px;
+        z-index: 2;
+        color: red;
+    }
     textarea {
         color: #707070 !important;
     }

@@ -16,6 +16,7 @@ function VendorSignup() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [email, setEmail] = useState('')
     const [category, setCategory] = useState('')
+    const [urlError, setUrlError] = useState('');
     const [shopifyUrl, setShopifyUrl] = useState('')
     const [instagramUrl, setInstagramUrl] = useState('')
     const [selectedFile, setSelectedFile] = useState(null);
@@ -61,8 +62,17 @@ function VendorSignup() {
     }
 
     const handleShopify = (event) => {
-        setShopifyUrl(event.target.value);
-    }
+        const url = event.target.value;
+        setShopifyUrl(url);
+    
+        // Check if the URL is valid
+        const urlPattern = /^[\w.-]+\.[a-zA-Z]{2,}$/;
+        if (!urlPattern.test(url)) {
+          setUrlError('Invalid URL');
+        } else {
+          setUrlError('');
+        }
+    };
 
     const handleInstagram = (event) => {
         setInstagramUrl(event.target.value);
@@ -194,7 +204,8 @@ function VendorSignup() {
                         <label className='text-start w-100 mb-2 text-dark'>Shopify URL</label>
                         <div className="input-container w-100 d-flex mb-0">
                             <label htmlFor="">https://</label>
-                            <input type="url" className='mb-0' placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
+                            <input type="url" className='mb-0' pattern="https?://.*" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
+                            {urlError && <p className="error mb-0">{urlError}</p>}
                         </div>
                     </div>
                     
@@ -204,7 +215,7 @@ function VendorSignup() {
                     </div>
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">
-                    <button className='buttonfx angleindouble color-1 Signup'>Signup</button>
+                    <button className='buttonfx angleindouble color-1 Signup' disabled={!!urlError}>Signup</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signin'> Sign In</Link></p>
                 </div>
             </div>
