@@ -242,7 +242,7 @@ function VendorSignup() {
                         />
                     
                     <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image</label>
-                    <input type="file" onChange={onFileChange} />
+                    <input type="file" accept="image/*" onChange={onFileChange} />
                     
                     <div className="input-field w-100">
                         <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
