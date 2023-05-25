@@ -6,7 +6,10 @@
     .sidebar {
         width: 100%;
         .notifications {
-            position: relative;
+            position: absolute;
+            right: 15px;
+            z-index: 4;
+            top: 20px;
             span {
                 position: absolute;
                 top: -11px;
@@ -17,10 +20,56 @@
                 height: 20px;
                 width: 20px;
                 border-radius: 50%;
-                background-color: #0d6efd;
-                color: #fff;
+                background-color: #fff;
+                color: #0d6efd;
                 font-size: 14px;
-                box-shadow: 0 0 8px 2px rgb(0 0 0 / 20%);
+                box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+                border: 1px solid #a8a8a8;
+            }
+        }
+        .notification-list {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            z-index: 3;
+            width: -moz-fit-content;
+            width: fit-content;
+            height: -moz-fit-content;
+            height: fit-content;
+            background: #fff;
+            border: 1px solid #bdbdbd;
+            border-radius: 5px;
+            padding-left: 0;
+            min-width: 185px;
+            button {
+                text-decoration: underline;
+                background-color: transparent;
+                border: none;
+                box-shadow: none;
+                width: 100%;
+                text-align: right;
+                font-size: 12px;
+            }
+            li {
+                display: flex;
+                font-size: 13px;
+                border-bottom: 1px solid #e7e7e7;
+                padding: 6px 8px;
+                position: relative;
+                padding-left: 15px;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    display: flex;
+                    margin: auto;
+                    left: 5px;
+                    height: 5px;
+                    width: 5px;
+                    border-radius: 50%;
+                    background: #000;
+                }
             }
         }
         .row {
@@ -49,35 +98,7 @@
                         border-radius: 0;
                     }
                 }
-                .notification-list {
-                    position: absolute;
-                    top: 10%;
-                    left: 85px;
-                    width: -moz-fit-content;
-                    width: fit-content;
-                    height: -moz-fit-content;
-                    height: fit-content;
-                    background: #fff;
-                    border: 1px solid #bdbdbd;
-                    border-radius: 5px;
-                    padding-left: 0;
-                    min-width: 185px;
-                    button {
-                        text-decoration: underline;
-                        background-color: transparent;
-                        border: none;
-                        box-shadow: none;
-                        width: 100%;
-                        text-align: right;
-                        font-size: 12px;
-                    }
-                    li {
-                        display: flex;
-                        font-size: 13px;
-                        border-bottom: 1px solid #e7e7e7;
-                        padding: 6px 8px;
-                    }
-                }
+                
             }
             .side-content {
                 width: 80%;

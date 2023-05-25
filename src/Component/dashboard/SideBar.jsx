@@ -99,9 +99,30 @@ const SideBar = () => {
     console.log(shownotification)
     return (
         <div className="sidebar">
-           <div className='d-flex justify-content-end logout-button'>
+           <div className='d-flex justify-content-end logout-button' style={{marginRight: 40}}>
             <button onClick={(e) => {handleLogOut(e)}}>Logout</button>
            </div>
+           <div className='notifications' style={{ cursor: 'pointer'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
+                <span>{notifications?.length ? notifications.length : 0}</span>
+                <FontAwesomeIcon 
+                icon={faBell}
+                style={{
+                    color: "#0d6efd",
+                    width: "20px",
+                    height: "20px",
+                }}
+                />
+            </div>
+            {shownotification === true && (
+                notifications?.length > 0 ? (
+                    <ul className="notification-list">
+                        <button onClick={(e) => {handleClearNotifications(e)}}>clear all</button>
+                        {notifications?.map((data) => {
+                        return <li>{data.message}</li>;
+                        })}
+                    </ul>
+                ) : <ul className="notification-list"><li style={{textAlign: 'center'}}>No Notifications</li></ul>
+            )}
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <Row>
                     <Col sm={3} className='side-menu py-4'>
@@ -110,17 +131,7 @@ const SideBar = () => {
                             <img src={User} alt='notification' style={{width: 45}} />
                             
                             <p className='text-white mb-0 ms-3'>Hello, {userName}</p>
-                            <div className='notifications' style={{marginLeft: 40, cursor: 'pointer'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
-                                <span>{notifications?.length ? notifications.length : 0}</span>
-                                <FontAwesomeIcon 
-                                icon={faBell}
-                                style={{
-                                    color: "#fff",
-                                    width: "20px",
-                                    height: "20px",
-                                }}
-                                />
-                            </div>
+                            
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="first">
@@ -128,16 +139,7 @@ const SideBar = () => {
                             Camp List</Nav.Link>
                         </Nav.Item>
                     </Nav>
-                    {shownotification === true && (
-                        notifications?.length > 0 ? (
-                            <ul className="notification-list">
-                                <button onClick={(e) => {handleClearNotifications(e)}}>clear all</button>
-                                {notifications?.map((data) => {
-                                return <li>{data.message}</li>;
-                                })}
-                            </ul>
-                        ) : <ul className="notification-list"><li style={{textAlign: 'center'}}>No Notifications</li></ul>
-                    )}
+                    
                     </Col>
                     <Col sm={9} className='side-content mt-2'>
                     <Tab.Content>
