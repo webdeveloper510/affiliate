@@ -3947,7 +3947,7 @@ a.buttonfx.angleindouble.color-1.Signup {
 }
 
 .right-desktop {
-    min-height: 100vh;
+    min-height: 86vh;
     background: #edeaf2;
 }
 
@@ -3961,7 +3961,7 @@ a.buttonfx.angleindouble.color-1.Signup {
 .left-desktop {
     background-position: 50%;
     background-size: cover;
-    min-height: 100vh;
+    min-height: 86vh;
     background: #0080FF;
     justify-content: center;
     align-items: center;
@@ -4071,6 +4071,12 @@ ul.menu li span {
     margin-top:110px;
     float:left;
     width:100%;
+    p.error.mb-0 {
+        position: absolute;
+        bottom: -23px;
+        z-index: 2;
+        color: red;
+    }
     textarea {
         color: #707070 !important;
     }
@@ -4146,15 +4152,42 @@ ul.menu li span {
     }
 }
 
+.vendor-login {
+    .right-desktop {
+        min-height: 88.5vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .content {
+            width: 100%;
+        }
+    }
+    .left-desktop {
+        min-height: 88.5vh;
+    }
+}
+
 .vendor-sign {
     .vendor-sign-img {
         img {
             height: 100%;
-            max-height: 165vh;
+            max-height: 86vh;
             object-fit: cover;
         }
     }
     .vendor-sign-content {
+        .input-field {
+            width: 48.5%;
+            margin-bottom: 1.5rem;
+            svg {
+                position: absolute;
+                bottom: 14px;
+                right: 15px;
+                z-index: 8;
+                cursor: pointer;
+            }
+        }
         img {
             display: flex;
             max-width: 120px;

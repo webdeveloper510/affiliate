@@ -5,9 +5,11 @@ import VendorSign from '../../assets/login-img.svg';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { API } from '../../config/Api';
 
@@ -17,6 +19,7 @@ function VendorSignup() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [email, setEmail] = useState('')
     const [category, setCategory] = useState('')
+    const [urlError, setUrlError] = useState('');
     const [shopifyUrl, setShopifyUrl] = useState('')
     const [instagramUrl, setInstagramUrl] = useState('')
     const [selectedFile, setSelectedFile] = useState(null);
@@ -26,6 +29,7 @@ function VendorSignup() {
     const [isCpassBlank,setisCpassBlank]=useState(false);
     const [isShopifyBlank,setisShopifyBlank]=useState(false);
     const [isInstaBlank,setisInstaBlank]=useState(false);
+    const [confirmType, setConfirmType] = useState(false);
     const navigate = useNavigate();
     
 
@@ -36,6 +40,14 @@ function VendorSignup() {
         setSelectedFile(event.target.files[0]);
         console.log(event.target.files[0])
         
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmVisibility = () => {
+        setConfirmType(!confirmType);
     };
 
     console.log("Selected File", selectedFile)
@@ -61,8 +73,17 @@ function VendorSignup() {
     }
 
     const handleShopify = (event) => {
-        setShopifyUrl(event.target.value);
-    }
+        const url = event.target.value;
+        setShopifyUrl(url);
+    
+        // Check if the URL is valid
+        const urlPattern = /^[\w.-]+\.[a-zA-Z]{2,}$/;
+        if (!urlPattern.test(url)) {
+          setUrlError('Invalid URL');
+        } else {
+          setUrlError('');
+        }
+    };
 
     const handleInstagram = (event) => {
         setInstagramUrl(event.target.value);
@@ -123,8 +144,10 @@ function VendorSignup() {
           .catch(function (error) {
             console.log(error);
              if(error.response.data.username) {
-                setisUserBlank(true);
                 toast.warn("Username may not be blank.");
+            }
+            else if(error.response.data.email== "user with this email already exists.") {
+                toast.warn("User with this email already exists.");
             }
             else if(error.response.data.email == "This field may not be blank.") {
                 setisEmailBlank(true)
@@ -172,62 +195,38 @@ function VendorSignup() {
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
                 <h3 className='mb-4'>Merchant Sign Up</h3>
-                <form className='d-flex flex-column justify-content-between align-items-center w-100'>
+                <form className='d-flex flex-column justify-content-between align-items-center w-100' onSubmit={createVendor}>
                     <label className='text-start w-100 mb-2 text-dark'>Username{<span style={{color:'red'}}>*</span>}</label>
-                    <input type="text" value={name} onChange={handleName}  style={{ border: isUserBlank ? '1px solid red' : '1px solid black' }}/>
+                    <input type="text" value={name} onChange={handleName}  style={{ border: isPassBlank ? '1px solid red' : '1px solid black' }}/>
                     
                     <label className='text-start w-100 mb-2 text-dark'>Email{<span style={{color:'red'}}>*</span>}</label>
-                    <input type="email" value={email} onChange={handleEmail} style={{ border: isEmailBlank ? '1px solid red' : '1px solid black' }}/>
-
-                    <div className='d-flex justify-content-between w-100'>
+                    <input type="email" value={email} onChange={handleEmail} />
+                    
                     <label className='text-start w-100 mb-2 text-dark'>Password{<span style={{color:'red'}}>*</span>}</label>
-                    <FontAwesomeIcon 
-                            icon={showPassword ? faEyeSlash : faEye}
-                            className="password-toggle-icon position-relative"
-                            style={{ top: '45px',right:'10px',zIndex:'4' }}
-                            onClick={() => setShowPassword(!showPassword)}
-                        />
-                      </div>
-                        <input
-                            type={showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={handlePassword}
-                            style={{ border: isPassBlank ? '1px solid red' : '1px solid black' }}
-                        />
-
-                    <div className='d-flex justify-content-between w-100'>
+                    <input type="password" value={password} onChange={handlePassword} />
+                    
                     <label className='text-start w-100 mb-2 text-dark'>Confirm Password{<span style={{color:'red'}}>*</span>}</label>
-                    <FontAwesomeIcon 
-                            icon={showCPassword ? faEyeSlash : faEye}
-                            className="password-toggle-icon position-relative"
-                            style={{ top: '45px',right:'10px',zIndex:'4' }}
-                            onClick={() => setShowCPassword(!showCPassword)}
-                    />
-                      </div>
-                        <input
-                            type={showCPassword ? 'text' : 'password'}
-                            value={confirmPassword}
-                            onChange={handleConfirmPassword}
-                            style={{ border: isCpassBlank ? '1px solid red' : '1px solid black' }}
-                        />
+                    <input type="password" value={confirmPassword} onChange={handleConfirmPassword} />
                     
                     <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image</label>
-                    <input type="file" accept="image/*" onChange={onFileChange} />
+                    <input type="file" onChange={onFileChange} />
                     
-                    <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
-                    <input type="text" value={category} onChange={handleCategory} />
+                    <div className="input-field">
+                        <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
+                        <input type="text" className='mb-0' maxLength='30' value={category} onChange={handleCategory} />
+                    </div>
 
                     <label className='text-start w-100 mb-2 text-dark'>Shopify URL{<span style={{color:'red'}}>*</span>}</label>
                     <div className="input-container w-100 d-flex">
                         <label htmlFor="">https://</label>
-                        <input type="url" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} style={{ border: isShopifyBlank ? '1px solid red' : '1px solid black' }}/>
+                        <input type="url" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
                     </div>
                     
                     <label className='text-start w-100 mb-2 text-dark'>Instagram Handle{<span style={{color:'red'}}>*</span>}</label>
-                    <input type="url" value={instagramUrl} onChange={handleInstagram} style={{ border: isInstaBlank ? '1px solid red' : '1px solid black' }}/>
+                    <input type="url" value={instagramUrl} onChange={handleInstagram} />
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">
-                    <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor}>Signup</button>
+                    <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor} disabled={!!urlError}>Signup</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signin'> Sign In</Link></p>
                 </div>
             </div>

@@ -34,3 +34,8 @@
     animation: spin 2s linear infinite;
   }
 }
+
+button:disabled,
+button[disabled] {
+    background-color: #1032bb47 !important;
+}

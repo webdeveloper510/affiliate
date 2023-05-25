@@ -91,8 +91,8 @@ function VendorLogin() {
                 :
                 (
                     <>
-                        <input type="email" placeholder='Email' value={email} onChange={handleEmail} />
-                        <input type="password" placeholder='Password' value={password} onChange={handlePassword} />
+                        <input type="email" maxLength='30' placeholder='Email' value={email} onChange={handleEmail} />
+                        <input type="password" maxLength='30' placeholder='Password' value={password} onChange={handlePassword} />
                     </>
                 )}
                 </form>

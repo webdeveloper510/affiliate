@@ -36,10 +36,10 @@ function Login (){
     .finally(() => setLoading(false));
   }
     return (
-        <div className='margin-outer'>
+        <div className='margin-outer vendor-login'>
           {loading && <div className='loader'><span></span></div>}
           <div className='container-fluid'>
-            <div className="row vh-100 d-flex justify-content-center align-items-center">
+            <div className="row d-flex justify-content-center align-items-center">
               <div className='col-md-6 left-desktop'>
                 <img src={login} alt="Logo" />
               </div>
@@ -55,13 +55,13 @@ function Login (){
                                 <Form.Label className="text-center">
                                   Email
                                 </Form.Label>
-                                <Form.Control type="email" placeholder="Enter Email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
+                                <Form.Control type="email"  maxLength='35' placeholder="Enter Email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
                             </Form.Group> 
                             <Form.Group className="mb-3" controlId="formname">
                               <Form.Label className="text-center">
                                 Password
                               </Form.Label>
-                              <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                              <Form.Control type="password" maxLength='30' placeholder="Enter Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
                             </Form.Group>
 
                             <a href='#/forgotpassword' className='forgot-password'>Forgot Password</a>
