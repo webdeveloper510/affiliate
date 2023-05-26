@@ -202,7 +202,7 @@ function VendorSignup() {
                 <img src={signup} alt="vendor-signup"  />
                 </div>
             </div>
-            <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
+            <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center" style={{background: '#edeaf2'}}>
                 <h3 className='mb-4'>Merchant Sign Up</h3>
                 <form className='d-flex flex-wrap justify-content-between align-items-center w-100'>
                 <div className="input-field">
@@ -271,6 +271,7 @@ function VendorSignup() {
                     <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor} disabled={!!urlError}>Signup</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signin'> Sign In</Link></p>
                 </div>
+                <p><Link to='/signup' className='fw-bold'>Sign Up</Link> as Influencer</p>
             </div>
         </div>
     </div>
