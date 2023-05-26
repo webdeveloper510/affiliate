@@ -77,7 +77,7 @@ function VendorLogin() {
             <div className="vendor-sign-img col-md-6 p-0">
                 <img src={VendorSign} alt="vendor-sign" className='w-100' />
             </div>
-            <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
+            <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center" style={{background: '#edeaf2'}}>
                 <h3 className='mb-4'>Merchant Sign In</h3>
                 <form className={isActive ? 'active d-flex flex-column justify-content-between align-items-center w-100' : 'd-flex flex-column justify-content-between align-items-center w-100'} >
                     {isActive == true ? (
@@ -103,6 +103,7 @@ function VendorLogin() {
                     <button className='buttonfx angleindouble color-1 Signup' onClick={logVendor}>Login</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signup'> Sign Up</Link></p>
                 </div>
+                <p className='mt-3'><Link to='/login' className='fw-bold'>Sign In</Link> as Influencer</p>
             </div>
         </div>
     </div>

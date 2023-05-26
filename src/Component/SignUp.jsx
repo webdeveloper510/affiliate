@@ -284,7 +284,7 @@ function Signup (){
           <div className='col-md-6 left-desktop'>
             <img src={signup} alt="Logo" />
           </div>
-          <div className='col-md-6 right-desktop'>
+          <div className='col-md-6 right-desktop d-flex align-items-center justify-content-center'>
             <div className="content col-xs-12 login-div d-flex flex-column">
               <h3>Affiliate signup</h3>
               <h5 className='my-3'>Step {stepOne == false && stepTwo == true ? "2" : "1"}</h5>
@@ -292,11 +292,11 @@ function Signup (){
               <form action="">
                 {stepOne && 
                 <>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.name ? 'error' : ''}`}>
+                <div className={`input-container d-flex flex-column mb-3 ${errors.name ? 'error' : ''}`} style={{width: '49%', marginRight: 10}}>
                   <label htmlFor="">Username <strong style={{color: 'red'}}>*</strong></label>
                   <input placeholder='UserName' maxLength='30' value={name} onChange={(e) => {setName(e.target.value)}} />
                 </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.email ? 'error' : ''}`}>
+                <div className={`input-container d-flex flex-column mb-3 ${errors.email ? 'error' : ''}`} style={{width: '49%'}}>
                   <label htmlFor="">Email <strong style={{color: 'red'}}>*</strong></label>
                   <input type='email' maxLength='35' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
                 </div>
@@ -433,6 +433,7 @@ function Signup (){
                     Sign In
                   </a>
                 </p>
+                <p className='text-center mb-0 mt-2'>or <Link className='mx-1 fw-bold' to='/vendor-signup'>Sign up </Link> as Vendor</p>
               </div>
 
               {mailPopup && (

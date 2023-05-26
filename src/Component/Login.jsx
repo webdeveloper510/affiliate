@@ -5,7 +5,7 @@ import login from '../assets/login11.png';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { API } from '../config/Api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
   
 function Login (){
   const [email, setEmail] = useState('');
@@ -80,6 +80,7 @@ function Login (){
                               Sign Up
                             </a>
                           </p>
+                          <p className='mt-3'><Link to='/vendor-signin' className='fw-bold'>Sign In</Link> as Vendor</p>
                         </div>
                       </div>
                     </div>
