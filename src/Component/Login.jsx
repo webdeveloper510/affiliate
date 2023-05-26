@@ -80,7 +80,7 @@ function Login (){
                               Sign Up
                             </a>
                           </p>
-                          <p className='mt-3'><Link to='/vendor-signin' className='fw-bold'>Sign In</Link> as Vendor</p>
+                          <p className='mt-3 text-center'><Link to='/vendor-signin' className='fw-bold'>Sign In</Link> as Vendor</p>
                         </div>
                       </div>
                     </div>
