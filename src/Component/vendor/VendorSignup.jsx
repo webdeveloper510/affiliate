@@ -207,17 +207,17 @@ function VendorSignup() {
                 <form className='d-flex flex-wrap justify-content-between align-items-center w-100'>
                 <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Username<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="text" className='mb-0' maxLength='30' value={name} onChange={handleName} />
+                        <input type="text" value={name} onChange={handleName}  style={{ border: isUserBlank ? '1px solid red' : '1px solid black' }}/>
                     </div>
                     
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Email<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="email" maxLength='35' className='mb-0' value={email} onChange={handleEmail} />
+                        <input type="email" value={email} onChange={handleEmail} style={{ border: isEmailBlank ? '1px solid red' : '1px solid black' }}/>
                     </div>
                     
                     <div className="input-field position-relative">
                         <label className='text-start w-100 mb-2 text-dark'>Password<strong style={{color: 'red'}}>*</strong></label>
-                        <input type={showPassword ? 'text' : 'password'} maxLength='30' className='mb-0' value={password} onChange={handlePassword} />
+                        <input type={showPassword ? 'text' : 'password'} maxLength='30' className='mb-0' value={password} onChange={handlePassword} style={{ border: isPassBlank ? '1px solid red' : '1px solid black' }}/>
                         <FontAwesomeIcon
                             icon={faEye}
                             style={{
@@ -231,7 +231,7 @@ function VendorSignup() {
                     
                     <div className="input-field position-relative">
                         <label className='text-start w-100 mb-2 text-dark'>Confirm Password<strong style={{color: 'red'}}>*</strong></label>
-                        <input type={confirmType ? 'text' : 'password'} className='mb-0' value={confirmPassword} onChange={handleConfirmPassword} />
+                        <input type={confirmType ? 'text' : 'password'} className='mb-0' value={confirmPassword} onChange={handleConfirmPassword} style={{ border: isCpassBlank ? '1px solid red' : '1px solid black' }}/>
                         <FontAwesomeIcon
                             icon={faEye}
                             style={{
@@ -257,7 +257,7 @@ function VendorSignup() {
                         <label className='text-start w-100 mb-2 text-dark'>Shopify URL<strong style={{color: 'red'}}>*</strong></label>
                         <div className="input-container w-100 d-flex mb-0">
                             <label htmlFor="">https://</label>
-                            <input type="url" className='mb-0' pattern="https?://.*" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
+                            <input type="url" className='mb-0' pattern="https?://.*" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} style={{ border: isShopifyBlank ? '1px solid red' : '1px solid black' }}/>
                             {urlError && <p className="error mb-0">{urlError}</p>}
                         </div>
                     </div>
