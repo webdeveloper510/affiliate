@@ -30,14 +30,15 @@ function Header (){
                 <NavLink to="/product"> Product </NavLink>
                 </li>
                 <li>
-                <span> Market Place </span>
-                <ul class="subpage">
+                <NavLink to="/vendor-signup"> Vendor Login/  Signup </NavLink></li>
+                {/* <span> Market Place </span> */}
+                {/* <ul class="subpage">
                 <li><NavLink to="/marketplace"> Home </NavLink></li>
                 <li><NavLink to="/offers"> Offers </NavLink></li>
                 <li><NavLink to="/products"> Products </NavLink></li>
                 <li><NavLink to="/vendor-signup"> Vendor Login/  Signup </NavLink></li>
-                </ul>
-                </li>
+                </ul> */}
+                {/* </li> */}
                 <li>
                 <NavLink to="/resources"> Resources </NavLink>
                 </li>

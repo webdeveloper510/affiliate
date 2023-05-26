@@ -197,8 +197,8 @@ function VendorSignup() {
   return (
     <div className="margin-outer-signup vendor-sign" >
         <div className="vendor-sign-container d-md-flex">
-            <div className="vendor-sign-img col-md-6 p-0 bg-primary">
-                <div className='col-md-6 m-auto align-middle'>
+            <div className="vendor-sign-img col-md-6 p-0" >
+                <div className='col-md-6 left-desktop w-100'>
                 <img src={signup} alt="vendor-signup"  />
                 </div>
             </div>
