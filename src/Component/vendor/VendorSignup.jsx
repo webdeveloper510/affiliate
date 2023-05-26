@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Logo from '../../assets/logo.png';
-import VendorSign from '../../assets/login-img.svg';
+// import VendorSign from '../../assets/login-img.svg';
+import signup from '../../assets/sign1.webp';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -12,6 +13,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { API } from '../../config/Api';
+import Signup from '../SignUp';
 
 function VendorSignup() {
     const [name, setName] = useState('');
@@ -191,8 +193,10 @@ function VendorSignup() {
   return (
     <div className="margin-outer-signup vendor-sign" >
         <div className="vendor-sign-container d-md-flex">
-            <div className="vendor-sign-img col-md-6 p-0">
-                <img src={VendorSign} alt="vendor-signup" className='w-100' />
+            <div className="vendor-sign-img col-md-6 p-0 bg-primary">
+                <div className='col-md-6 m-auto align-middle'>
+                <img src={signup} alt="vendor-signup"  />
+                </div>
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center">
                 <h3 className='mb-4'>Merchant Sign Up</h3>
