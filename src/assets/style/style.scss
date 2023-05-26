@@ -4082,6 +4082,12 @@ button[disabled] {
         z-index: 2;
         color: red;
     }
+    .vendor-sign-container {
+        min-height: 86vh;
+    }
+    .vendor-sign-img {
+        min-height: 86vh;
+    }
     textarea {
         color: #707070 !important;
     }
