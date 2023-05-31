@@ -13,7 +13,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { API } from '../../config/Api';
-import Signup from '../SignUp';
+// import Signup from '../SignUp';
 
 function VendorSignup() {
     const [name, setName] = useState('');
@@ -33,6 +33,8 @@ function VendorSignup() {
     const [isInstaBlank,setisInstaBlank]=useState(false);
     const [confirmType, setConfirmType] = useState(false);
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
+    const [Img,setImg]=useState(signup);
     
 
     const [showPassword, setShowPassword] = useState(false);
@@ -40,17 +42,18 @@ function VendorSignup() {
 
     const onFileChange = event => {
         setSelectedFile(event.target.files[0]);
-        console.log(event.target.files[0])
+        console.log('This is selected img---------------->',event.target.files[0]);
+        setImg(URL.createObjectURL(event.target.files[0]))
         
     };
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    // const togglePasswordVisibility = () => {
+    //     setShowPassword(!showPassword);
+    // };
 
-    const toggleConfirmVisibility = () => {
-        setConfirmType(!confirmType);
-    };
+    // const toggleConfirmVisibility = () => {
+    //     setShowCPassword(!confirmType);
+    // };
 
     console.log("Selected File", selectedFile)
 
@@ -108,12 +111,37 @@ function VendorSignup() {
         formData.append('confirm_password', confirmPassword);
         formData.append('type','normal');
         console.log(formData);
-        setisUserBlank(false);
-        setisEmailBlank(false);
-        setisPassBlank(false);
-        setisCpassBlank(false);
-        setisShopifyBlank(false);
-        setisInstaBlank(false);
+        const errorObj={}
+        if(!name){
+           errorObj.name=true; 
+        }
+        if(!email){
+            errorObj.email=true; 
+         }
+         if(!password){
+            errorObj.password=true; 
+         }
+         if(!confirmPassword){
+            errorObj.confirmPassword=true; 
+         }
+         if(!shopifyUrl){
+            errorObj.shopifyUrl=true; 
+         }
+         if(!instagramUrl){
+            errorObj.instagramUrl=true; 
+         }
+
+         if (Object.keys(errorObj).length > 0) {
+            setErrors(errorObj);
+            toast.warn("Please fill in all the required fields");
+         }
+        //  setErrors(errorObj)
+        // setisUserBlank(false);
+        // setisEmailBlank(false);
+        // setisPassBlank(false);
+        // setisCpassBlank(false);
+        // setisShopifyBlank(false);
+        // setisInstaBlank(false);
         if(name.length>30){
             setisUserBlank(true);
             return toast.warn("Username should not be more than 30 characters.");
@@ -148,17 +176,17 @@ function VendorSignup() {
             navigate('/vendor-signin');
         })
           .catch(function (error) {
-            console.log(error);
+            console.log('ERROR--------------------------->',error);
              if(error.response.data.username) {
-                setisUserBlank(true)
-                toast.warn("Username may not be blank.");
+                // setisUserBlank(true)
+                // toast.warn("Username may not be blank.");
             }
             else if(error.response.data.email== "user with this email already exists.") {
                 toast.warn("User with this email already exists.");
             }
             else if(error.response.data.email == "This field may not be blank.") {
-                setisEmailBlank(true)
-                toast.warn("Email may not be blank.");
+                // setisEmailBlank(true)
+                // toast.warn("Email may not be blank.");
             }
             else if(error.response.data.email == "Enter a valid email address.") {
                 toast.warn("Enter a valid email address");
@@ -167,23 +195,23 @@ function VendorSignup() {
                 toast.warn("Password must be more than 8 character.");
             }
             else if(error.response.data.password == "This field may not be blank.") {
-                setisPassBlank(true)
-                toast.warn("Password may not be blank.");
+                // setisPassBlank(true)
+                // toast.warn("Password may not be blank.");
             }
             else if(error.response.data.confirm_password == "This field may not be blank.") {
-                setisCpassBlank(true)
-                toast.warn("Confirm Password may not be blank.");
+                // setisCpassBlank(true)
+                // toast.warn("Confirm Password may not be blank.");
             }
             else if(error.response.data.shopify_url == "Shopify_url cannot be empty") {
-                setisShopifyBlank(true)
-                toast.warn("Shopify url cannot be empty");
+                // setisShopifyBlank(true)
+                // toast.warn("Shopify url cannot be empty");
             }
             else if(error.response.data.shopify_url == "user with this shopify url already exists.") {
                 toast.warn("User with this shopify url already exists.");
             }
             else if(error.response.data.instagram_url == "instagram_url cannot be empty") {
-                setisInstaBlank(true)
-                toast.warn("Instagram url cannot be empty");
+                // setisInstaBlank(true)
+                // toast.warn("Instagram url cannot be empty");
             }
             else if(error.response.data.non_field_errors == "Password fields did not match.") {
                 toast.warn("Passwords did not match");
@@ -198,8 +226,10 @@ function VendorSignup() {
     <div className="margin-outer-signup vendor-sign" >
         <div className="vendor-sign-container d-md-flex">
             <div className="vendor-sign-img col-md-6 p-0" >
-                <div className='col-md-6 left-desktop w-100'>
-                <img src={signup} alt="vendor-signup"  />
+                {/* <div className='col-md-6 left-desktop w-100'> */}
+                <div className='left-desktop w-100'  style={{width:'100%'}}>
+                {/* <img src={signup} alt="vendor-signup"  /> */}
+                <img src={Img} alt="vendor-signup"  style={{width:'100%'}}/>
                 </div>
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center" style={{background: '#edeaf2'}}>
@@ -207,39 +237,39 @@ function VendorSignup() {
                 <form className='d-flex flex-wrap justify-content-between align-items-center w-100'>
                 <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Username<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="text" value={name} onChange={handleName}  style={{ border: isUserBlank ? '1px solid red' : '1px solid black' }}/>
+                        <input type="text" value={name} onChange={handleName}  style={{ border: errors.name ? '1px solid red' : '1px solid black' }}/>
                     </div>
                     
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Email<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="email" value={email} onChange={handleEmail} style={{ border: isEmailBlank ? '1px solid red' : '1px solid black' }}/>
+                        <input type="email" value={email} onChange={handleEmail} style={{ border: errors.email ? '1px solid red' : '1px solid black' }}/>
                     </div>
                     
                     <div className="input-field position-relative">
                         <label className='text-start w-100 mb-2 text-dark'>Password<strong style={{color: 'red'}}>*</strong></label>
-                        <input type={showPassword ? 'text' : 'password'} maxLength='30' className='mb-0' value={password} onChange={handlePassword} style={{ border: isPassBlank ? '1px solid red' : '1px solid black' }}/>
+                        <input type={showPassword ? 'text' : 'password'} maxLength='30' className='mb-0' value={password} onChange={handlePassword} style={{ border: errors.password ? '1px solid red' : '1px solid black' }}/>
                         <FontAwesomeIcon
-                            icon={faEye}
+                            icon={showPassword ? faEyeSlash : faEye}
                             style={{
                                 color: "#1032bb",
                                 width: "20px",
                                 height: "20px",
                             }}
-                            onClick={togglePasswordVisibility}
+                            onClick={() => setShowPassword(!showPassword)}
                         />
                     </div>
                     
                     <div className="input-field position-relative">
                         <label className='text-start w-100 mb-2 text-dark'>Confirm Password<strong style={{color: 'red'}}>*</strong></label>
-                        <input type={confirmType ? 'text' : 'password'} className='mb-0' value={confirmPassword} onChange={handleConfirmPassword} style={{ border: isCpassBlank ? '1px solid red' : '1px solid black' }}/>
+                        <input type={showCPassword ? 'text' : 'password'} className='mb-0' value={confirmPassword} onChange={handleConfirmPassword} style={{ border: errors.confirmPassword ? '1px solid red' : '1px solid black' }}/>
                         <FontAwesomeIcon
-                            icon={faEye}
+                           icon={showCPassword ? faEyeSlash : faEye}
                             style={{
                                 color: "#1032bb",
                                 width: "20px",
                                 height: "20px",
                             }}
-                            onClick={toggleConfirmVisibility}
+                            onClick={() => setShowCPassword(!showCPassword)}
                         />
                     </div>
                     
@@ -257,14 +287,14 @@ function VendorSignup() {
                         <label className='text-start w-100 mb-2 text-dark'>Shopify URL<strong style={{color: 'red'}}>*</strong></label>
                         <div className="input-container w-100 d-flex mb-0">
                             <label htmlFor="">https://</label>
-                            <input type="url" className='mb-0' pattern="https?://.*" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} style={{ border: isShopifyBlank ? '1px solid red' : '1px solid black' }}/>
+                            <input type="url" className='mb-0' pattern="https?://.*" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} style={{ border: errors.shopifyUrl ? '1px solid red' : '1px solid black' }}/>
                             {urlError && <p className="error mb-0">{urlError}</p>}
                         </div>
                     </div>
                     
                     <div className="input-field">
-                        <label className='text-start w-100 mb-2 text-dark'>Instagram Handle</label>
-                        <input type="url" className='mb-0' value={instagramUrl} onChange={handleInstagram} />
+                        <label className='text-start w-100 mb-2 text-dark'>Instagram Handle<strong style={{color: 'red'}}>*</strong></label>
+                        <input type="url" className='mb-0' value={instagramUrl} onChange={handleInstagram} style={{ border: errors.instagramUrl ? '1px solid red' : '1px solid black' }}/>
                     </div>
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">
