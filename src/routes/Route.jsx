@@ -14,8 +14,9 @@ import CampList from '../Component/dashboard/CampList';
 import Verify from '../Component/Verify';
 
 const Routing = () => {
+    
     return(
-        <div className="routes">
+        <div className="routes" >
         <Header />
         <Routes>
             <Route exact path='/' element={< Home />}></Route>

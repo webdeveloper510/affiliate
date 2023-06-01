@@ -102,19 +102,7 @@ const SideBar = () => {
            <div className='d-flex justify-content-end logout-button' style={{marginRight: 40}}>
             <button onClick={(e) => {handleLogOut(e)}}>Logout</button>
 
-            {/* <div className='notifications' style={{marginLeft: 30, cursor: 'pointer',marginTop:'10px',marginRight:'8px'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
-                                <span>{notifications?.length ? notifications.length : 0}</span>
-                                <FontAwesomeIcon 
-                                icon={faBell}
-                                style={{
-                                    color: "#000",
-                                    width: "20px",
-                                    height: "20px",
-                                    marginTop:'5px',
-                                }}
-                                />
-                                
-                            </div> */}
+           
 
            </div>
            {/* notification icon */}
@@ -147,17 +135,7 @@ const SideBar = () => {
                             <img src={User} alt='notification' style={{width: 45}} />
                             
                             <p className='text-white mb-0 ms-3'>Hello, {userName}</p>
-                            {/* <div className='notifications' style={{marginLeft: 40, cursor: 'pointer'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
-                                <span>{notifications?.length ? notifications.length : 0}</span>
-                                <FontAwesomeIcon 
-                                icon={faBell}
-                                style={{
-                                    color: "#fff",
-                                    width: "20px",
-                                    height: "20px",
-                                }}
-                                />
-                            </div> */}
+                          
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="first">

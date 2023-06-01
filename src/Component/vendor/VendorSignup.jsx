@@ -47,13 +47,7 @@ function VendorSignup() {
         
     };
 
-    // const togglePasswordVisibility = () => {
-    //     setShowPassword(!showPassword);
-    // };
-
-    // const toggleConfirmVisibility = () => {
-    //     setShowCPassword(!confirmType);
-    // };
+   
 
     console.log("Selected File", selectedFile)
 
@@ -135,13 +129,7 @@ function VendorSignup() {
             setErrors(errorObj);
             toast.warn("Please fill in all the required fields");
          }
-        //  setErrors(errorObj)
-        // setisUserBlank(false);
-        // setisEmailBlank(false);
-        // setisPassBlank(false);
-        // setisCpassBlank(false);
-        // setisShopifyBlank(false);
-        // setisInstaBlank(false);
+       
         if(name.length>30){
             setisUserBlank(true);
             return toast.warn("Username should not be more than 30 characters.");
