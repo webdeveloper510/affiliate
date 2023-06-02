@@ -5,6 +5,9 @@ import VendorSign from '../../assets/login-img.svg';
 import { toast } from 'react-toastify';
 import { API } from '../../config/Api';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +16,7 @@ function VendorLogin() {
     const [email, setEmail] = useState('');
     const [shopifyUrl, setShopifyUrl] = useState('');
     const [isActive, setIsActive] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -91,8 +95,21 @@ function VendorLogin() {
                 :
                 (
                     <>
-                        <input type="email" maxLength='30' placeholder='Email' value={email} onChange={handleEmail} />
-                        <input type="password" maxLength='30' placeholder='Password' value={password} onChange={handlePassword} />
+                        <div className="input-container w-100">
+                            <input type="email" className='ps-4' maxLength='30' placeholder='Email' value={email} onChange={handleEmail} />  
+                        </div>
+                        <div className="input-container input-field input-pass w-100">
+                            <input type={showPassword ? 'text' : 'password'} className='ps-4' maxLength='30' placeholder='Password' value={password} onChange={handlePassword} />
+                            <FontAwesomeIcon
+                                icon={showPassword ? faEyeSlash : faEye}
+                                style={{
+                                    color: "#1032bb",
+                                    width: "20px",
+                                    height: "20px",
+                                }}
+                                onClick={() => setShowPassword(!showPassword)}
+                            />
+                        </div>
                     </>
                 )}
                 </form>

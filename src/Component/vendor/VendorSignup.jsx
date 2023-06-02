@@ -32,6 +32,7 @@ function VendorSignup() {
     const [isShopifyBlank,setisShopifyBlank]=useState(false);
     const [isInstaBlank,setisInstaBlank]=useState(false);
     const [confirmType, setConfirmType] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
     const [Img,setImg]=useState(signup);
@@ -155,15 +156,16 @@ function VendorSignup() {
             return toast.warn("Password should not be more than 30 characters.");
         }
        
-        if(shopifyUrl.length>30){
+        if(shopifyUrl.length>100){
             setisShopifyBlank(true);
-            return toast.warn("Shopify url should not be more than 30 characters.");
+            return toast.warn("Shopify url should not be more than 100 characters.");
         }
-        if(instagramUrl.length>30){
+        if(instagramUrl.length>100){
             setisInstaBlank(true);
-            return toast.warn("Instagram url should not be more than 30 characters.");
+            return toast.warn("Instagram url should not be more than 100 characters.");
         }
       
+        setLoading(true);
         
         axios.post(API.BASE_URL + 'campaign/vendor/register/',formData, {
             headers: {
@@ -219,6 +221,10 @@ function VendorSignup() {
                 toast.warn("User with this email already exists.");
             }
           })
+        .finally(() => {
+        // Re-enable the button after the API call completes
+        setLoading(false);
+        });
     }
 
     
@@ -274,7 +280,7 @@ function VendorSignup() {
                     </div>
                     
                     <div className="input-field">
-                        <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image</label>
+                        <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image<strong style={{color: 'red'}}>*</strong></label>
                         <input type="file" className='mb-0' onChange={onFileChange} accept="image/*" />
                     </div>
                     
@@ -287,18 +293,18 @@ function VendorSignup() {
                         <label className='text-start w-100 mb-2 text-dark'>Shopify URL<strong style={{color: 'red'}}>*</strong></label>
                         <div className="input-container w-100 d-flex mb-0">
                             <label htmlFor="">https://</label>
-                            <input type="url" className='mb-0' pattern="https?://.*" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} style={{ border: errors.shopifyUrl ? '1px solid red' : '1px solid black' }}/>
+                            <input type="url" className='mb-0' maxLength='100' pattern="https?://.*" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} style={{ border: errors.shopifyUrl ? '1px solid red' : '1px solid black' }}/>
                             {urlError && <p className="error mb-0">{urlError}</p>}
                         </div>
                     </div>
                     
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Instagram Handle<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="url" className='mb-0' value={instagramUrl} onChange={handleInstagram} style={{ border: errors.instagramUrl ? '1px solid red' : '1px solid black' }}/>
+                        <input type="url"  maxLength='100' className='mb-0' value={instagramUrl} onChange={handleInstagram} style={{ border: errors.instagramUrl ? '1px solid red' : '1px solid black' }}/>
                     </div>
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">
-                    <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor} disabled={!!urlError}>Signup</button>
+                    <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor} disabled={loading || !!urlError}>Signup</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signin'> Sign In</Link></p>
                 </div>
                 <p><Link to='/signup' className='fw-bold'>Sign Up</Link> as Influencer</p>

@@ -4199,6 +4199,11 @@ button[disabled] {
                 cursor: pointer;
             }
         }
+        .input-pass {
+            svg {
+                bottom: 36px;
+            }
+        }
         img {
             display: flex;
             max-width: 120px;
@@ -4250,6 +4255,30 @@ button[disabled] {
         border: none !important;
         margin-top: 1.5rem;
         text-decoration: underline;
+    }
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        height: 6px;
+        width: 1.2px;
+        background: #707070;
+        border-radius: 40px;
+        z-index: 2;
+    }
+    &::before {
+        bottom: 14px;
+        right: 12px;
+        transform: rotate(-45deg);
+    }
+    &::after {
+        bottom: 14.2px;
+        right: 7px;
+        transform: rotate(45deg);
     }
 }
 

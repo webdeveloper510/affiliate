@@ -48,12 +48,13 @@ function Signup (){
 
   const stepAhead = () => {
     const newErrors = {};
-    if(!name) {
+    if (!name) {
       newErrors.name = true;
     }
-    if (!email && !newErrors.name) {
+  
+    if (!email) {
       newErrors.email = true;
-    } else if (!newErrors.name) {
+    } else {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(email)) {
         newErrors.email = true;
@@ -62,23 +63,23 @@ function Signup (){
         return;
       }
     }
-
+  
     if (!password) {
       newErrors.password = true;
     }
-    
+  
     if (!confirmPassword) {
       newErrors.confirmPassword = true;
     }
-    
+  
     if (!country) {
       newErrors.country = true;
     }
-    
+  
     if (!userHandle) {
       newErrors.userHandle = true;
     }
-    
+  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       toast.warn("Please fill in all the required fields");
@@ -86,13 +87,12 @@ function Signup (){
       newErrors.confirmPassword = true;
       setErrors(newErrors);
       toast.error("Passwords do not match");
-    }
-     else {
+    } else {
       setErrors({});
       setStepOne(false);
       setStepTwo(true);
     }
-  }
+  };
   
 
   const stepBehind = () => {
@@ -322,7 +322,7 @@ function Signup (){
                 </>
                 }
                 {stepTwo && <>
-                  <div className="input-container d-flex flex-column mb-3" ref={inputRef}>
+                  <div className="input-container d-flex flex-column mb-3 dropdown" ref={inputRef}>
                     <input type="text" placeholder={industries?.length > 0 ? industries : "Your Industry"}  onClick={toggleOptions} readOnly />
                       {showOptions && (
                         <ul>
@@ -347,7 +347,7 @@ function Signup (){
                       <option value="three">I am a professional affiliate marketer</option>
                     </select>
                   </div>
-                  <div className="input-container d-flex flex-column mb-3 w-100" ref={promotionRef}>
+                  <div className="input-container d-flex flex-column mb-3 w-100 dropdown" ref={promotionRef}>
                     <input type="text" placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"} onClick={promotionToggleOptions} readOnly />
                     {showPromotionOptions && (
                       <ul>
@@ -403,7 +403,7 @@ function Signup (){
                     <div className="input-container d-flex flex-column mb-3" ref={locationRef}>
                       <input
                         type="text"
-                        placeholder={location?.length > 0 ? location : "Search and select country (max 10 options)"}
+                        placeholder={location?.length > 0 ? location.join(", ") : "Search and select country (max 10 options)"}
                         onClick={toggleLocationOptions}
                         value={locationInput}
                         onChange={handleLocationInputChange}
