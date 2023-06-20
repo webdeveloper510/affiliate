@@ -3961,7 +3961,6 @@ a.buttonfx.angleindouble.color-1.Signup {
 .left-desktop {
     background-position: 50%;
     background-size: cover;
-    min-height: 86vh;
     background: #0080FF;
     justify-content: center;
     align-items: center;
@@ -4083,10 +4082,16 @@ button[disabled] {
         color: red;
     }
     .vendor-sign-container {
-        min-height: 86vh;
+        min-height: calc(100vh - 110px);
     }
     .vendor-sign-img {
-        min-height: 86vh;
+        min-height: calc(100vh - 110px);
+        .left-desktop {
+            height: 100%;
+            img {
+                object-fit: contain;
+            }
+        }
     }
     textarea {
         color: #707070 !important;
@@ -4175,7 +4180,7 @@ button[disabled] {
         }
     }
     .left-desktop {
-        min-height: 88.5vh;
+        min-height: calc(100vh - 110px);
     }
 }
 
@@ -4183,14 +4188,14 @@ button[disabled] {
     .vendor-sign-img {
         img {
             height: 100%;
-            max-height: 86vh;
+            max-height: calc(100vh - 110px);
             object-fit: cover;
         }
     }
     .vendor-sign-content {
         .input-field {
             width: 48.5%;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             svg {
                 position: absolute;
                 bottom: 14px;
@@ -4213,10 +4218,9 @@ button[disabled] {
             
             input {
                 border: 1px solid #d9d9d9;
-                min-height: 40px;
                 border-radius: 3px;
                 outline: none;
-                padding: 10px 15px;
+                padding: 6px 15px;
                 margin-bottom: 1.5vw;
                 width: 100%;
                 font-size: 1.2vw;

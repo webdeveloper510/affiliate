@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useMemo} from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
@@ -6,9 +6,11 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { API } from '../../config/Api';
 import axios from 'axios';
+import Select from 'react-select';
+import countryList from 'react-select-country-list';
 
 // Images
 import CampaignOverview from '../../assets/campaign-over.png';
@@ -20,8 +22,29 @@ const SideBar = () => {
     const navigate = useNavigate();
     const [notifications, setNotifications] = useState([])
     const token = localStorage.getItem("logToken");
+    const [showPayment, setShowPayment] = useState(false);
+    const [country, setCountry] = useState('');
+    const [formState, setFormState] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+    });
+
+    const [accNum, setAccNum] = useState('')
+    const [holdNum, setHoldNum] = useState('');
+    const [routNum, setRoutNum] = useState('')
     const [shownotification, setShowNotification] = useState(false);
     const notificationsRef = useRef(null);
+    const options = useMemo(() => countryList().getData(), [])
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormState((prevState) => ({
+          ...prevState,
+          [name]: value
+        }));
+      };
+
     const handleLogOut = () => {
         localStorage.removeItem("username");
         localStorage.removeItem("logToken");
@@ -31,6 +54,10 @@ const SideBar = () => {
 
     const handleNotifications = () => {
         setShowNotification(!shownotification);
+    }
+
+    const changeHandler = country => {
+        setCountry(country)
     }
 
     useEffect(() => {
@@ -96,6 +123,39 @@ const SideBar = () => {
         })
     }
 
+    const handleShowPayment = (e) => {
+        e.preventDefault();
+        setShowPayment(true);
+    }
+
+    const handleClose = () => {
+        setShowPayment(false)
+    }
+
+    const handlePayment = (e) => {
+        e.preventDefault();
+        axios.post(API.BASE_URL + 'influencer/stripe/connect/', {
+            first_name: formState.firstName,
+            last_name: formState.lastName,
+            email: formState.email,
+            country: country.value,
+            account_number: accNum,
+            routing_number: routNum,
+            account_holder_name: holdNum
+        },{
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        })
+        .then(function (response) {
+            console.log("Payment", response)
+            toast.success(response.data.message, { autoClose: 1000 })
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
     console.log(shownotification)
     return (
         <div className="sidebar">
@@ -142,6 +202,9 @@ const SideBar = () => {
                             <img src={CampaignOverview} className="me-2" alt='menu-img' />
                             Campaigns List</Nav.Link>
                         </Nav.Item>
+                        <div className="button pay-btn d-flex justify-content-center align-items-center mt-5">
+                            <button type='button' onClick={(e) => {handleShowPayment(e)}}>Set up Payment</button>
+                        </div>
                     </Nav>
                     
                     </Col>
@@ -154,6 +217,55 @@ const SideBar = () => {
                     </Col>
                 </Row>
             </Tab.Container>
+            {showPayment && (
+                <div className="payment-form">
+                    <form action="">
+                        <button className="cls-btn" type='button' onClick={(e) => {handleClose(e)}}>
+                            <FontAwesomeIcon
+                                icon={faXmark}
+                                style={{
+                                    color: "#000",
+                                    width: "30px",
+                                    height: "30px",
+                                }}
+                            />
+                        </button>
+                    
+                        <h2 className='mb-4'>Enter Details</h2>
+                        <div className="input-container">
+                            <label htmlFor="">First Name</label>
+                            <input type="text" name='firstName' value={formState.firstName} onChange={handleInputChange} />
+                        </div>
+                        <div className="input-container">
+                            <label htmlFor="">Last Name</label>
+                            <input type="text" name='lastName' value={formState.lastName} onChange={handleInputChange} />
+                        </div>
+                        <div className="input-container">
+                            <label htmlFor="">Email</label>
+                            <input type="email" name="email" value={formState.email} onChange={handleInputChange} />
+                        </div>
+                        <div className="input-container">
+                            <label htmlFor="">Country</label>
+                            <Select options={options} value={country} onChange={changeHandler} />
+                        </div>
+                        <div className="input-container">
+                            <label htmlFor="">Account Number</label>
+                            <input type="number" value={accNum} onChange={(e) => {setAccNum(e.target.value)}} />
+                        </div>
+                        <div className="input-container">
+                        <label htmlFor="">Routing Number</label>
+                            <input type="number" value={routNum} onChange={(e) => {setRoutNum(e.target.value)}} />
+                        </div>
+                        <div className="input-container">
+                            <label htmlFor="">Account Holder Name</label>
+                            <input type="text" value={holdNum} onChange={(e) => {setHoldNum(e.target.value)}} />
+                        </div>
+                        <div className="button">
+                            <button type='button' onClick={(e) => {handlePayment(e)}}>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            )}
         </div>
     )
 }

@@ -295,7 +295,7 @@ function VendorSignup() {
                     <button className='buttonfx angleindouble color-1 Signup' onClick={createVendor} disabled={loading || !!urlError}>Signup</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signin'> Sign In</Link></p>
                 </div>
-                <p><Link to='/signup' className='fw-bold'>Sign Up</Link> as Influencer</p>
+                <p className='mb-0'><Link to='/signup' className='fw-bold'>Sign Up</Link> as Influencer</p>
             </div>
         </div>
     </div>
