@@ -23,7 +23,10 @@ const SideBar = () => {
     const [notifications, setNotifications] = useState([])
     const token = localStorage.getItem("logToken");
     const [showPayment, setShowPayment] = useState(false);
+    const [vendorNames, setVendorNames] = useState([])
+    const [selectedVendor, setSelectedVendor] = useState('');
     const [country, setCountry] = useState('');
+    const [loading, setLoading] = useState(false);
     const [formState, setFormState] = useState({
         firstName: '',
         lastName: '',
@@ -69,6 +72,19 @@ const SideBar = () => {
         .then(function (response) {
             console.log("Notification", response.data)
             setNotifications(response.data.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+
+        axios.get(API.BASE_URL + 'influencer/vendor_key/',{
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        })
+        .then(function (response) {
+            console.log("Vendor Key", response.data.data)
+            setVendorNames(response.data.data);
         })
         .catch(function (error) {
             console.log(error);
@@ -133,15 +149,17 @@ const SideBar = () => {
     }
 
     const handlePayment = (e) => {
+        setLoading(true);
         e.preventDefault();
         axios.post(API.BASE_URL + 'influencer/stripe/connect/', {
             first_name: formState.firstName,
             last_name: formState.lastName,
             email: formState.email,
-            country: country.value,
+            country: country?.value,
             account_number: accNum,
             routing_number: routNum,
-            account_holder_name: holdNum
+            account_holder_name: holdNum,
+            secret: selectedVendor,
         },{
             headers: {
                 Authorization: `Token ${token}`
@@ -154,16 +172,17 @@ const SideBar = () => {
         .catch(function (error) {
             console.log(error);
         })
+        .finally(() => setLoading(false));
     }
 
     console.log(shownotification)
+
+    console.log("selectedVendor", selectedVendor)
     return (
         <div className="sidebar">
+             {loading && <div className='loader'><span></span></div>}
            <div className='d-flex justify-content-end logout-button' style={{marginRight: 40}}>
             <button onClick={(e) => {handleLogOut(e)}}>Logout</button>
-
-           
-
            </div>
            {/* notification icon */}
            <div className='notifications' style={{ cursor: 'pointer'}} onClick={() => {handleNotifications()}} ref={notificationsRef}>
@@ -243,6 +262,15 @@ const SideBar = () => {
                         <div className="input-container">
                             <label htmlFor="">Email</label>
                             <input type="email" name="email" value={formState.email} onChange={handleInputChange} />
+                        </div>
+                        <div className="input-container">
+                            <label htmlFor="">Vendor</label>
+                            <select value={selectedVendor} onChange={e => setSelectedVendor(e.target.value)}>
+                                <option disabled value="">Select a Vendor</option>
+                                {vendorNames?.map((names, i) => (
+                                    <option value={names.vendor_key} key={i}>{names.vendor}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="input-container">
                             <label htmlFor="">Country</label>
