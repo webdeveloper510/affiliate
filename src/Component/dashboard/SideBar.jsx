@@ -174,13 +174,13 @@ const SideBar = () => {
         .catch(function (error) {
             console.log(error);
             if(error.response.data.message) {
-                toast.error(error.response.data.message)
+                toast.error(error.response.data.message, { autoClose: 1000 })
             }
             else if(error.response.data.error) {
-                toast.error(error.response.data.error)
+                toast.error(error.response.data.error, { autoClose: 1000 })
             }
             else {
-                toast.error("Unable to transfer amount right now")
+                toast.error("Unable to transfer amount right now", { autoClose: 1000 })
             }
         })
         .finally(() => setLoading(false));
