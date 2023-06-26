@@ -184,6 +184,9 @@ function VendorSignup() {
             else if(error.response.data.password == "Password must be more than 8 character.") {
                 toast.warn("Password must be more than 8 character.");
             }
+            else if(error.response.data.image == "The submitted data was not a file. Check the encoding type on the form.") {
+                toast.warn("Please enter an Image")
+            }
             else if(error.response.data.password == "This field may not be blank.") {
                 // setisPassBlank(true)
                 // toast.warn("Password may not be blank.");
@@ -218,6 +221,7 @@ function VendorSignup() {
     
   return (
     <div className="margin-outer-signup vendor-sign" >
+        {loading && <div className='loader'><span></span></div>}
         <div className="vendor-sign-container d-md-flex">
             <div className="vendor-sign-img col-md-6 p-0" >
                 {/* <div className='col-md-6 left-desktop w-100'> */}
