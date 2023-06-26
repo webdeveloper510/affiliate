@@ -48,11 +48,11 @@ function Signup (){
 
   const stepAhead = () => {
     const newErrors = {};
-    if (!name) {
+    if (!name || /^\s*$/.test(name)) {
       newErrors.name = true;
     }
   
-    if (!email) {
+    if (!email || /^\s*$/.test(email)) {
       newErrors.email = true;
     } else {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -64,11 +64,11 @@ function Signup (){
       }
     }
   
-    if (!password) {
+    if (!password || /^\s*$/.test(password)) {
       newErrors.password = true;
     }
   
-    if (!confirmPassword) {
+    if (!confirmPassword || /^\s*$/.test(confirmPassword)) {
       newErrors.confirmPassword = true;
     }
   
@@ -76,7 +76,7 @@ function Signup (){
       newErrors.country = true;
     }
   
-    if (!userHandle) {
+    if (!userHandle || /^\s*$/.test(userHandle)) {
       newErrors.userHandle = true;
     }
   

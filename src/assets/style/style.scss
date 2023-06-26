@@ -4075,6 +4075,12 @@ button[disabled] {
     margin-top:110px;
     float:left;
     width:100%;
+    .container-fluid {
+        padding: 0;
+        .row {
+            margin: 0;
+        }
+    }
     p.error.mb-0 {
         position: absolute;
         bottom: -23px;
@@ -4299,6 +4305,25 @@ button[disabled] {
                 }
                 &:nth-child(3) {
                     margin-right: 10px;
+                }
+            }
+        }
+    }
+    .margin-outer-signup {
+        .row {
+            .right-desktop {
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .login-div {
+        form {
+            .input-container {
+                &:nth-child(3) {
+                    margin-right: 0px;
                 }
             }
         }
