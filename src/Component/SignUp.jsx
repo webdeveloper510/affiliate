@@ -285,11 +285,11 @@ function Signup (){
             <img src={signup} alt="Logo" />
           </div>
           <div className='col-md-6 right-desktop d-flex align-items-center justify-content-center'>
-            <div className="content col-xs-12 login-div d-flex flex-column">
+            <div className="content col-12 w-100 login-div d-flex flex-column">
               <h3>Affiliate signup</h3>
               <h5 className='my-3'>Step {stepOne == false && stepTwo == true ? "2" : "1"}</h5>
               <p>Sign up as affiliate to join our Marketplace and apply for the most competitive offers from our Shopify merchant!</p>
-              <form action="">
+              <form className='w-100'>
                 {stepOne && 
                 <>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.name ? 'error' : ''}`} style={{width: '49%', marginRight: 10}}>
@@ -323,7 +323,14 @@ function Signup (){
                 }
                 {stepTwo && <>
                   <div className="input-container d-flex flex-column mb-3 dropdown" ref={inputRef}>
-                    <input type="text" placeholder={industries?.length > 0 ? industries : "Your Industry"}  onClick={toggleOptions} readOnly />
+                  <label className='mb-2'>Industry <strong style={{color: 'red'}}>*</strong></label>
+                    <input 
+                      type="text" 
+                      placeholder={industries?.length > 0 ? industries : "Your Industry "}  
+                      onClick={toggleOptions} 
+                      readOnly
+                      style={industries?.length > 0 ? { fontWeight: 'bold' } : {}}  
+                    />
                       {showOptions && (
                         <ul>
                           {industry.map((option) => (
@@ -340,7 +347,9 @@ function Signup (){
                     )}
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
-                    <select onChange={(e) => {setExperience(e.target.value)}} style={{color: '#707070'}}>
+                  <label className='mb-2'>Experience <strong style={{color: 'red'}}>*</strong></label>
+                    <select onChange={(e) => {setExperience(e.target.value)}} style={{color: '#707070'}}
+                        style={experience?.length > 0 ? { fontWeight: 'bold', color: '#757575' } : {}} >
                       <option disabled>Experience with Affiliate Marketing</option>
                       <option value="one">I'm starting with Affiliate Marketing and want to learn more about it</option>
                       <option value="two">I've worked with few brands but haven't optimized my promoting process</option>
@@ -348,7 +357,14 @@ function Signup (){
                     </select>
                   </div>
                   <div className="input-container d-flex flex-column mb-3 w-100 dropdown" ref={promotionRef}>
-                    <input type="text" placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"} onClick={promotionToggleOptions} readOnly />
+                  <label className='mb-2'>Preferred options <strong style={{color: 'red'}}>*</strong></label>
+                    <input 
+                    type="text" 
+                    placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"} 
+                    onClick={promotionToggleOptions} 
+                    readOnly
+                    style={promotion?.length > 0 ? { fontWeight: 'bold' } : {}}  
+                    />
                     {showPromotionOptions && (
                       <ul>
                         {promotionData.map((option) => (
@@ -367,7 +383,14 @@ function Signup (){
                   <div className='target w-100 mb-4'>
                     <p className='w-100'>Your Target Customers</p>
                     <div className="input-container d-flex flex-column mb-3" ref={ageRef}>
-                      <input type="text" placeholder= {age?.length > 0 ? age : "Select age range (max 3 options)"} onClick={toggleAgeOptions} readOnly />
+                      <label className='mb-2'>Age <strong style={{color: 'red'}}>*</strong></label>
+                      <input 
+                        type="text" 
+                        placeholder= {age?.length > 0 ? age : "Select age range (max 3 options)"} 
+                        onClick={toggleAgeOptions} 
+                        readOnly 
+                        style={age?.length > 0 ? { fontWeight: 'bold' } : {}} 
+                      />
                       {showAge && (
                         <ul>
                           {ageData.map((option) => (
@@ -384,7 +407,14 @@ function Signup (){
                       )}
                     </div>
                     <div className="input-container d-flex flex-column mb-3" ref={genderRef}>
-                      <input type="text" placeholder={gender?.length > 0 ? gender : "Please Select Gender"} onClick={toggleGenderOptions} readOnly />
+                    <label className='mb-2'>Gender <strong style={{color: 'red'}}>*</strong></label>
+                      <input
+                        type="text" 
+                        placeholder={gender?.length > 0 ? gender : "Please Select Gender"} 
+                        onClick={toggleGenderOptions} 
+                        readOnly 
+                        style={gender?.length > 0 ? { fontWeight: 'bold' } : {}} 
+                      />
                       {showGender && (
                         <ul>
                           {genderData.map((option) => (
@@ -401,12 +431,14 @@ function Signup (){
                       )}
                     </div>
                     <div className="input-container d-flex flex-column mb-3" ref={locationRef}>
+                    <label className='mb-2'>Country <strong style={{color: 'red'}}>*</strong></label>
                       <input
                         type="text"
                         placeholder={location?.length > 0 ? location.join(", ") : "Search and select country (max 10 options)"}
                         onClick={toggleLocationOptions}
                         value={locationInput}
                         onChange={handleLocationInputChange}
+                        style={location?.length > 0 ? { fontWeight: 'bold' } : {}}
                       />
                       {showLocation && (
                         <ul>
