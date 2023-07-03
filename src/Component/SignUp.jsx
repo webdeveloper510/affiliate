@@ -7,6 +7,10 @@ import { API } from '../config/Api';
 import { toast } from 'react-toastify';
 import MailPop from '../assets/mail-pop.jpg'
 import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Signup (){
    const [step, setstep] = useState(1);
@@ -35,6 +39,8 @@ function Signup (){
    const inputRef = useRef(null);
    const ageRef = useRef(null);
    const genderRef = useRef(null);
+   const [showPassword, setShowPassword] = useState(false);
+  const [showCPassword,setShowCPassword]=useState(false)
    const locationRef = useRef(null);
    const promotionRef = useRef(null);
    const [errors, setErrors] = useState({});
@@ -300,13 +306,31 @@ function Signup (){
                   <label htmlFor="">Email <strong style={{color: 'red'}}>*</strong></label>
                   <input type='email' maxLength='35' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
                 </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.password ? 'error' : ''}`}>
+                <div className={`input-container pass d-flex flex-column mb-3 ${errors.password ? 'error' : ''}`} style={{width: '49%', marginRight: 11}}>
                   <label htmlFor="">Password <strong style={{color: 'red'}}>*</strong></label>
-                  <input type='password' maxLength='30' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                  <input type={showPassword ? 'text' : 'password'} maxLength='30' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                  <FontAwesomeIcon
+                      icon={showPassword ? faEyeSlash : faEye}
+                      style={{
+                          color: "#1032bb",
+                          width: "20px",
+                          height: "20px",
+                      }}
+                      onClick={() => setShowPassword(!showPassword)}
+                  />
                 </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`}>
+                <div className={`input-container pass d-flex flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`} style={{width: '49%'}}>
                   <label htmlFor="">Confirm Password <strong style={{color: 'red'}}>*</strong></label>
-                  <input type='password' maxLength='30' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
+                  <input type={showCPassword ? 'text' : 'password'} maxLength='30' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
+                  <FontAwesomeIcon
+                      icon={showPassword ? faEyeSlash : faEye}
+                      style={{
+                          color: "#1032bb",
+                          width: "20px",
+                          height: "20px",
+                      }}
+                      onClick={() => setShowCPassword(!showCPassword)}
+                  />
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.country ? 'error' : ''}`}>
                   <label htmlFor="">Country <strong style={{color: 'red'}}>*</strong></label>

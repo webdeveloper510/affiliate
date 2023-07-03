@@ -4170,6 +4170,18 @@ button[disabled] {
                     }
                 }
             }
+            
+        }
+        .input-container.pass {
+            svg {
+                position: absolute;
+                right: 10px;
+                top: 23px;
+                bottom: 0;
+                display: flex;
+                margin: auto;
+                cursor: pointer;
+            }
         }
     }
 }
@@ -4212,7 +4224,7 @@ button[disabled] {
         }
         .input-pass {
             svg {
-                bottom: 36px;
+                bottom: 27px;
             }
         }
         img {

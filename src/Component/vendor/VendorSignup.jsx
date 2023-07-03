@@ -187,6 +187,10 @@ function VendorSignup() {
             else if(error.response.data.image == "The submitted data was not a file. Check the encoding type on the form.") {
                 toast.warn("Please enter an Image")
             }
+
+            else if(error.response.data.image[0] == "Upload a valid image. The file you uploaded was either not an image or a corrupted image.") {
+                toast.warn("Please enter a valid image")
+            }
             else if(error.response.data.password == "This field may not be blank.") {
                 // setisPassBlank(true)
                 // toast.warn("Password may not be blank.");
