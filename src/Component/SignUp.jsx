@@ -326,7 +326,7 @@ function Signup (){
                   <label htmlFor="">Confirm Password <strong style={{color: 'red'}}>*</strong></label>
                   <input type={showCPassword ? 'text' : 'password'} maxLength='30' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
                   <FontAwesomeIcon
-                      icon={showPassword ? faEyeSlash : faEye}
+                      icon={showCPassword ? faEyeSlash : faEye}
                       style={{
                           color: "#1032bb",
                           width: "20px",
