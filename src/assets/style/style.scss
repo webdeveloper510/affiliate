@@ -4148,6 +4148,9 @@ button[disabled] {
         .input-container {
             width: 100%;
             position: relative;
+            input, select, .select div, .dropdown, select, .target {
+                cursor: pointer;
+            }
             ul {
                 background-color: #fff;
                 border: 1px solid #e5e6e7;

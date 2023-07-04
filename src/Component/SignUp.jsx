@@ -337,7 +337,7 @@ function Signup (){
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.country ? 'error' : ''}`}>
                   <label htmlFor="">Country <strong style={{color: 'red'}}>*</strong></label>
-                  <Select options={options} value={country} onChange={changeHandler} placeholder="Choose your country"/>
+                  <Select options={options} value={country} onChange={changeHandler} className='select' placeholder="Choose your country"/>
                 </div>
                 <div className={`input-container d-flex flex-column mb-3 ${errors.userHandle ? 'error' : ''}`}>
                   <label htmlFor="">User Handle <strong style={{color: 'red'}}>*</strong></label>
