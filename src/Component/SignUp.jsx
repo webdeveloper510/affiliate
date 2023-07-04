@@ -241,7 +241,10 @@ function Signup (){
     })
     .catch(function (error) {
       console.log(error);
-      if(error.response.data.email && error.response.data.email[0] == "user with this email already exists.") {
+      if(error.response.data.password && error.response.data.password[0] == "Password must be more than 8 character.") {
+        toast.warn("Password must be more than 8 character.")
+      }
+      else if(error.response.data.email && error.response.data.email[0] == "user with this email already exists.") {
         toast.warn("User with this email already exists")
       }
       else if(error.response.data.industries && error.response.data.industries[0] == "This field may not be blank.") {
