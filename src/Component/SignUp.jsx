@@ -247,11 +247,23 @@ function Signup (){
       else if(error.response.data.email && error.response.data.email[0] == "user with this email already exists.") {
         toast.warn("User with this email already exists")
       }
+      else if(error.response.data.email && error.response.data.email[0] == "This email is already registered.") {
+        toast.warn("User with this email already exists")
+      }
       else if(error.response.data.industries && error.response.data.industries[0] == "This field may not be blank.") {
         toast.warn("Please select at least one industry")
       }
       else if(error.response.data.promotion && error.response.data.promotion[0] == "This field may not be blank.") {
         toast.warn("Please select at least one promotion")
+      }
+      else if(error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one Customer age")
+      }
+      else if(error.response.data.gender && error.response.data.gender[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one Gender")
+      }
+      else if(error.response.data.location && error.response.data.location[0] == "This field may not be blank.") {
+        toast.warn("Please select at least one Location")
       }
       else if(error.response.data.password == "Password must contain at least one digit.") {
           toast.warn("Password must contain at least one digit.");
