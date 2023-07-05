@@ -253,6 +253,12 @@ function Signup (){
       else if(error.response.data.promotion && error.response.data.promotion[0] == "This field may not be blank.") {
         toast.warn("Please select at least one promotion")
       }
+      else if(error.response.data.password == "Password must contain at least one digit.") {
+          toast.warn("Password must contain at least one digit.");
+      }
+      else if(error.response.data.error.error == "retry_later" || error.response.data.error.error == "account_not_found") {
+          toast.warn("Please enter correct user handle");
+      }
       else if(error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
         toast.warn("Please select at least one age range")
       }
