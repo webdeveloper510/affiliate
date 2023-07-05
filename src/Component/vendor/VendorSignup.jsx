@@ -184,8 +184,14 @@ function VendorSignup() {
             else if(error.response.data.password == "Password must be more than 8 character.") {
                 toast.warn("Password must be more than 8 character.");
             }
+            else if(error.response.data.non_field_errors == "Password fields did not match.") {
+                toast.warn("Password fields did not match.");
+            }
             else if(error.response.data.image == "The submitted data was not a file. Check the encoding type on the form.") {
                 toast.warn("Please enter an Image")
+            }
+            else if(error.response.data.shopify_url && error.response.data.shopify_url[0] === "user with this shopify url already exists.") {
+                toast.warn("user with this shopify url already exists");
             }
 
             else if(error.response.data.image[0] == "Upload a valid image. The file you uploaded was either not an image or a corrupted image.") {
