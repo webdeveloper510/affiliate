@@ -256,13 +256,13 @@ function Signup (){
         toast.warn("Please select at least one promotion")
       }
       else if(error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one Customer age")
+        toast.warn("Please select an age")
       }
       else if(error.response.data.gender && error.response.data.gender[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one Gender")
+        toast.warn("Please select at least one gender")
       }
       else if(error.response.data.location && error.response.data.location[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one Location")
+        toast.warn("Please select at least one country")
       }
       else if(error.response.data.password == "Password must contain at least one digit.") {
           toast.warn("Password must contain at least one digit.");
