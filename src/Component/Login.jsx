@@ -6,12 +6,16 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { API } from '../config/Api';
 import { useNavigate, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
   
 function Login (){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (e) => {
     setLoading(true);
@@ -61,7 +65,16 @@ function Login (){
                               <Form.Label className="text-center">
                                 Password
                               </Form.Label>
-                              <Form.Control type="password" maxLength='30' placeholder="Enter Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                              <Form.Control type={showPassword ? 'text' : 'password'} maxLength='30' placeholder="Enter Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                              <FontAwesomeIcon
+                                  icon={showPassword ? faEyeSlash : faEye}
+                                  style={{
+                                      color: "#1032bb",
+                                      width: "20px",
+                                      height: "20px",
+                                  }}
+                                  onClick={() => setShowPassword(!showPassword)}
+                              />
                             </Form.Group>
 
                             <a href='#/forgotpassword' className='forgot-password'>Forgot Password</a>

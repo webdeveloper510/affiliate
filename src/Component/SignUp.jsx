@@ -9,7 +9,6 @@ import MailPop from '../assets/mail-pop.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-
 import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Signup (){
@@ -40,7 +39,7 @@ function Signup (){
    const ageRef = useRef(null);
    const genderRef = useRef(null);
    const [showPassword, setShowPassword] = useState(false);
-  const [showCPassword,setShowCPassword]=useState(false)
+   const [showCPassword,setShowCPassword]=useState(false)
    const locationRef = useRef(null);
    const promotionRef = useRef(null);
    const [errors, setErrors] = useState({});

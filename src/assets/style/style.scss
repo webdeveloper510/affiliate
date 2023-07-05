@@ -4199,9 +4199,22 @@ button[disabled] {
         .content {
             width: 100%;
         }
+        form {
+            .mb-3 {
+                position: relative;
+                svg {
+                    position: absolute;
+                    bottom: 9px;
+                    right: 15px;
+                    z-index: 8;
+                    cursor: pointer;
+                }
+            }
+        }
     }
     .left-desktop {
         min-height: calc(100vh - 110px);
+        
     }
 }
 
