@@ -4361,22 +4361,25 @@ button[disabled] {
             display: block !important;
             button {
                 position: relative;
+                font-size: 0;
+                color: #000 !important;
                 &::before {
                     position: absolute;
                     top: 0;
                     bottom: 0;
                     display: flex;
                     margin: auto;
+                    font-size: 40px;
                 }
                 &:nth-child(1) {
-                    padding-left: 12px !important;
+                    padding-left: 40px !important;
                     &::before {
                         content: '<';
                         left: 0;
                     }
                 }
                 &:nth-child(2) {
-                    padding-right: 12px !important;
+                    padding-right: 40px !important;
                     &::before {
                         content: '>';
                         right: 0;
