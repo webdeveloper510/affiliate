@@ -2,8 +2,7 @@ import {Routes, Route } from 'react-router-dom';
 import Home from '../Component/Home';
 import Product from '../Component/Product';
 import Header from '../Component/Header';
-import MarketPlace from '../Component/Marketplace/MarketPlace';
-import Resources from '../Component/Resources';
+import Marketplace from '../Component/Marketplace';
 import Login from '../Component/Login';
 import SignUp from '../Component/SignUp';
 import Forgotpassword from '../Component/Forgotpassword';
@@ -21,8 +20,7 @@ const Routing = () => {
         <Routes>
             <Route exact path='/' element={< Home />}></Route>
             <Route exact path='/product' element={< Product />}></Route>
-            <Route exact path='/marketplace' element={< MarketPlace />}></Route>
-            <Route exact path='/resources' element={< Resources />}></Route>
+            <Route exact path='/marketplace' element={< Marketplace />}></Route>
             <Route exact path='/login' element={< Login />}></Route>
             <Route exact path='/signup' element={< SignUp />}></Route>
             <Route exact path='/forgotpassword' element={< Forgotpassword />}></Route>

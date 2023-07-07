@@ -15,6 +15,10 @@ body {
     padding: 0;
 }
 
+.section {
+    margin-top: 85px;
+}
+
 a {
     text-decoration: none;
 }
@@ -4320,6 +4324,69 @@ button[disabled] {
     }
 }
 
+.market {
+    .owl-carousel {
+        .owl-item {
+            .card {
+                border-radius: 20px;
+                .card-body {
+                    padding: 0 !important;
+                    border-radius: 20px;
+                    h3 {
+                        background-color: #003db6;
+                        color: #fff;
+                        padding: 2rem 1rem;
+                        border-radius: 20px 20px 0 0;
+                    }
+                    .card-content {
+                        padding: 2rem;
+                        h6, p {
+                            margin-bottom: 1rem !important;
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+            button {
+                margin: 1rem 1rem 2rem;
+                outline: none;
+                box-shadow: none;
+                border: none;
+                min-width: 190px;
+                padding: 19px 30px;
+                font-weight: bold;
+            }
+        }
+        .owl-nav, .owl-dots {
+            display: block !important;
+            button {
+                position: relative;
+                &::before {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    display: flex;
+                    margin: auto;
+                }
+                &:nth-child(1) {
+                    padding-left: 12px !important;
+                    &::before {
+                        content: '<';
+                        left: 0;
+                    }
+                }
+                &:nth-child(2) {
+                    padding-right: 12px !important;
+                    &::before {
+                        content: '>';
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (min-width: 768px) {
     .login-div {
         form {
@@ -4337,10 +4404,27 @@ button[disabled] {
             }
         }
     }
+
     .margin-outer-signup {
         .row {
             .right-desktop {
                 overflow: hidden;
+            }
+        }
+    }
+
+    .market {
+        .owl-carousel {
+            .owl-item {
+                .card {
+                    .card-body {
+                        .card-content {
+                            h6, p {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -4352,6 +4436,24 @@ button[disabled] {
             .input-container {
                 &:nth-child(3) {
                     margin-right: 0px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .market {
+        .owl-carousel {
+            .owl-item {
+                .card {
+                    .card-body {
+                        .card-content {
+                            h6, p {
+                                font-size: 1.13rem;
+                            }
+                        }
+                    }
                 }
             }
         }

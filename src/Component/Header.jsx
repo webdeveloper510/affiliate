@@ -40,7 +40,7 @@ function Header (){
                 </ul> */}
                 {/* </li> */}
                 <li>
-                <NavLink to="/resources"> Resources </NavLink>
+                <NavLink to="/marketplace"> Marketplace </NavLink>
                 </li>
                 <li>
                 <NavLink to="/login" className='login'> Login</NavLink>

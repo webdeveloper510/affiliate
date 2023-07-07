@@ -184,6 +184,9 @@ function VendorSignup() {
             else if(error.response.data.password == "Password must be more than 8 character.") {
                 toast.warn("Password must be more than 8 character.");
             }
+            else if(error.response.data.password == "Password must contain at least one digit.") {
+                toast.warn("Password must contain at least one digit.");
+            }
             else if(error.response.data.non_field_errors == "Password fields did not match.") {
                 toast.warn("Password fields did not match.");
             }
@@ -283,12 +286,12 @@ function VendorSignup() {
                     
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Upload Profile Image<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="file" className='mb-0' onChange={onFileChange} accept="image/*" />
+                        <input type="file" className='mb-0' style={{ border: '1px solid black' }} onChange={onFileChange} accept="image/*" />
                     </div>
                     
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
-                        <input type="text" className='mb-0' maxLength='30' value={category} onChange={handleCategory} />
+                        <input type="text" className='mb-0' maxLength='30' style={{ border: '1px solid black' }} value={category} onChange={handleCategory} />
                     </div>
 
                     <div className="input-field">

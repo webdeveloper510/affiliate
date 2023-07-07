@@ -326,7 +326,7 @@ function Signup (){
                   <label htmlFor="">Email <strong style={{color: 'red'}}>*</strong></label>
                   <input type='email' maxLength='35' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
                 </div>
-                <div className={`input-container pass d-flex flex-column mb-3 ${errors.password ? 'error' : ''}`} style={{width: '49%', marginRight: 11}}>
+                <div className={`input-container pass d-flex flex-column mb-3 ${errors.password ? 'error' : ''}`} style={{width: '48%', marginRight: 11}}>
                   <label htmlFor="">Password <strong style={{color: 'red'}}>*</strong></label>
                   <input type={showPassword ? 'text' : 'password'} maxLength='30' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
                   <FontAwesomeIcon
@@ -339,7 +339,7 @@ function Signup (){
                       onClick={() => setShowPassword(!showPassword)}
                   />
                 </div>
-                <div className={`input-container pass d-flex flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`} style={{width: '49%'}}>
+                <div className={`input-container pass d-flex flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`} style={{width: '48%'}}>
                   <label htmlFor="">Confirm Password <strong style={{color: 'red'}}>*</strong></label>
                   <input type={showCPassword ? 'text' : 'password'} maxLength='30' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
                   <FontAwesomeIcon

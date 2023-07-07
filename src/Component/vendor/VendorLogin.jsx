@@ -17,6 +17,40 @@ function VendorLogin() {
     const [shopifyUrl, setShopifyUrl] = useState('');
     const [isActive, setIsActive] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [errorClass, setErrorClass] = useState(false);
+
+    const handleLogCheck = (e) => {
+        e.preventDefault();
+        const newErrors = {};
+        if(!isActive) {
+            if(email == '') {
+                newErrors.email = true;
+                toast.warn('Email should not be empty')
+              }
+              if(password == '') {
+                newErrors.password = true
+                toast.warn('Password should not be empty')
+              }
+              if(email && password != '') {
+                setErrorClass(false)
+                logVendor(e)
+              }
+        }
+        else {
+            if(shopifyUrl == '') {
+                newErrors.shopifyUrl = true;
+                toast.warn('Url should not be empty')
+              }
+
+              if(shopifyUrl != '') {
+                setErrorClass(false)
+                logVendor(e)
+              }
+        }
+    
+        
+        setErrorClass(newErrors)
+      }
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -34,7 +68,6 @@ function VendorLogin() {
         setShopifyUrl(event.target.value);
     }
 
-    console.log(isActive)
     const logVendor = (e) => {
         let data;
             if (!isActive) {
@@ -69,10 +102,13 @@ function VendorLogin() {
            
         })
         .catch(function (error) {
-        console.log(error);
-        if(error.response.data.error== "Invalid credentials") {
-            toast.warn("Invalid credentials");
-        }
+            console.log(error);
+            if(error.response.data.error== "Invalid credentials") {
+                toast.warn("Invalid credentials");
+            }
+            if(error.response.data.error== "Shop url not found") {
+                toast.warn("Shop url not found");
+            }
         })
     }
   return (
@@ -83,12 +119,16 @@ function VendorLogin() {
             </div>
             <div className="vendor-sign-content col-md-6 px-3 px-lg-5 d-flex flex-column align-items-center justify-content-center" style={{background: '#edeaf2'}}>
                 <h3 className='mb-4'>Merchant Sign In</h3>
-                <form className={isActive ? 'active d-flex flex-column justify-content-between align-items-center w-100' : 'd-flex flex-column justify-content-between align-items-center w-100'} >
+                <form onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        handleLogCheck(e);
+                    }
+            }} className={isActive ? 'active d-flex flex-column justify-content-between align-items-center w-100' : 'd-flex flex-column justify-content-between align-items-center w-100'} >
                     {isActive == true ? (
                         <>
                             <div className="input-container w-100 d-flex">
                                 <label htmlFor="">https://</label>
-                                <input type="url" placeholder='shopify URL' value= {shopifyUrl} onChange={handleShopify} />
+                                <input type="url" placeholder='shopify URL' value= {shopifyUrl} style={errorClass.shopifyUrl ? {border: '1px solid red'} : {}} onChange={handleShopify} />
                             </div>
                         </>
                     )
@@ -96,10 +136,10 @@ function VendorLogin() {
                 (
                     <>
                         <div className="input-container w-100">
-                            <input type="email" className='ps-4' maxLength='30' placeholder='Email' value={email} onChange={handleEmail} />  
+                            <input type="email" className='ps-4' maxLength='30' placeholder='Email' style={errorClass.email ? {border: '1px solid red'} : {}} value={email} onChange={handleEmail} required />  
                         </div>
                         <div className="input-container input-field input-pass w-100">
-                            <input type={showPassword ? 'text' : 'password'} className='ps-4' maxLength='30' placeholder='Password' value={password} onChange={handlePassword} />
+                            <input type={showPassword ? 'text' : 'password'} className='ps-4' maxLength='30' placeholder='Password' value={password} style={errorClass.password ? {border: '1px solid red'} : {}} onChange={handlePassword} />
                             <FontAwesomeIcon
                                 icon={showPassword ? faEyeSlash : faEye}
                                 style={{
@@ -117,7 +157,7 @@ function VendorLogin() {
                     {isActive==true ? "Login by Email" : "Login by Shop URL"}
                 </button>
                 <div className="links d-flex align-items-center mt-4">
-                    <button className='buttonfx angleindouble color-1 Signup' onClick={logVendor}>Login</button>
+                    <button className='buttonfx angleindouble color-1 Signup' onClick={(e) => {handleLogCheck(e)}}>Login</button>
                     <p className='mb-0 ms-3'>Or <Link to='/vendor-signup'> Sign Up</Link></p>
                 </div>
                 <p className='mt-3'><Link to='/login' className='fw-bold'>Sign In</Link> as Influencer</p>

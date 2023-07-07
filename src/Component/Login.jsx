@@ -16,10 +16,31 @@ function Login (){
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [errorClass, setErrorClass] = useState(false);
+  
+  const handleLogCheck = (e) => {
+    e.preventDefault();
+    const newErrors = {};
+    if(email == '') {
+      newErrors.email = true;
+      toast.warn('Email should not be empty')
+    }
+    if(password == '') {
+      newErrors.password = true
+      toast.warn('Password should not be empty')
+    }
+
+    if(email && password != '') {
+      setErrorClass(false)
+      handleLogin(e)
+    }
+    setErrorClass(newErrors)
+  }
 
   const handleLogin = (e) => {
     setLoading(true);
     e.preventDefault();
+    
     axios.post(API.BASE_URL + 'influencer/login/', {
       email: email,
       password: password,
@@ -59,13 +80,13 @@ function Login (){
                                 <Form.Label className="text-center">
                                   Email
                                 </Form.Label>
-                                <Form.Control type="email"  maxLength='35' placeholder="Enter Email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
+                                <Form.Control type="email"  maxLength='35' style={errorClass.email ? {border: '1px solid red'} : {}} placeholder="Enter Email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
                             </Form.Group> 
                             <Form.Group className="mb-3" controlId="formname">
                               <Form.Label className="text-center">
                                 Password
                               </Form.Label>
-                              <Form.Control type={showPassword ? 'text' : 'password'} maxLength='30' placeholder="Enter Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                              <Form.Control type={showPassword ? 'text' : 'password'} style={errorClass.password ? {border: '1px solid red'} : {}} maxLength='30' placeholder="Enter Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
                               <FontAwesomeIcon
                                   icon={showPassword ? faEyeSlash : faEye}
                                   style={{
@@ -80,7 +101,7 @@ function Login (){
                             <a href='#/forgotpassword' className='forgot-password'>Forgot Password</a>
 
                             <div className="d-grid">
-                              <button className='button buttonfx color-1 angleindouble' variant="primary" type="submit" onClick={(e) => {handleLogin(e)}}>
+                              <button className='button buttonfx color-1 angleindouble' variant="primary" type="submit" onClick={(e) => {handleLogCheck(e)}}>
                                 Login
                               </button>
                             </div>
