@@ -30,6 +30,7 @@ function Marketplace () {
         responsiveClass: true,
         navText: ["Prev", "Next"],
         nav: true,
+        showThumbs: false,
         loop: true,
         dots: false,
         autoplay: true,
