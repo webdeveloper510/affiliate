@@ -4328,21 +4328,27 @@ button[disabled] {
     .owl-carousel {
         .owl-item {
             .card {
-                border-radius: 20px;
+                border-radius: 14px;
                 .card-body {
                     padding: 0 !important;
-                    border-radius: 20px;
+                    border-radius: 14px;
                     h3 {
                         background-color: #003db6;
                         color: #fff;
                         padding: 2rem 1rem;
-                        border-radius: 20px 20px 0 0;
+                        border-radius: 14px 14px 0 0;
                     }
                     .card-content {
                         padding: 2rem;
                         h6, p {
                             margin-bottom: 1rem !important;
                             font-size: 15px;
+                        }
+                    }
+
+                    button.angleindouble {
+                        &:before, &:after {
+                            background: #003db6 !important;
                         }
                     }
                 }
@@ -4361,7 +4367,7 @@ button[disabled] {
             display: block !important;
             button {
                 position: relative;
-                font-size: 0;
+                font-size: 0 !important;
                 color: #000 !important;
                 &::before {
                     position: absolute;

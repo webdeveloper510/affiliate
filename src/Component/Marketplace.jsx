@@ -5,11 +5,14 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css'; 
 import { API } from '../config/Api';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
   
 function Marketplace () {
     const [marketItems, setMarketItems] = useState([]);
+    const navigate = useNavigate();
+    const token = localStorage.getItem("logToken");
     useEffect(() => {
-        // setLoading(true);
         axios.get(API.BASE_URL + 'campaign/marketplacewebsite/')
         .then(function (response) {
         console.log("Marketplace", response);
@@ -50,6 +53,20 @@ function Marketplace () {
             }
         },
     };
+
+    const handleApplied = (e, id) => {
+        e.preventDefault();
+        localStorage.setItem("appliedId", id);
+        if(token) {
+            navigate('/dashboard');
+        }
+        else {
+            toast.warn("Sign in in to continue")
+            navigate('/login');
+        }
+        
+    }
+
     return ( 
         <>
         <div className='pt-110pb-68 market'>
@@ -73,11 +90,12 @@ function Marketplace () {
                                                     <p className="card-text">Amount: <strong>{(prod.amount != null ? prod.amount : 'No Coupons').filter(Boolean).join(", ")}</strong></p>
 
                                                     <p className="card-text">Discount Type: <strong>{(prod.discount_type != null ? prod.discount_type : 'No Coupons').filter(Boolean).join(", ")}</strong></p>
+
+                                                    <button className="buttonfx angleindouble color-2" onClick={(e) => {handleApplied(e, item.campaignid_id)}}>Apply</button>
                                                 </div>
                                             )
                                         })}
                                     
-                                    <button className="buttonfx angleindouble color-2">Apply</button>
                                 </div>
                             </div>
                         )

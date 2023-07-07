@@ -232,6 +232,11 @@ const SideBar = () => {
                             <img src={CampaignOverview} className="me-2" alt='menu-img' />
                             Campaigns List</Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="second">
+                            <img src={CampaignOverview} className="me-2" alt='menu-img' />
+                            Marketplace List</Nav.Link>
+                        </Nav.Item>
                         <div className="button pay-btn d-flex justify-content-center align-items-center mt-5">
                             <button type='button' onClick={(e) => {handleShowPayment(e)}}>Set up Payment</button>
                         </div>
@@ -241,7 +246,10 @@ const SideBar = () => {
                     <Col sm={9} className='side-content mt-2'>
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
-                        <CampList />
+                            <CampList marketList={false} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="second">
+                            <CampList marketList={true} />
                         </Tab.Pane>
                     </Tab.Content>
                     </Col>

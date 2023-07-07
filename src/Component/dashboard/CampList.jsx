@@ -9,7 +9,7 @@ import Tab from 'react-bootstrap/Tab';
 import './dashboard.scss';
 import NoData from '../../assets/no-data.png'
 
-function CampList() {
+function CampList({marketList = true}) {
     const [campListPending, setCampListPending] = useState([]);
     const [campListApproval, setCampListApproval] = useState([]);
     const [campViewDetails, setCampViewDetails] = useState([]);
@@ -20,6 +20,7 @@ function CampList() {
     const [productNames, setProductNames] = useState([]);
     const token = localStorage.getItem("logToken");
     const [actionTaken, setActionTaken] = useState(null);
+    const [marketAppliedList, setMarketAppliedList] = useState([]);
 
     useEffect(() => {
         axios.get(API.BASE_URL + 'influencer/pending/',{
@@ -62,6 +63,23 @@ function CampList() {
             console.log(error);
         })
     }, [token, actionTaken])
+
+    useEffect(() => {
+        axios.get(API.BASE_URL + 'influencer/inflapplied/',{
+            params: {
+                value: localStorage.getItem("appliedId"),
+            },
+            headers: {
+                Authorization: `Token ${token}`,
+            }})
+        .then(function (response) {
+            console.log("Requested", response.data)
+            setMarketAppliedList(response.data.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }, [])
 
     const handleAction = (id, action) => {
         setLoading(true);
@@ -114,7 +132,9 @@ function CampList() {
             <Col sm={12}>
             <Nav variant="pills" className="flex-row mb-4 tab-header">
                 <Nav.Item>
-                    <Nav.Link eventKey="first">Pending Campaigns</Nav.Link>
+                    <Nav.Link eventKey="first">
+                        {!marketList ? "Pending Campaigns" : "Requested Campaigns"}
+                    </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey="second">Accepted Campaigns</Nav.Link>
@@ -127,21 +147,44 @@ function CampList() {
             <Col sm={12}>
             <Tab.Content>
                 <Tab.Pane eventKey="first">
-                    {campListPending?.length > 0 ? (
-                        <TableList 
-                            data={campListPending}
-                            handleAction={handleAction}
-                            viewDetails={handleViewDetails}
-                            showDetails={showDetails} 
-                            userDetails={campViewDetails}
-                            couponCross={couponCross}
-                        />
-                    ): (
-                        <>
-                            <h5 className='mt-4 text-center'>No Pending Campaigns right now</h5>
-                            <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
-                        </>
+                    {marketList == false && (
+                        campListPending?.length > 0 ? (
+                            <TableList 
+                                data={campListPending}
+                                handleAction={handleAction}
+                                viewDetails={handleViewDetails}
+                                showDetails={showDetails} 
+                                userDetails={campViewDetails}
+                                couponCross={couponCross}
+                                showAll={true}
+                            />
+                        ): (
+                            <>
+                                <h5 className='mt-4 text-center'>No Pending Campaigns right now</h5>
+                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                            </>
+                        )
                     )}
+
+                    {marketList == true && (
+                        marketAppliedList?.length > 0 ? (
+                            <TableList 
+                                data={marketAppliedList}
+                                handleAction={handleAction}
+                                viewDetails={handleViewDetails}
+                                showDetails={showDetails} 
+                                userDetails={campViewDetails}
+                                couponCross={couponCross}
+                                showAll={false}
+                            />
+                        ): (
+                            <>
+                                <h5 className='mt-4 text-center'>No Requested Campaigns right now</h5>
+                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                            </>
+                        )
+                    )}      
+                    
                 </Tab.Pane>
                 <Tab.Pane eventKey="second" className='campaign'>
                     {campListApproval?.length > 0 ? (<TableList data={campListApproval} showButtons={false} pending={false} />) : (

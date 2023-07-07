@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark, faEye, faClose } from "@fortawesome/free-solid-svg-icons";
-const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, couponCross, showButtons = true, pending = true }) => {
+const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true }) => {
   return (
     <table>
       <thead>
@@ -41,7 +41,8 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
               </td>
               {showButtons && (
                 <td className="d-flex justify-content-center">
-                  <button
+                  {showAll && (
+                    <button
                     type="button"
                     style={{ marginRight: 15 }}
                     data-toggle="tooltip"
@@ -60,6 +61,8 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                       }}
                     />
                   </button>
+                  )}
+                  {!showAll && (
                   <button
                     type="button"
                     data-toggle="tooltip"
@@ -79,6 +82,8 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                       }}
                     />
                   </button>
+                  )}
+                  {showAll && (
                   <button
                     type="button"
                     data-toggle="tooltip"
@@ -97,6 +102,7 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                       }}
                     />
                   </button>
+                  )}
                 </td>
               )}
             </tr>
