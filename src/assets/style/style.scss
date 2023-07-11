@@ -4325,72 +4325,55 @@ button[disabled] {
 }
 
 .market {
-    .owl-carousel {
-        .owl-item {
-            .card {
-                border-radius: 14px;
-                .card-body {
-                    padding: 0 !important;
+    .carousel-container {
+        ul {
+            li.react-multi-carousel-item {
+                padding: 0 20px;
+                .card {
                     border-radius: 14px;
-                    h3 {
-                        background-color: #003db6;
-                        color: #fff;
-                        padding: 2rem 1rem;
-                        border-radius: 14px 14px 0 0;
-                    }
-                    .card-content {
-                        padding: 2rem;
-                        h6, p {
-                            margin-bottom: 1rem !important;
-                            font-size: 15px;
+                    .card-body {
+                        padding: 0 !important;
+                        border-radius: 14px;
+                        h3 {
+                            background-color: #003db6;
+                            color: #fff;
+                            padding: 2rem 1rem;
+                            border-radius: 14px 14px 0 0;
                         }
-                    }
-
-                    button.angleindouble {
-                        &:before, &:after {
-                            background: #003db6 !important;
+                        .card-content {
+                            padding: 2rem;
+                            h6, p {
+                                margin-bottom: 1rem !important;
+                                font-size: 15px;
+                            }
+                        }
+    
+                        button.angleindouble {
+                            &:before, &:after {
+                                background: #003db6 !important;
+                            }
                         }
                     }
                 }
-            }
-            button {
-                margin: 1rem 1rem 2rem;
-                outline: none;
-                box-shadow: none;
-                border: none;
-                min-width: 190px;
-                padding: 19px 30px;
-                font-weight: bold;
+                button {
+                    margin: 1rem 1rem 2rem;
+                    outline: none;
+                    box-shadow: none;
+                    border: none;
+                    min-width: 190px;
+                    padding: 19px 30px;
+                    font-weight: bold;
+                }
             }
         }
-        .owl-nav, .owl-dots {
-            display: block !important;
+        .react-multi-carousel-dot-list {
             button {
                 position: relative;
-                font-size: 0 !important;
                 color: #000 !important;
-                &::before {
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    display: flex;
-                    margin: auto;
-                    font-size: 40px;
-                }
-                &:nth-child(1) {
-                    padding-left: 40px !important;
-                    &::before {
-                        content: '<';
-                        left: 0;
-                    }
-                }
-                &:nth-child(2) {
-                    padding-right: 40px !important;
-                    &::before {
-                        content: '>';
-                        right: 0;
-                    }
-                }
+                width: fit-content;
+                min-width: fit-content;
+                margin-bottom: 0;
+                padding: 8px;
             }
         }
     }

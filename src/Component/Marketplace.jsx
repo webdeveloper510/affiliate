@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import  Footer from './Footer';
 import axios from 'axios';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';  
-import 'owl.carousel/dist/assets/owl.theme.default.css'; 
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { API } from '../config/Api';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -25,34 +24,20 @@ function Marketplace () {
 
     console.log("marketItems", marketItems)
 
-    const options = {
-        margin: 25,
-        responsiveClass: true,
-        navText: ["Prev", "Next"],
-        nav: true,
-        loop: true,
-        dots: false,
-        autoplay: true,
-        smartSpeed: 1000,
-        responsive: {
-            0: {
-                items: 1,
-            },
-            400: {
-                items: 1,
-            },
-            600: {
-                items: 2,
-            },
-            700: {
-                items: 2,
-            },
-            1000: {
-                items: 3,
-    
-            }
+    const responsive = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 3, // Adjust the number of items shown on desktop
         },
-    };
+        tablet: {
+          breakpoint: { max: 1024, min: 768 },
+          items: 2, // Adjust the number of items shown on tablet
+        },
+        mobile: {
+          breakpoint: { max: 768, min: 0 },
+          items: 1, // Adjust the number of items shown on mobile
+        },
+      };
 
     const handleApplied = (e, id) => {
         e.preventDefault();
@@ -72,7 +57,23 @@ function Marketplace () {
         <div className='pt-110pb-68 market'>
             <div className='container'>
                 <h2 className='mb-4 mb-md-5'>MarketPlace</h2>
-                <OwlCarousel items={3} className="owl-theme" {...options}>
+                <Carousel
+                    responsive={responsive}
+                    swipeable={true}
+                    draggable={true}
+                    showDots={true}
+                    ssr={true}
+                    infinite={true}
+                    autoPlay={true}
+                    autoPlaySpeed={3000}
+                    keyBoardControl={true}
+                    customTransition="transform 1s ease-in-out"
+                    transitionDuration={1000}
+                    containerClass="carousel-container"
+                    removeArrowOnDeviceType={['tablet', 'mobile']}
+                    dotListClass="custom-dot-list-style"
+                    itemClass="carousel-item-padding-40-px"
+                    >
                     {marketItems?.map((item, i) => {
                         return(
                             <div className="card" key={i}>
@@ -101,7 +102,7 @@ function Marketplace () {
                         )
                     })}
                     
-                </OwlCarousel>
+                </Carousel>
             </div>
         </div>
         <Footer/>
