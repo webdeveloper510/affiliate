@@ -44,11 +44,8 @@ function VendorSignup() {
     const onFileChange = event => {
         setSelectedFile(event.target.files[0]);
         console.log('This is selected img---------------->',event.target.files[0]);
-        setImg(URL.createObjectURL(event.target.files[0]))
-        
+        setImg(URL.createObjectURL(event.target.files[0]))  
     };
-
-   
 
     console.log("Selected File", selectedFile)
 
@@ -107,22 +104,22 @@ function VendorSignup() {
         formData.append('type','normal');
         console.log(formData);
         const errorObj={}
-        if(!name){
+        if(!name || name.trim() === ''){
            errorObj.name=true; 
         }
-        if(!email){
+        if(!email || email.trim() === ''){
             errorObj.email=true; 
          }
-         if(!password){
+         if(!password || password.trim() === ''){
             errorObj.password=true; 
          }
-         if(!confirmPassword){
+         if(!confirmPassword || confirmPassword.trim() === ''){
             errorObj.confirmPassword=true; 
          }
-         if(!shopifyUrl){
+         if(!shopifyUrl || shopifyUrl.trim() === ''){
             errorObj.shopifyUrl=true; 
          }
-         if(!instagramUrl){
+         if(!instagramUrl || instagramUrl.trim() === ''){
             errorObj.instagramUrl=true; 
          }
 
@@ -248,12 +245,12 @@ function VendorSignup() {
                 <form className='d-flex flex-wrap justify-content-between align-items-center w-100'>
                 <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Username<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="text" value={name} onChange={handleName}  style={{ border: errors.name ? '1px solid red' : '1px solid black' }}/>
+                        <input type="text" value={name} placeholder='John' onChange={handleName}  style={{ border: errors.name ? '1px solid red' : '1px solid black' }}/>
                     </div>
                     
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Email<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="email" value={email} onChange={handleEmail} style={{ border: errors.email ? '1px solid red' : '1px solid black' }}/>
+                        <input type="email" value={email} placeholder='abc@example.com' onChange={handleEmail} style={{ border: errors.email ? '1px solid red' : '1px solid black' }}/>
                     </div>
                     
                     <div className="input-field position-relative">
@@ -290,8 +287,8 @@ function VendorSignup() {
                     </div>
                     
                     <div className="input-field">
-                        <label className='text-start w-100 mb-2 text-dark'>Select Category</label>
-                        <input type="text" className='mb-0' maxLength='30' style={{ border: '1px solid black' }} value={category} onChange={handleCategory} />
+                        <label className='text-start w-100 mb-2 text-dark'>Category</label>
+                        <input type="text" className='mb-0' maxLength='30' placeholder='Fashion' style={{ border: '1px solid black' }} value={category} onChange={handleCategory} />
                     </div>
 
                     <div className="input-field">
@@ -305,7 +302,7 @@ function VendorSignup() {
                     
                     <div className="input-field">
                         <label className='text-start w-100 mb-2 text-dark'>Instagram Handle<strong style={{color: 'red'}}>*</strong></label>
-                        <input type="url"  maxLength='100' className='mb-0' value={instagramUrl} onChange={handleInstagram} style={{ border: errors.instagramUrl ? '1px solid red' : '1px solid black' }}/>
+                        <input type="url" placeholder='@abc12'  maxLength='100' className='mb-0' value={instagramUrl} onChange={handleInstagram} style={{ border: errors.instagramUrl ? '1px solid red' : '1px solid black' }}/>
                     </div>
                 </form>
                 <div className="links d-flex align-items-center mt-4 pb-4">

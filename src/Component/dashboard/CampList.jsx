@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
+import UserContext from '../context/UserContext';
 import { API } from '../../config/Api';
 import { toast } from 'react-toastify';
 import TableList from './TableList';
@@ -20,66 +21,71 @@ function CampList({marketList = true}) {
     const [productNames, setProductNames] = useState([]);
     const token = localStorage.getItem("logToken");
     const [actionTaken, setActionTaken] = useState(null);
+    const [apiCalled, setApiCalled] = useState(false);
     const [marketAppliedList, setMarketAppliedList] = useState([]);
 
     useEffect(() => {
-        axios.get(API.BASE_URL + 'influencer/pending/',{
-            headers: {
-                Authorization: `Token ${token}`
-            }
+        axios.get(API.BASE_URL + 'influencer/pending/', {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
         })
-        .then(function (response) {
+          .then(function (response) {
             setCampListPending(response.data.data);
             setPendingId(response.data.product_id);
-            console.log("Pending", response.data)
-        })
-        .catch(function (error) {
+            console.log("Pending", response.data);
+          })
+          .catch(function (error) {
             console.log(error);
+          });
+      }, [token]);
+      
+      useEffect(() => {
+        axios.get(API.BASE_URL + 'influencer/approval/', {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
         })
-
-        axios.get(API.BASE_URL + 'influencer/approval/',{
-            headers: {
-                Authorization: `Token ${token}`
-            }
-        })
-        .then(function (response) {
+          .then(function (response) {
             setCampListApproval(response.data.data);
-            console.log("Approved", response.data)
-        })
-        .catch(function (error) {
+            console.log("Approved", response.data);
+          })
+          .catch(function (error) {
             console.log(error);
+          });
+      }, [token]);
+      
+      useEffect(() => {
+        axios.get(API.BASE_URL + 'influencer/decline/', {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
         })
-
-        axios.get(API.BASE_URL + 'influencer/decline/',{
-            headers: {
-                Authorization: `Token ${token}`
-            }
-        })
-        .then(function (response) {
+          .then(function (response) {
             setDeclineList(response.data.data);
-            console.log("Decline", response.data)
-        })
-        .catch(function (error) {
+            console.log("Decline", response.data);
+          })
+          .catch(function (error) {
             console.log(error);
+          });
+      }, [token]);
+      
+      useEffect(() => {
+        axios.get(API.BASE_URL + 'influencer/applied/', {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
         })
-    }, [token, actionTaken])
+          .then(function (response) {
+            setMarketAppliedList(response.data.data);
+            console.log("setMarketAppliedList", response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }, [token]);
 
-    useEffect(() => {
-        axios.get(API.BASE_URL + 'influencer/inflapplied/',{
-            params: {
-                value: localStorage.getItem("appliedId"),
-            },
-            headers: {
-                Authorization: `Token ${token}`,
-            }})
-        .then(function (response) {
-            console.log("Requested", response.data)
-            setMarketAppliedList(response.data.data)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-    }, [])
+    
 
     const handleAction = (id, action) => {
         setLoading(true);

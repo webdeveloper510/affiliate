@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import  Footer from './Footer';
 import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import UserContext from './context/UserContext';
 import { API } from '../config/Api';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,6 +12,7 @@ function Marketplace () {
     const [marketItems, setMarketItems] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("logToken");
+    const {setAppliedId} = useContext(UserContext);
     useEffect(() => {
         axios.get(API.BASE_URL + 'campaign/marketplacewebsite/')
         .then(function (response) {
@@ -27,30 +29,54 @@ function Marketplace () {
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 3, // Adjust the number of items shown on desktop
+          items: 3,
         },
         tablet: {
           breakpoint: { max: 1024, min: 768 },
-          items: 2, // Adjust the number of items shown on tablet
+          items: 2,
         },
         mobile: {
           breakpoint: { max: 768, min: 0 },
-          items: 1, // Adjust the number of items shown on mobile
+          items: 1,
         },
       };
 
+    // const handleApplied = (e, id) => {
+    //     e.preventDefault();
+    //     localStorage.setItem("appliedId", id);
+    //     if(token) {
+    //         navigate('/dashboard');
+    //     }
+    //     else {
+    //         toast.warn("Sign in in to continue")
+    //         navigate('/login');
+    //     }
+        
+    // }
+
     const handleApplied = (e, id) => {
         e.preventDefault();
-        localStorage.setItem("appliedId", id);
-        if(token) {
-            navigate('/dashboard');
-        }
-        else {
-            toast.warn("Sign in in to continue")
-            navigate('/login');
-        }
+        setAppliedId(id);
         
-    }
+        if (token) {
+          axios.post(API.BASE_URL + 'influencer/inflapplied/', {
+            value: id,
+          }, {
+            headers: {
+              Authorization: `Token ${token}`,
+            }})
+            .then(function (response) {
+              console.log("Requested", response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          // navigate('/dashboard');
+        } else {
+          toast.warn("Sign in to continue");
+          navigate('/login');
+        }
+      };
 
     return ( 
         <>
@@ -90,7 +116,7 @@ function Marketplace () {
 
                                                     <p className="card-text">Amount: <strong>{(prod.amount != null ? prod.amount : 'No Coupons').filter(Boolean).join(", ")}</strong></p>
 
-                                                    <p className="card-text">Discount Type: <strong>{(prod.discount_type != null ? prod.discount_type : 'No Coupons').filter(Boolean).join(", ")}</strong></p>
+                                                    <p className="card-text">Discount Type: <strong>{(prod.discount_type != null ? prod.discount_type : 'No Coupons')}</strong></p>
 
                                                     <button className="buttonfx angleindouble color-2" onClick={(e) => {handleApplied(e, item.campaignid_id)}}>Apply</button>
                                                 </div>

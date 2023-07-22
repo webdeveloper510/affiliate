@@ -4216,9 +4216,16 @@ button[disabled] {
             }
         }
     }
+}
+
+.vendor-login {
+    .right-desktop {
+        min-height: 87.2vh !important;
+    }
+}
+.vendor-login {
     .left-desktop {
-        min-height: calc(100vh - 110px);
-        
+        min-height: 87.2vh !important;
     }
 }
 
@@ -4448,6 +4455,19 @@ button[disabled] {
                     }
                 }
             }
+        }
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .vendor-login {
+        .right-desktop {
+            min-height: 88.5vh !important;
+        }
+    }
+    .vendor-login {
+        .left-desktop {
+            min-height: 88.5vh !important;
         }
     }
 }

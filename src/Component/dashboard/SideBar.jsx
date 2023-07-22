@@ -283,20 +283,20 @@ const SideBar = () => {
                             <input type="email" name="email" value={formState.email} onChange={handleInputChange} />
                         </div>
                         <div className="input-container">
-  <label htmlFor="">Vendor</label>
-  <select value={selectedVendor} onChange={e => {
-    setSelectedVendor(e.target.value);
-    const selectedIndex = e.target.selectedIndex;
-    console.log("selectedIndex", selectedIndex);
-    const selectedVendorId = selectedIndex >= 1 ? vendorNames[selectedIndex - 1]?.vendor_id : '';
-    setSelectedVendorId(selectedVendorId);
-  }}>
-    <option disabled value="">Select a Vendor</option>
-    {vendorNames?.map((names, i) => (
-      <option value={names.vendor_key} key={i}>{names.vendor}</option>
-    ))}
-  </select>
-</div>
+                            <label htmlFor="">Vendor</label>
+                            <select value={selectedVendor} onChange={e => {
+                                setSelectedVendor(e.target.value);
+                                const selectedIndex = e.target.selectedIndex;
+                                console.log("selectedIndex", selectedIndex);
+                                const selectedVendorId = selectedIndex >= 1 ? vendorNames[selectedIndex - 1]?.vendor_id : '';
+                                setSelectedVendorId(selectedVendorId);
+                            }}>
+                                <option disabled value="">Select a Vendor</option>
+                                {vendorNames?.map((names, i) => (
+                                <option value={names.vendor_key} key={i}>{names.vendor}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className="input-container">
                             <label htmlFor="">Country</label>
                             <Select options={options} value={country} onChange={changeHandler} />
