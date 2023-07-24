@@ -34,10 +34,27 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
               {pending == true ? (
                 "Please accept to get the price"
               ) : (
-                list?.product?.map((prod) =>
-                  Array.isArray(prod.amount) ? prod.amount.map((amount) => amount).join(", ") : "No Price"
-                  ).filter(Boolean).join(", ")
-              )}
+                list?.product?.map((prod) =>(
+                  <>
+                    {prod.discount_type && Array.isArray(prod.discount_type) ?  (
+                      prod.discount_type.map((discount, i) => (
+                        <>
+                          {prod.amount[i]}
+                          {discount === 'percentage' ? '%' :'Dhs'}
+                          {i < prod.discount_type.length - 1 ? ' , ' : ''}
+                        </>
+                      ))
+                    ) : 
+                        prod.amount && Array.isArray(prod.amount) &&  (
+                          prod.amount.map((amount, i) => (
+                              <>
+                                {amount}
+                                {i < prod.amount.length - 1 ? ' , ' : ''}
+                              </>
+                          )))}
+                  </>
+                )
+              ))}
               </td>
               {showButtons && (
                 <td className="d-flex justify-content-center">
@@ -62,7 +79,7 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                     />
                   </button>
                   )}
-                  {!showAll && (
+                  {showAll && (
                   <button
                     type="button"
                     data-toggle="tooltip"
