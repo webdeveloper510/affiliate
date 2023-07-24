@@ -59,7 +59,7 @@ function Marketplace () {
         setAppliedId(id);
         
         if (token) {
-          axios.post(API.BASE_URL + 'influencer/inflapplied/', {
+          axios.post(API.BASE_URL + `influencer/inflapplied/?value=${id}`, {
             value: id,
           }, {
             headers: {
@@ -67,11 +67,12 @@ function Marketplace () {
             }})
             .then(function (response) {
               console.log("Requested", response.data);
+              toast.success("Successfully Applied")
+              navigate('/dashboard');
             })
             .catch(function (error) {
               console.log(error);
             });
-          // navigate('/dashboard');
         } else {
           toast.warn("Sign in to continue");
           navigate('/login');
