@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark, faEye, faClose } from "@fortawesome/free-solid-svg-icons";
-const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true }) => {
+const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true }) => {
   return (
     <table>
       <thead>
@@ -80,7 +80,8 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                   </button>
                   )}
                   {showAll && (
-                  <button
+                    marketApplied == false && (
+                      <button
                     type="button"
                     data-toggle="tooltip"
                     data-placement="top"
@@ -99,8 +100,10 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                       }}
                     />
                   </button>
+                  
+                    )
                   )}
-                  {showAll && (
+                  {showAll ? (
                   <button
                     type="button"
                     data-toggle="tooltip"
@@ -119,7 +122,27 @@ const TableList = ({ data, handleAction, viewDetails, showDetails, userDetails, 
                       }}
                     />
                   </button>
-                  )}
+                  ):
+                  marketApplied == true && (
+                    <button
+                      type="button"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="View Details"
+                      onClick={() =>
+                        viewDetails(list.campaignid_id)
+                      }
+                    >
+                      <FontAwesomeIcon
+                        icon={faEye}
+                        style={{
+                          color: "#fff",
+                          width: "15px",
+                          height: "15px",
+                        }}
+                      />
+                    </button>
+                    )}
                 </td>
               )}
             </tr>

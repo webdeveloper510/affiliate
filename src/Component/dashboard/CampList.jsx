@@ -181,6 +181,8 @@ function CampList({marketList = true}) {
                                 showDetails={showDetails} 
                                 userDetails={campViewDetails}
                                 couponCross={couponCross}
+                                marketApplied = {true}
+                                showAll = {false}
                             />
                         ): (
                             <>
