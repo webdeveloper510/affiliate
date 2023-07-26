@@ -135,7 +135,7 @@ function CampList({marketList = true}) {
         {loading && <div className='loader'><span></span></div>}
         <h2 className='mb-4'>Manage Campaigns</h2>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-            <Col sm={12}>
+            <Col sm={12}> 
             <Nav variant="pills" className="flex-row mb-4 tab-header">
                 <Nav.Item>
                     <Nav.Link eventKey="first">
