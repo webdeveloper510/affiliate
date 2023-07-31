@@ -4220,12 +4220,12 @@ button[disabled] {
 
 .vendor-login {
     .right-desktop {
-        min-height: 87.2vh !important;
+        min-height: calc(100vh - 90px) !important;
     }
 }
 .vendor-login {
     .left-desktop {
-        min-height: 87.2vh !important;
+        min-height: calc(100vh - 90px) !important;
     }
 }
 
@@ -4455,19 +4455,6 @@ button[disabled] {
                     }
                 }
             }
-        }
-    }
-}
-
-@media only screen and (min-width: 1500px) {
-    .vendor-login {
-        .right-desktop {
-            min-height: 88.5vh !important;
-        }
-    }
-    .vendor-login {
-        .left-desktop {
-            min-height: 88.5vh !important;
         }
     }
 }

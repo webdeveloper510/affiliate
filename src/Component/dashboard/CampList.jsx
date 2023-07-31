@@ -16,6 +16,7 @@ function CampList({marketList = true}) {
     const [campViewDetails, setCampViewDetails] = useState([]);
     const [showDetails, setShowDetails] = useState(false);
     const [declineList, setDeclineList] = useState([]);
+    const [acceptList, setAcceptList] = useState([]);
     const [pendingId, setPendingId] = useState([]);
     const [loading, setLoading] = useState(false);
     const [productNames, setProductNames] = useState([]);
@@ -71,6 +72,21 @@ function CampList({marketList = true}) {
       }, [token]);
       
       useEffect(() => {
+        axios.get(API.BASE_URL + 'influencer/inflmarketaccept/', {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then(function (response) {
+            setAcceptList(response.data.data);
+            console.log("Accepttttt", response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }, [token]);
+      
+      useEffect(() => {
         axios.get(API.BASE_URL + 'influencer/applied/', {
           headers: {
             Authorization: `Token ${token}`,
@@ -100,6 +116,19 @@ function CampList({marketList = true}) {
             console.log(action === "accept" ? "Accept" : "Reject", response.data)
             toast.success(action === "accept" ? "Campaign Accepted" : "Campaign Declined")
             setActionTaken(prevState => ({ ...prevState, [id]: action }));
+            axios.get(API.BASE_URL + 'influencer/pending/', {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            })
+              .then(function (response) {
+                setCampListPending(response.data.data);
+                setPendingId(response.data.product_id);
+                console.log("Pending", response.data);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         })
         .catch(function (error) {
             console.log(error);
@@ -121,7 +150,20 @@ function CampList({marketList = true}) {
         .then(function (response) {
             setCampViewDetails(response.data.data[0]);
             console.log("Details", response)
-            setShowDetails(true)
+            setShowDetails(true);
+            axios.get(API.BASE_URL + 'influencer/pending/', {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            })
+              .then(function (response) {
+                setCampListPending(response.data.data);
+                setPendingId(response.data.product_id);
+                console.log("Pending", response.data);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         })
         .catch(function (error) {
             console.log(error);
@@ -148,6 +190,11 @@ function CampList({marketList = true}) {
                 <Nav.Item>
                     <Nav.Link eventKey="third">Declined Campaigns</Nav.Link>
                 </Nav.Item>
+                {marketList && (
+                  <Nav.Item>
+                      <Nav.Link eventKey="four">Active Campaigns</Nav.Link>
+                  </Nav.Item>
+                )}
             </Nav>
             </Col>
             <Col sm={12}>
@@ -206,6 +253,15 @@ function CampList({marketList = true}) {
                     {declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
                         <>
                         <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
+                        <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                    </>
+                    )}
+                
+                </Tab.Pane>
+                <Tab.Pane eventKey="four" className='campaign'>
+                    {acceptList?.length > 0 ? (<TableList data={acceptList} showButtons={false} pending={false} />) : (
+                        <>
+                        <h5 className='mt-4 text-center'>No Active Campaigns right now</h5>
                         <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
                     </>
                     )}
