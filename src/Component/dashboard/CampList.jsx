@@ -135,14 +135,74 @@ function CampList({marketList = true}) {
                 Authorization: `Token ${token}`,
               },
             })
-              .then(function (response) {
-                setCampListPending(response.data.data);
-                setPendingId(response.data.product_id);
-                console.log("Pending", response.data);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+            .then(function (response) {
+              setCampListPending(response.data.data);
+              setPendingId(response.data.product_id);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+            axios.get(API.BASE_URL + 'influencer/approval/', {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            })
+            .then(function (response) {
+              setCampListApproval(response.data.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+            axios.get(API.BASE_URL + 'influencer/inflmarketdecline/', {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            })
+            .then(function (response) {
+              setInflaDecline(response.data.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            
+            axios.get(API.BASE_URL + 'influencer/decline/', {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            })
+            .then(function (response) {
+              setDeclineList(response.data.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+            axios.get(API.BASE_URL + 'influencer/inflmarketaccept/', {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            })
+            .then(function (response) {
+              setAcceptList(response.data.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+            axios.get(API.BASE_URL + 'influencer/applied/', {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            })
+            .then(function (response) {
+              setMarketAppliedList(response.data.data);
+              console.log("setMarketAppliedList", response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         })
         .catch(function (error) {
             console.log(error);
