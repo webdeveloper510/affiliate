@@ -16,9 +16,9 @@ function CampList({marketList = true}) {
     const [campViewDetails, setCampViewDetails] = useState([]);
     const [showDetails, setShowDetails] = useState(false);
     const [declineList, setDeclineList] = useState([]);
-    const [inflaDeclineList, setInflaDeclineList] = useState([]);
     const [acceptList, setAcceptList] = useState([]);
     const [pendingId, setPendingId] = useState([]);
+    const [inflaDecline,setInflaDecline] = useState([]);
     const [loading, setLoading] = useState(false);
     const [productNames, setProductNames] = useState([]);
     const token = localStorage.getItem("logToken");
@@ -56,7 +56,22 @@ function CampList({marketList = true}) {
           console.log(error);
         });
     }, [token]);
-      
+
+    useEffect(() => {
+      axios.get(API.BASE_URL + 'influencer/inflmarketdecline/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then(function (response) {
+          setInflaDecline(response.data.data);
+          console.log("Approved", response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [token]);
+    
     useEffect(() => {
       axios.get(API.BASE_URL + 'influencer/decline/', {
         headers: {
@@ -86,22 +101,7 @@ function CampList({marketList = true}) {
           console.log(error);
         });
     }, [token]);
-    
-    useEffect(() => {
-      axios.get(API.BASE_URL + 'influencer/inflmarketdecline/', {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      })
-        .then(function (response) {
-          setInflaDeclineList(response.data.data);
-          console.log("Declineeeeee", response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }, [token]);
-    
+      
     useEffect(() => {
       axios.get(API.BASE_URL + 'influencer/applied/', {
         headers: {
@@ -116,8 +116,6 @@ function CampList({marketList = true}) {
           console.log(error);
         });
     }, [token]);
-
-    
 
     const handleAction = (id, action) => {
         setLoading(true);
@@ -206,6 +204,11 @@ function CampList({marketList = true}) {
                 <Nav.Item>
                     <Nav.Link eventKey="third">Declined Campaigns</Nav.Link>
                 </Nav.Item>
+                {marketList && (
+                  <Nav.Item>
+                      <Nav.Link eventKey="four">Active Campaigns</Nav.Link>
+                  </Nav.Item>
+                )}
             </Nav>
             </Col>
             <Col sm={12}>
@@ -231,9 +234,9 @@ function CampList({marketList = true}) {
                     )}
 
                     {marketList == true && (
-                        campListApproval?.length > 0 ? (
+                        marketAppliedList?.length > 0 ? (
                             <TableList 
-                                data={campListApproval}
+                                data={marketAppliedList}
                                 handleAction={handleAction}
                                 viewDetails={handleViewDetails}
                                 showDetails={showDetails} 
@@ -252,70 +255,42 @@ function CampList({marketList = true}) {
                     
                 </Tab.Pane>
                 <Tab.Pane eventKey="second" className='campaign'>
-                {marketList == false && (
-                        campListPending?.length > 0 ? (
-                            <TableList 
-                                data={campListPending}
-                                handleAction={handleAction}
-                                viewDetails={handleViewDetails}
-                                showDetails={showDetails} 
-                                userDetails={campViewDetails}
-                                couponCross={couponCross}
-                                showAll={true}
-                            />
-                        ): (
-                            <>
-                                <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
-                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
-                            </>
-                        )
-                    )}
-
-                    {marketList == true && (
-                        acceptList?.length > 0 ? (
-                            <TableList 
-                                data={acceptList}
-                                handleAction={handleAction}
-                                viewDetails={handleViewDetails}
-                                showDetails={showDetails} 
-                                userDetails={campViewDetails}
-                                couponCross={couponCross}
-                                marketApplied = {true}
-                                showAll = {false}
-                            />
-                        ): (
-                            <>
-                                <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
-                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
-                            </>
-                        )
+                    {campListApproval?.length > 0 ? (<TableList data={campListApproval} showButtons={false} pending={false} />) : (
+                        <>
+                        <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
+                        <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                    </>
                     )}
                 
                 </Tab.Pane>
                 <Tab.Pane eventKey="third" className='campaign'>
-                {marketList == false && (
-                        declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
+                  {marketList == false && (
+                    declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
+                      <>
+                      <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
+                      <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                  </>
+                  )
+                    )}
+
+                    {marketList == true && (
+                        inflaDecline?.length > 0 ? (<TableList data={inflaDecline} showButtons={false} pending={false} />) : (
                           <>
                           <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
                           <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
                       </>
                       )
                     )}
-
-                    {marketList == true && (
-                        inflaDeclineList?.length > 0 ? (
-                            <TableList 
-                                data={inflaDeclineList}
-                                showButtons={false}
-                                pending={false}
-                            />
-                        ): (
-                            <>
-                                <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
-                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
-                            </>
-                        )
+                
+                </Tab.Pane>
+                <Tab.Pane eventKey="four" className='campaign'>
+                    {acceptList?.length > 0 ? (<TableList data={acceptList} showButtons={false} pending={false} />) : (
+                        <>
+                        <h5 className='mt-4 text-center'>No Active Campaigns right now</h5>
+                        <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                    </>
                     )}
+                
                 </Tab.Pane>
             </Tab.Content>
             </Col>
