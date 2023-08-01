@@ -12,7 +12,7 @@ function Marketplace () {
     const [marketItems, setMarketItems] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("logToken");
-    const {setAppliedId} = useContext(UserContext);
+    const {setAppliedId, influStatus, setInfluStatus} = useContext(UserContext);
     useEffect(() => {
         axios.get(API.BASE_URL + 'campaign/marketplacewebsite/')
         .then(function (response) {
@@ -41,19 +41,6 @@ function Marketplace () {
         },
       };
 
-    // const handleApplied = (e, id) => {
-    //     e.preventDefault();
-    //     localStorage.setItem("appliedId", id);
-    //     if(token) {
-    //         navigate('/dashboard');
-    //     }
-    //     else {
-    //         toast.warn("Sign in in to continue")
-    //         navigate('/login');
-    //     }
-        
-    // }
-
     const handleApplied = (e, id) => {
         e.preventDefault();
         setAppliedId(id);
@@ -75,61 +62,70 @@ function Marketplace () {
             });
         } else {
           toast.warn("Sign in to continue");
+          setInfluStatus(1)
+          console.log("influStatus", influStatus)
           navigate('/login');
         }
       };
+
 
     return ( 
         <>
         <div className='pt-110pb-68 market'>
             <div className='container'>
                 <h2 className='mb-4 mb-md-5'>MarketPlace</h2>
-                <Carousel
-                    responsive={responsive}
-                    swipeable={true}
-                    draggable={true}
-                    showDots={true}
-                    ssr={true}
-                    infinite={true}
-                    autoPlay={true}
-                    autoPlaySpeed={3000}
-                    keyBoardControl={true}
-                    customTransition="transform 1s ease-in-out"
-                    transitionDuration={1000}
-                    containerClass="carousel-container"
-                    removeArrowOnDeviceType={['tablet', 'mobile']}
-                    dotListClass="custom-dot-list-style"
-                    itemClass="carousel-item-padding-40-px"
-                    >
-                    {marketItems?.map((item, i) => {
-                        return(
-                            <div className="card" key={i}>
-                                <div className="card-body text-center">
-                                    <h3 className="card-title text-center">{item.campaign_name}</h3>
-                                    {item.product?.map((prod, i) => {
-                                            return(
-                                                <div  className="card-content"> 
-                                                    <h6 className="card-subtitle mb-2 text-dark">
-                                                    Product Name: <strong>{prod.product_name}</strong>
-                                                    </h6>
+                {marketItems?.length > 0 ? (
+                  <Carousel
+                  responsive={responsive}
+                  swipeable={true}
+                  draggable={true}
+                  showDots={true}
+                  ssr={true}
+                  infinite={true}
+                  autoPlay={true}
+                  autoPlaySpeed={3000}
+                  keyBoardControl={true}
+                  customTransition="transform 1s ease-in-out"
+                  transitionDuration={1000}
+                  containerClass="carousel-container"
+                  removeArrowOnDeviceType={['tablet', 'mobile']}
+                  dotListClass="custom-dot-list-style"
+                  itemClass="carousel-item-padding-40-px"
+                  >
+                  {marketItems?.map((item, i) => {
+                      return(
+                          <div className="card" key={i}>
+                              <div className="card-body text-center">
+                                  <h3 className="card-title text-center">{item.campaign_name}</h3>
+                                  {item.product?.map((prod, i) => {
+                                          return(
+                                              <div  className="card-content"> 
+                                                  <h6 className="card-subtitle mb-2 text-dark">
+                                                  Product Name: <strong>{prod.product_name}</strong>
+                                                  </h6>
 
-                                                    <p className="card-text">Coupon: <strong>{(prod.coupon_name != null ? prod.coupon_name : 'No Coupons').filter(Boolean).join(", ")}</strong></p>
+                                                  <p className="card-text">Coupon: <strong>{(prod.coupon_name != null ? prod.coupon_name.filter(Boolean).join(", ") : 'No Coupons')}</strong></p>
 
-                                                    <p className="card-text">Amount: <strong>{(prod.amount != null ? prod.amount : 'No Coupons').filter(Boolean).join(", ")}</strong></p>
+                                                  <p className="card-text">Amount: <strong>{(prod.amount != null ? prod.amount : 'No Coupons').filter(Boolean).join(", ")}</strong></p>
 
-                                                    <p className="card-text">Discount Type: <strong>{(prod.discount_type != null ? prod.discount_type : 'No Coupons')}</strong></p>
+                                                  <p className="card-text">Discount Type: <strong>{(prod.discount_type != null ? prod.discount_type : 'No Coupons')}</strong></p>
 
-                                                    <button className="buttonfx angleindouble color-2" onClick={(e) => {handleApplied(e, item.campaignid_id)}}>Apply</button>
-                                                </div>
-                                            )
-                                        })}
-                                    
-                                </div>
-                            </div>
-                        )
-                    })}
-                    
-                </Carousel>
+                                                  <button className="buttonfx angleindouble color-2" onClick={(e) => {handleApplied(e, item.campaignid_id)}}>Apply</button>
+                                              </div>
+                                          )
+                                      })}
+                                  
+                              </div>
+                          </div>
+                      )
+                  })}
+                  
+              </Carousel>
+                ):
+                <div>
+                  <h2 className='text-center'>No Campaign right now</h2>
+                  </div>}
+                
             </div>
         </div>
         <Footer/>

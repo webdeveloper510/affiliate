@@ -1,57 +1,83 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faXmark, faEye, faClose } from "@fortawesome/free-solid-svg-icons";
-const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true }) => {
+import { faCheck, faXmark, faEye, faClose, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true, sign = false }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 8;
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handlePreviousPage = () => {
+      if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      }
+  };
+
+  const handleNextPage = () => {
+      if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      }
+  };
   return (
+    <>
     <table>
       <thead>
         <tr>
           <th>Campaign Name</th>
+          <th>Vendor Name</th>
           <th>Product Name</th>
           <th>Coupon Price</th>
           {showButtons && (<th>Action</th>)}
         </tr>
       </thead>
       <tbody>
-        {data?.map((list, i) => {
+        {currentItems?.map((list, i) => {
           return (
             <>
             <tr key={list.product.product_name}>
               <td>{list?.campaign_name}</td>
+              <td>{list.vendor_name ? list.vendor_name : "No Vendor Name"}</td>
               <td>
                 {list?.product?.map((prod, index) => (
                   <React.Fragment key={index}>
-                    {prod?.product_name} {!pending && prod?.coupon_name && (
+                    {prod?.product_name} {!pending && prod?.coupon_name ? (
                       <>
-                      - <span><strong>Discount Code:</strong> {pending == true ? ("Please accept to get the price") : (prod?.coupon_name?.join(", "))}</span>
+                      - <span><strong>Discount Code:</strong> {pending == true ? ("Please accept for price") : (prod?.coupon_name?.join(", "))}</span>
                       <br />
                       </>
-                    )} 
+                    ):("-Campaign is declined")} 
                   </React.Fragment>
                 ))}
               </td>
               <td>
               {pending == true ? (
-                "Please accept to get the price"
+                "Please accept for price"
               ) : (
                 list?.product?.map((prod) =>(
                   <>
                     {prod.discount_type && Array.isArray(prod.discount_type) ?  (
                       prod.discount_type.map((discount, i) => (
                         <>
-                          {prod.amount[i]}
+                          {sign == true ? parseInt(prod.amount[i].toString().substring(1), 10) : prod.amount[i]}
                           {discount === 'percentage' ? '%' :'Dhs'}
                           {i < prod.discount_type.length - 1 ? ' , ' : ''}
                         </>
                       ))
                     ) : 
-                        prod.amount && Array.isArray(prod.amount) &&  (
+                        prod.amount && Array.isArray(prod.amount) ? (
                           prod.amount.map((amount, i) => (
                               <>
                                 {amount}
                                 {i < prod.amount.length - 1 ? ' , ' : ''}
                               </>
-                          )))}
+                          )))
+                        :
+                        "No Coupon"}
                   </>
                 )
               ))}
@@ -187,6 +213,26 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
         })}
       </tbody>
     </table>
+    <div className="table-pagination d-flex justify-content-center align-items-center mt-4">
+      <button onClick={handlePreviousPage} disabled={currentPage === 1} className='page-btn' style={{marginRight: 10}}>
+          <FontAwesomeIcon icon={faChevronLeft} style={{ color: "#fff", width: "15px", height: "15px"}} />
+      </button>
+      {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+      <button
+          key={pageNumber}
+          onClick={() => paginate(pageNumber)}
+          className={currentPage === pageNumber ? 'active page-num' : 'page-num'}
+          style={{margin: '0 5px'}}
+      >
+          {pageNumber}
+          </button>
+      ))}
+      <button onClick={handleNextPage} className='page-btn' disabled={currentPage === totalPages} style={{marginLeft: 10}}>
+          <FontAwesomeIcon icon={faChevronLeft} style={{ transform: 'rotate(180deg)', color: "#fff", width: "15px", height: "15px"}} />
+      </button>
+    </div>
+    </>
+    
   );
 };
 

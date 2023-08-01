@@ -1,9 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import login from '../assets/login11.png';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import UserContext from './context/UserContext';
 import { API } from '../config/Api';
 import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +18,9 @@ function Login (){
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errorClass, setErrorClass] = useState(false);
-  
+
+  const {setInfluStatus ,influStatus} = useContext(UserContext);
+  console.log("influStatusinfluStatus", influStatus)
   const handleLogCheck = (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -50,7 +53,15 @@ function Login (){
       toast.success("Logged In Successfully!");
       localStorage.setItem("logToken", response.data.Token);
       localStorage.setItem("username", response.data.username);
-      navigate('/dashboard')
+      if(influStatus == 1) {
+        setInfluStatus('')
+        navigate('/marketplace')
+      }
+      else {
+        setInfluStatus('')
+        navigate('/dashboard')
+      }
+      
     })
     .catch(function (error) {
       console.log(error);

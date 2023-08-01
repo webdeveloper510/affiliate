@@ -11,11 +11,16 @@ import { API } from '../../config/Api';
 import axios from 'axios';
 import Select from 'react-select';
 import countryList from 'react-select-country-list';
+import Sales from './Sales';
+import Profile from './Profile';
 
 // Images
 import CampaignOverview from '../../assets/campaign-over.png';
 import User from '../../assets/user.png';
 import CampList from './CampList';
+import SaleImg from '../../assets/sales.png';
+import ProfileImg from '../../assets/profile.png';
+import CampNew from '../../assets/campaign-new.png';
 
 const SideBar = () => {
     const userName = localStorage.getItem("username");
@@ -234,8 +239,22 @@ const SideBar = () => {
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="second">
-                            <img src={CampaignOverview} className="me-2" alt='menu-img' />
+                            <img src={CampNew} className="me-2" alt='menu-img' />
                             Marketplace List</Nav.Link>
+                        </Nav.Item>
+
+                        <Nav.Item>
+                            <Nav.Link eventKey="third">
+                                <img src={SaleImg} className="me-2" alt='menu-img' />
+                                Sales
+                            </Nav.Link>
+                        </Nav.Item>
+
+                        <Nav.Item>
+                            <Nav.Link eventKey="four">
+                                <img src={ProfileImg} className="me-2" alt='menu-img' />
+                                Profile
+                            </Nav.Link>
                         </Nav.Item>
                         <div className="button pay-btn d-flex justify-content-center align-items-center mt-5">
                             <button type='button' onClick={(e) => {handleShowPayment(e)}}>Set up Payment</button>
@@ -250,6 +269,12 @@ const SideBar = () => {
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
                             <CampList marketList={true} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="third">
+                            <Sales />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="four">
+                            <Profile />
                         </Tab.Pane>
                     </Tab.Content>
                     </Col>

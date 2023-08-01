@@ -4386,6 +4386,26 @@ button[disabled] {
     }
 }
 
+.profile {
+    .profile-form {
+        max-width: 600px;
+        margin: 0 auto;
+        .input-container {
+            width: 48%;
+            label {
+                margin-bottom: .5rem;
+            }
+            input {
+                color: rgba(51, 51, 51, .6);
+            }
+
+            input, div {
+                font-weight: bold
+            }
+        }
+    }
+}
+
 @media only screen and (min-width: 768px) {
     .login-div {
         form {

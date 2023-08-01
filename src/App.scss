@@ -35,6 +35,32 @@
   }
 }
 
+.table-pagination {
+  button {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    transition: .3s ease;
+  }
+  button.page-btn {
+    background-color: #005caf;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  button.page-num {
+    background: none;
+  }
+
+  button.page-num.active {
+    background: #005caf;
+    color: #fff;
+    transition: .3s ease;
+    border-radius: 3px;
+  }
+}
+
 button:disabled,
 button[disabled] {
     background-color: #1032bb47 !important;

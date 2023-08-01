@@ -258,9 +258,12 @@ function CampList({marketList = true}) {
                         {!marketList ? "Pending Campaigns" : "Requested Campaigns"}
                     </Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="second">Accepted Campaigns</Nav.Link>
-                </Nav.Item>
+                {!marketList && (
+                  <Nav.Item>
+                      <Nav.Link eventKey="second">Accepted Campaigns</Nav.Link>
+                  </Nav.Item>
+                )}
+                
                 <Nav.Item>
                     <Nav.Link eventKey="third">Declined Campaigns</Nav.Link>
                 </Nav.Item>
@@ -314,7 +317,8 @@ function CampList({marketList = true}) {
                     )}      
                     
                 </Tab.Pane>
-                <Tab.Pane eventKey="second" className='campaign'>
+                {!marketList && (
+                  <Tab.Pane eventKey="second" className='campaign'>
                     {campListApproval?.length > 0 ? (<TableList data={campListApproval} showButtons={false} pending={false} />) : (
                         <>
                         <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
@@ -323,6 +327,8 @@ function CampList({marketList = true}) {
                     )}
                 
                 </Tab.Pane>
+                )}
+                
                 <Tab.Pane eventKey="third" className='campaign'>
                   {marketList == false && (
                     declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
@@ -334,7 +340,7 @@ function CampList({marketList = true}) {
                     )}
 
                     {marketList == true && (
-                        inflaDecline?.length > 0 ? (<TableList data={inflaDecline} showButtons={false} pending={false} />) : (
+                        inflaDecline?.length > 0 ? (<TableList data={inflaDecline} showButtons={false} pending={false} sign = {true} />) : (
                           <>
                           <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
                           <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
@@ -344,7 +350,7 @@ function CampList({marketList = true}) {
                 
                 </Tab.Pane>
                 <Tab.Pane eventKey="four" className='campaign'>
-                    {acceptList?.length > 0 ? (<TableList data={acceptList} showButtons={false} pending={false} />) : (
+                    {acceptList?.length > 0 ? (<TableList data={acceptList} showButtons={false} pending={false} sign = {true} />) : (
                         <>
                         <h5 className='mt-4 text-center'>No Active Campaigns right now</h5>
                         <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />

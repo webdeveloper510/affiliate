@@ -94,6 +94,7 @@
                     .nav-link {
                         width: 100%;
                         color: #fff;
+                        padding: 1rem;
                     }
                     .nav-link.active {
                         border-radius: 0;
@@ -146,8 +147,9 @@
                         td, th {
                             border: 1px solid #dddddd;
                             text-align: left;
-                            padding: 8px 13px;
+                            padding: 10px 13px;
                             text-align: left;
+                            min-width: 168px;
                         }
                         th {
                             &:nth-child(1) {
@@ -159,10 +161,11 @@
                         }
                         td {
                             font-size: 14px;
-                            line-height: 2.4;
+                            line-height: 1.6;
+                            min-height: 66px;
                             span {
                                 strong {
-                                    color: #6414e9;
+                                    color: #2657b3;
                                 }
                             }
                             button {
@@ -175,6 +178,7 @@
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
+                                height: 35px;
                             }
                         }
                         tr{
@@ -202,8 +206,8 @@
                         color: #000;
                     }
                     a.nav-link.active {
-                        background: #6414e9 !important;
-                        border: 1px solid #6414e9 !important;
+                        background: #2657b3 !important;
+                        border: 1px solid #2657b3 !important;
                         color: #fff;
                     }
                     &:last-child {
