@@ -16,6 +16,7 @@ function CampList({marketList = true}) {
     const [campViewDetails, setCampViewDetails] = useState([]);
     const [showDetails, setShowDetails] = useState(false);
     const [declineList, setDeclineList] = useState([]);
+    const [inflaDeclineList, setInflaDeclineList] = useState([]);
     const [acceptList, setAcceptList] = useState([]);
     const [pendingId, setPendingId] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -39,67 +40,82 @@ function CampList({marketList = true}) {
           .catch(function (error) {
             console.log(error);
           });
-      }, [token]);
+    }, [token]);
       
-      useEffect(() => {
-        axios.get(API.BASE_URL + 'influencer/approval/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
+    useEffect(() => {
+      axios.get(API.BASE_URL + 'influencer/approval/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then(function (response) {
+          setCampListApproval(response.data.data);
+          console.log("Approved", response.data);
         })
-          .then(function (response) {
-            setCampListApproval(response.data.data);
-            console.log("Approved", response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }, [token]);
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [token]);
       
-      useEffect(() => {
-        axios.get(API.BASE_URL + 'influencer/decline/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
+    useEffect(() => {
+      axios.get(API.BASE_URL + 'influencer/decline/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then(function (response) {
+          setDeclineList(response.data.data);
+          console.log("Decline", response.data);
         })
-          .then(function (response) {
-            setDeclineList(response.data.data);
-            console.log("Decline", response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }, [token]);
-      
-      useEffect(() => {
-        axios.get(API.BASE_URL + 'influencer/inflmarketaccept/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [token]);
+    
+    useEffect(() => {
+      axios.get(API.BASE_URL + 'influencer/inflmarketaccept/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then(function (response) {
+          setAcceptList(response.data.data);
+          console.log("Accepttttt", response.data);
         })
-          .then(function (response) {
-            setAcceptList(response.data.data);
-            console.log("Accepttttt", response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }, [token]);
-      
-      useEffect(() => {
-        axios.get(API.BASE_URL + 'influencer/applied/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [token]);
+    
+    useEffect(() => {
+      axios.get(API.BASE_URL + 'influencer/inflmarketdecline/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then(function (response) {
+          setInflaDeclineList(response.data.data);
+          console.log("Declineeeeee", response.data);
         })
-          .then(function (response) {
-            setMarketAppliedList(response.data.data);
-            console.log("setMarketAppliedList", response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }, [token]);
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [token]);
+    
+    useEffect(() => {
+      axios.get(API.BASE_URL + 'influencer/applied/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then(function (response) {
+          setMarketAppliedList(response.data.data);
+          console.log("setMarketAppliedList", response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [token]);
 
     
 
@@ -190,11 +206,6 @@ function CampList({marketList = true}) {
                 <Nav.Item>
                     <Nav.Link eventKey="third">Declined Campaigns</Nav.Link>
                 </Nav.Item>
-                {marketList && (
-                  <Nav.Item>
-                      <Nav.Link eventKey="four">Active Campaigns</Nav.Link>
-                  </Nav.Item>
-                )}
             </Nav>
             </Col>
             <Col sm={12}>
@@ -220,9 +231,9 @@ function CampList({marketList = true}) {
                     )}
 
                     {marketList == true && (
-                        marketAppliedList?.length > 0 ? (
+                        campListApproval?.length > 0 ? (
                             <TableList 
-                                data={marketAppliedList}
+                                data={campListApproval}
                                 handleAction={handleAction}
                                 viewDetails={handleViewDetails}
                                 showDetails={showDetails} 
@@ -241,31 +252,70 @@ function CampList({marketList = true}) {
                     
                 </Tab.Pane>
                 <Tab.Pane eventKey="second" className='campaign'>
-                    {campListApproval?.length > 0 ? (<TableList data={campListApproval} showButtons={false} pending={false} />) : (
-                        <>
-                        <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
-                        <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
-                    </>
+                {marketList == false && (
+                        campListPending?.length > 0 ? (
+                            <TableList 
+                                data={campListPending}
+                                handleAction={handleAction}
+                                viewDetails={handleViewDetails}
+                                showDetails={showDetails} 
+                                userDetails={campViewDetails}
+                                couponCross={couponCross}
+                                showAll={true}
+                            />
+                        ): (
+                            <>
+                                <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
+                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                            </>
+                        )
+                    )}
+
+                    {marketList == true && (
+                        acceptList?.length > 0 ? (
+                            <TableList 
+                                data={acceptList}
+                                handleAction={handleAction}
+                                viewDetails={handleViewDetails}
+                                showDetails={showDetails} 
+                                userDetails={campViewDetails}
+                                couponCross={couponCross}
+                                marketApplied = {true}
+                                showAll = {false}
+                            />
+                        ): (
+                            <>
+                                <h5 className='mt-4 text-center'>No Accepted Campaigns right now</h5>
+                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                            </>
+                        )
                     )}
                 
                 </Tab.Pane>
                 <Tab.Pane eventKey="third" className='campaign'>
-                    {declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
-                        <>
-                        <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
-                        <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
-                    </>
+                {marketList == false && (
+                        declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
+                          <>
+                          <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
+                          <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                      </>
+                      )
                     )}
-                
-                </Tab.Pane>
-                <Tab.Pane eventKey="four" className='campaign'>
-                    {acceptList?.length > 0 ? (<TableList data={acceptList} showButtons={false} pending={false} />) : (
-                        <>
-                        <h5 className='mt-4 text-center'>No Active Campaigns right now</h5>
-                        <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
-                    </>
+
+                    {marketList == true && (
+                        inflaDeclineList?.length > 0 ? (
+                            <TableList 
+                                data={inflaDeclineList}
+                                showButtons={false}
+                                pending={false}
+                            />
+                        ): (
+                            <>
+                                <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
+                                <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
+                            </>
+                        )
                     )}
-                
                 </Tab.Pane>
             </Tab.Content>
             </Col>

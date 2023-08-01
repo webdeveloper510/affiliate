@@ -4229,6 +4229,16 @@ button[disabled] {
     }
 }
 
+.influencer-list {
+    .tab-content {
+        div[role="tabpanel"] {
+            max-height: 73vh;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+    }
+}
+
 .vendor-sign {
     .vendor-sign-img {
         img {
