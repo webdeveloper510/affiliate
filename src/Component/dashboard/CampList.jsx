@@ -287,6 +287,7 @@ function CampList({marketList = true}) {
                                 userDetails={campViewDetails}
                                 couponCross={couponCross}
                                 showAll={true}
+                                pending = {true}
                             />
                         ): (
                             <>
@@ -307,6 +308,7 @@ function CampList({marketList = true}) {
                                 couponCross={couponCross}
                                 marketApplied = {true}
                                 showAll = {false}
+                                pending = {true}
                             />
                         ): (
                             <>

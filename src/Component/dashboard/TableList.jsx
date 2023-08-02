@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark, faEye, faClose, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true, sign = false }) => {
+const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true, sign = false}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 8;
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
@@ -45,12 +45,13 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
               <td>
                 {list?.product?.map((prod, index) => (
                   <React.Fragment key={index}>
-                    {prod?.product_name} {!pending && prod?.coupon_name ? (
+                    {prod?.product_name} 
+                    {prod?.coupon_name ? (
                       <>
                       - <span><strong>Discount Code:</strong> {pending == true ? ("Please accept for price") : (prod?.coupon_name?.join(", "))}</span>
                       <br />
                       </>
-                    ):("-Campaign is declined")} 
+                    ):(!pending && <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i>)} 
                   </React.Fragment>
                 ))}
               </td>

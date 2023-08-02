@@ -43,8 +43,12 @@ function Sales() {
                 'blue',
                 'green',
                 'yellow',
-                'red',
                 'orange',
+                'teak',
+                'purple',
+                'brown',
+                'yellowgreen',
+                'tomato'
               ],
             },
           ],
