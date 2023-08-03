@@ -51,7 +51,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                       - <span><strong>Discount Code:</strong> {pending == true ? ("Please accept for price") : (prod?.coupon_name?.join(", "))}</span>
                       <br />
                       </>
-                    ):(!pending && <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i>)} 
+                    ):(!pending && list.status == 3 ? <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : <i style={{color: '#5e5e5e'}}> <b> Waiting for Approval</b></i>) } 
                   </React.Fragment>
                 ))}
               </td>
