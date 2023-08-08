@@ -39,16 +39,22 @@ function Sales() {
               data: sales,
               tension: 0.2,
               backgroundColor: [
-                'red',
-                'blue',
-                'green',
-                'yellow',
-                'orange',
-                'teak',
-                'purple',
-                'brown',
-                'yellowgreen',
-                'tomato'
+                '#FF9B9B',
+                '#CD6688',
+                '#FFFEC4',
+                '#7A316F',
+                '#FFD6A5',
+                '#9BE8D8',
+                '#E966A0',
+                '#967E76',
+                '#C2DEDC',
+                '#ECE5C7',
+                '#E0BBE4',
+                '#957DAD',
+                '#AAD6FA',
+                '#FCE6A9',
+                '#B3C99C',
+                '#7C9D96'
               ],
             },
           ],
@@ -73,12 +79,14 @@ function Sales() {
       <div className="sales p-4 page">
       {loading && <div className='d-flex loader-container flex-column'><div className='loader'><span></span></div> <p className='text-white'>Processing...</p></div>}
         <div className="sales-container">
-          <h2 className="my-5">Sales overview</h2>
+          <h2 className="my-5">Campaign Sales</h2>
           <div className="earnings-list d-flex flex-column justify-content-center align-items-center">
 
             <div className="chart my-5 d-flex flex-column w-100">
               <h3 className='text-left w-100 d-flex ps-5 mb-4'>Sales Data</h3>
+              <p className='text-center left-text'>Sales</p>
               <Line ref={chartSalesRef} type="line" data={chartSalesData} options={options}></Line>
+              <p className='text-center'>Campaign name</p>
             </div>
           </div>
         </div>

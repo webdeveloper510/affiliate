@@ -41,6 +41,17 @@
             border-radius: 5px;
             padding-left: 0;
             min-width: 185px;
+            max-height: 300px;
+            overflow-y: scroll;
+            &::-webkit-scrollbar-thumb {
+                background: #0d6efd;
+                border-radius: 10px;
+            }
+            &::-webkit-scrollbar {
+                width: 5px;
+                height: 8px;
+                background-color: #aaa0;
+            }
             button {
                 text-decoration: underline;
                 background-color: transparent;
@@ -56,7 +67,7 @@
                 border-bottom: 1px solid #e7e7e7;
                 padding: 6px 8px;
                 position: relative;
-                padding-left: 15px;
+                padding-left: 20px;
                 &::before {
                     content: '';
                     position: absolute;
@@ -64,7 +75,7 @@
                     bottom: 0;
                     display: flex;
                     margin: auto;
-                    left: 5px;
+                    left: 10px;
                     height: 5px;
                     width: 5px;
                     border-radius: 50%;
@@ -196,7 +207,7 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        min-width: 100px;
+                        min-width: 150px;
                         padding: 10px 14px;
                         border-radius: 40px;
                         font-size: 14px;
@@ -228,6 +239,18 @@
                 border-radius: 5px;
                 color: #fff;
                 padding: 5px 20px;
+            }
+        }
+
+        .pay-btn {
+            button {
+                background: #333b89;
+                border: 1px solid #ffffff54;
+                outline: none;
+                border-radius: 5px;
+                color: #fff;
+                padding: 8px 20px;
+                font-weight: 600;
             }
         }
 
@@ -280,6 +303,25 @@
                         padding: 10px 15px;
                         min-height: 50px;
                     }
+                }
+            }
+        }
+
+        .sales {
+            .chart {
+                position: relative;
+                padding-left: 40px;
+                .left-text {
+                    position: absolute;
+                    margin-bottom: 0;
+                    inset: 0;
+                    right: unset;
+                    margin: auto;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: fit-content;
+                    transform: rotate(-90deg);
                 }
             }
         }

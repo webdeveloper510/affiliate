@@ -255,21 +255,21 @@ function CampList({marketList = true}) {
             <Nav variant="pills" className="flex-row mb-4 tab-header">
                 <Nav.Item>
                     <Nav.Link eventKey="first">
-                        {!marketList ? "Pending Campaigns" : "Requested Campaigns"}
+                        {!marketList ? "Pending" : "Requested"}
                     </Nav.Link>
                 </Nav.Item>
                 {!marketList && (
                   <Nav.Item>
-                      <Nav.Link eventKey="second">Accepted Campaigns</Nav.Link>
+                      <Nav.Link eventKey="second">Awaiting</Nav.Link>
                   </Nav.Item>
                 )}
                 
                 <Nav.Item>
-                    <Nav.Link eventKey="third">Declined Campaigns</Nav.Link>
+                    <Nav.Link eventKey="third">Declined</Nav.Link>
                 </Nav.Item>
                 {marketList && (
                   <Nav.Item>
-                      <Nav.Link eventKey="four">Active Campaigns</Nav.Link>
+                      <Nav.Link eventKey="four">Active</Nav.Link>
                   </Nav.Item>
                 )}
             </Nav>
