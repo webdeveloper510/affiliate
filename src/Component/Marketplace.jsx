@@ -10,8 +10,12 @@ import { toast } from 'react-toastify';
   
 function Marketplace () {
     const [marketItems, setMarketItems] = useState([]);
+    const [productList, setProductList] = useState([])
+    const [selectedProduct, setSelectedProduct] = useState();
+    const [selectedCommission, setSelectedCommission] = useState();
     const navigate = useNavigate();
     const token = localStorage.getItem("logToken");
+    const [loading, setLoading] = useState(false);
     const {setAppliedId, influStatus, setInfluStatus} = useContext(UserContext);
     useEffect(() => {
         axios.get(API.BASE_URL + 'campaign/marketplacewebsite/')
@@ -24,7 +28,21 @@ function Marketplace () {
         })
     }, [])
 
+    useEffect(() => {
+      setLoading(true);
+      axios.get(API.BASE_URL + 'campaign/product/list/')
+      .then(function (response) {
+        console.log("Product List", response);
+        setProductList(response.data.success)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(() => setLoading(false));
+  }, [])
+
     console.log("marketItems", marketItems)
+    console.log("products", productList)
 
     const responsive = {
         desktop: {
@@ -39,7 +57,7 @@ function Marketplace () {
           breakpoint: { max: 768, min: 0 },
           items: 1,
         },
-      };
+    };
 
     const handleApplied = (e, id) => {
         e.preventDefault();
@@ -66,14 +84,61 @@ function Marketplace () {
           console.log("influStatus", influStatus)
           navigate('/login');
         }
-      };
+    };
 
+    const handleFilter = (e) => {
+      e.preventDefault();
+      setLoading(true);
+      axios.post(API.BASE_URL + 'campaign/commission/filter/', {
+        commission: selectedCommission,
+        product: selectedProduct,
+      }, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }})
+        .then(function (response) {
+          console.log("Requested", response.data);
+          setMarketItems(response.data.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+        .finally(() => setLoading(false));
+    }
 
     return ( 
         <>
         <div className='pt-110pb-68 market'>
+        {loading && <div className='loader'><span></span></div>}
             <div className='container'>
                 <h2 className='mb-4 mb-md-5'>MarketPlace</h2>
+                <div className="filters d-flex align-items-center mb-5">
+                  <h6 className='text-dark'>Search by:-</h6>
+                  <form className="filter-list d-flex align-items-end ms-4">
+                    <div className="input-container me-4">
+                      <label>Product</label>
+                      <select onChange={(e) => {setSelectedProduct(e.target.value)}}>
+                        <option value="">Select a Product</option>
+                        {productList?.length > 0 && (
+                          productList?.map((prod, i) => {
+                            return(
+                              <option value={prod.id} key={i}>{prod.title}</option>
+                            )
+                          })
+                        )}
+                      </select>
+                    </div>
+                    <div className="input-container me-4">
+                      <label>Commission Type</label>
+                      <select onChange={(e) => {setSelectedCommission(e.target.value)}}>
+                        <option value="">Select type of Offer</option>
+                        <option value="commission">Commission</option>
+                        <option value="percentage">Percentage</option>
+                      </select>
+                    </div>
+                    <button type="submit" className='buttonfx angleindouble color-2 mb-0' onClick={(e) => {handleFilter(e)}}>Filter</button>
+                  </form>
+                </div>
                 {marketItems?.length > 0 ? (
                   <Carousel
                   responsive={responsive}

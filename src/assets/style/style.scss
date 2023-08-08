@@ -4380,7 +4380,28 @@ button[disabled] {
                 width: fit-content;
                 min-width: fit-content;
                 margin-bottom: 0;
-                padding: 8px;
+                padding: 6px;
+                background: #fff;
+            }
+        }
+        .react-multi-carousel-dot--active {
+            button {
+                background: #003db6;
+            }
+        }
+    }
+}
+
+.react-multi-carousel-list {
+    padding-bottom: 40px;
+}
+
+.filters {
+    form {
+        button {
+            border: none;
+            &:before, &:after {
+                background: #003db6 !important;
             }
         }
     }

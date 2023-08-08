@@ -235,31 +235,31 @@ function Home (){
         <div className="content-part">
           <div className="google-icon">
             <div className="image-wrapper">
-            <i class="icofont-hand-drag1"></i>
+            <i className="icofont-hand-drag1"></i>
             </div>
             <p>EASY TO USE</p>
           </div>
           <div className="google-icon">
             <div className="image-wrapper">
-            <i class="icofont-tick-boxed"></i>
+            <i className="icofont-tick-boxed"></i>
             </div>
             <p>RELIABLE</p>
           </div>
           <div className="google-icon">
             <div className="image-wrapper">
-            <i class="icofont-dart"></i>
+            <i className="icofont-dart"></i>
             </div>
             <p>ACCURATE</p>
           </div>
           <div className="google-icon">
             <div className="image-wrapper">
-            <i class="icofont-database"></i>
+            <i className="icofont-database"></i>
             </div>
             <p>CUSTOMIZABLE</p>
           </div>
           <div className="google-icon">
             <div className="image-wrapper">
-            <i class="icofont-unique-idea"></i>
+            <i className="icofont-unique-idea"></i>
             </div>
             <p>INNOVATIVE</p>
           </div>
