@@ -64,7 +64,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                     {prod.discount_type && Array.isArray(prod.discount_type) ?  (
                       prod.discount_type.map((discount, i) => (
                         <>
-                          {sign == true ? parseInt(prod.amount[i].toString().substring(1), 10) : prod.amount[i]}
+                          {sign == true ? parseInt(Math.abs(prod.amount[i].toString())) : prod.amount[i]}
                           {discount === 'percentage' ? '%' :'Dhs'}
                           {i < prod.discount_type.length - 1 ? ' , ' : ''}
                         </>
