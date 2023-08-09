@@ -30,7 +30,7 @@ function Marketplace () {
 
     useEffect(() => {
       setLoading(true);
-      axios.get(API.BASE_URL + 'campaign/product/list/')
+      axios.get(API.BASE_URL + 'campaign/marketproduct/list/')
       .then(function (response) {
         console.log("Product List", response);
         setProductList(response.data.success)
@@ -92,10 +92,7 @@ function Marketplace () {
       axios.post(API.BASE_URL + 'campaign/commission/filter/', {
         commission: selectedCommission,
         product: selectedProduct,
-      }, {
-        headers: {
-          Authorization: `Token ${token}`,
-        }})
+      })
         .then(function (response) {
           console.log("Requested", response.data);
           setMarketItems(response.data.data)
@@ -122,7 +119,7 @@ function Marketplace () {
                         {productList?.length > 0 && (
                           productList?.map((prod, i) => {
                             return(
-                              <option value={prod.id} key={i}>{prod.title}</option>
+                              <option value={prod.title} key={i}>{prod.title}</option>
                             )
                           })
                         )}
@@ -132,8 +129,8 @@ function Marketplace () {
                       <label>Commission Type</label>
                       <select onChange={(e) => {setSelectedCommission(e.target.value)}}>
                         <option value="">Select type of Offer</option>
-                        <option value="commission">Commission</option>
-                        <option value="percentage">Percentage</option>
+                        <option value="commission">Fixed Amount</option>
+                        <option value="percentage">Percent of Sale</option>
                       </select>
                     </div>
                     <button type="submit" className='buttonfx angleindouble color-2 mb-0' onClick={(e) => {handleFilter(e)}}>Filter</button>

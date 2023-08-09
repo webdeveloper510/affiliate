@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark, faEye, faClose, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true, sign = false}) => {
+const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true, sign = false, declined = false, requested = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 8;
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
@@ -46,19 +46,24 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                 {list?.product?.map((prod, index) => (
                   <React.Fragment key={index}>
                     {prod?.product_name ? prod?.product_name  + ' - ' : ""}
-                    {prod?.coupon_name ? (
-                      <>
-                      <span><strong>Discount Code:</strong> {pending == true ? ("Waiting for Approval") : (prod?.coupon_name?.join(", "))}</span>
-                      <br />
-                      </>
-                    ):(!pending && list.status == 4 ? <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : 'Waiting for Approval') } 
+                    {declined === true ? (
+                       <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i>
+                     
+                    ) : (
+                      prod?.coupon_name ? (
+                        <>
+                        <span><strong>Discount Code:</strong> {pending == true ? ("Please accept for price") : requested == true ? "Waiting for Approval" : (prod?.coupon_name?.join(", "))}</span>
+                        <br />
+                        </>
+                      ):(!pending && list.status == 4 ? <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : declined == true ?  <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : requested == true ? "Waiting for Approval"  : 'Please accept for price')
+                    )} 
                   </React.Fragment>
                 ))}
               </td>
               <td>
               {pending == true ? (
-                "Waiting for Approval"
-              ) : (
+                "Please accept for price"
+              ) : requested == true ? "Waiting for Approval" : declined == true ?  <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> :(
                 list?.product?.map((prod) =>(
                   <>
                     {prod.discount_type && Array.isArray(prod.discount_type) ?  (

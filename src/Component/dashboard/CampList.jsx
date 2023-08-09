@@ -260,7 +260,7 @@ function CampList({marketList = true}) {
                 </Nav.Item>
                 {!marketList && (
                   <Nav.Item>
-                      <Nav.Link eventKey="second">Awaiting</Nav.Link>
+                      <Nav.Link eventKey="second">Accepted</Nav.Link>
                   </Nav.Item>
                 )}
                 
@@ -308,7 +308,8 @@ function CampList({marketList = true}) {
                                 couponCross={couponCross}
                                 marketApplied = {true}
                                 showAll = {false}
-                                pending = {true}
+                                pending = {false}
+                                requested = {true}
                             />
                         ): (
                             <>
@@ -333,7 +334,7 @@ function CampList({marketList = true}) {
                 
                 <Tab.Pane eventKey="third" className='campaign'>
                   {marketList == false && (
-                    declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} />) : (
+                    declineList?.length > 0 ? (<TableList data={declineList} showButtons={false} pending={false} declined={true} />) : (
                       <>
                       <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
                       <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
@@ -342,7 +343,7 @@ function CampList({marketList = true}) {
                     )}
 
                     {marketList == true && (
-                        inflaDecline?.length > 0 ? (<TableList data={inflaDecline} showButtons={false} pending={false} sign = {true} />) : (
+                        inflaDecline?.length > 0 ? (<TableList data={inflaDecline} showButtons={false} pending={false} sign = {true} declined={true} />) : (
                           <>
                           <h5 className='mt-4 text-center'>No Declined Campaigns right now</h5>
                           <img src={NoData} alt='no-data' style={{width: '100%', maxHeight: 500, objectFit: 'contain'}} />
