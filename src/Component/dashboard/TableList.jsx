@@ -55,7 +55,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                         <span><strong>Discount Code:</strong> {pending == true ? ("Please accept for price") : requested == true ? "Waiting for Approval" : list.status == 1 ? "Waiting for Approval" :  list.status == 2 && (prod?.coupon_name?.join(", "))}</span>
                         <br />
                         </>
-                      ):(!pending && list.status == 4 ? <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : declined == true ?  <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : requested == true ? "Waiting for Approval"  : 'Please accept for price')
+                      ):(!pending && list.status == 4 ? <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : declined == true ?  <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : requested == true ? "Waiting for Approval"  : list.staus != 2 || list.staus != 1 &&'Please accept for price')
                     )} 
                   </React.Fragment>
                 ))}
@@ -63,7 +63,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
               <td>
               {pending == true ? (
                 "Please accept for price"
-              ) : requested == true ? "Waiting for Approval" : declined == true ?  <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> :(
+              ) : requested == true || list.status ==1 ? "Waiting for Approval" : declined == true ?  <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> :(
                 list?.product?.map((prod) =>(
                   <>
                     {prod.discount_type && Array.isArray(prod.discount_type) ?  (
