@@ -52,7 +52,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                     ) : (
                       prod?.coupon_name ? (
                         <>
-                        <span><strong>Discount Code:</strong> {pending == true ? ("Please accept for price") : requested == true ? "Waiting for Approval" : list.status == 3 ? "Waiting for Approval" : (prod?.coupon_name?.join(", "))}</span>
+                        <span><strong>Discount Code:</strong> {pending == true ? ("Please accept for price") : requested == true ? "Waiting for Approval" : list.status == 1 ? "Waiting for Approval" :  list.status == 2 && (prod?.coupon_name?.join(", "))}</span>
                         <br />
                         </>
                       ):(!pending && list.status == 4 ? <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : declined == true ?  <i style={{color: '#5e5e5e'}}> <b> Campaign is declined</b></i> : requested == true ? "Waiting for Approval"  : 'Please accept for price')
