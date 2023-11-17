@@ -14,7 +14,20 @@ body {
     margin: 0;
     padding: 0;
 }
+.col-md-4.mb-3.priview {text-align: center;}
 
+.priview-image img {border: 4px solid #1032bb;border-radius: 50%;padding: 20px;margin-bottom: 15px;}
+
+.col-md-4.mb-3.priview h3 {
+    text-align: center;
+    color: #1032bb;
+    font-size: 22px;
+}
+
+.col-md-4.mb-3.priview p {
+    text-align: center;
+    color: #1032bb !important;
+}
 .section {
     margin-top: 85px;
 }

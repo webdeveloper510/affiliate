@@ -11,6 +11,7 @@ import VendorLogin from '../Component/vendor/VendorLogin';
 import Dashboard from '../Component/dashboard/Dashboard';
 import CampList from '../Component/dashboard/CampList';
 import Verify from '../Component/Verify';
+import Influencers from '../Component/Influencers';
 
 const Routing = () => {
     
@@ -27,6 +28,7 @@ const Routing = () => {
             <Route exact path='/vendor-signup' element={< VendorSignup />}></Route>
             <Route exact path='/vendor-signin' element={< VendorLogin />}></Route>
             <Route exact path='/dashboard' element={<Dashboard />}></Route>
+            <Route exact path='/Influencers' element={<Influencers />}></Route>
             <Route exact path='/list' element={<CampList />}></Route>
             <Route exact path='/verify/:token/:id' element={<Verify />}></Route>
         </Routes>
