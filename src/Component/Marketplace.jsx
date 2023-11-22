@@ -20,7 +20,7 @@ function Marketplace () {
     useEffect(() => {
         axios.get(API.BASE_URL + 'campaign/marketplacewebsite/')
         .then(function (response) {
-        console.log("Marketplace", response);
+        console.log("Marketplace==========>>>>>>>", response);
         setMarketItems(response.data.data)
         })
         .catch(function (error) {
@@ -168,7 +168,7 @@ function Marketplace () {
 
                                                   <p className="card-text">Influencer Fee: <strong>{(item.influencer_fee)}</strong></p>
 
-                                                  <p className="card-text">Offer Type: <strong>{(item.offer != null ? item.offer == 'commission' ? 'Commission' : 'Percentage' : 'No Coupons')}</strong></p>
+                                                  <p className="card-text">Discount Type: <strong>{prod.discount_type}</strong></p>
 
                                                   <button className="buttonfx angleindouble color-2" onClick={(e) => {handleApplied(e, item.campaignid_id)}}>Apply</button>
                                               </div>

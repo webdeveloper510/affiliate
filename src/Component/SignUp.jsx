@@ -14,6 +14,8 @@ import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 function Signup (){
    const [step, setstep] = useState(1);
    const [name, setName] = useState('');
+   const [bankname, setBankname] = useState('');
+   const [fee, setFee] = useState('');
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
@@ -225,6 +227,8 @@ function Signup (){
       country: country.label,
       user_handle: userHandle,
       industries: industries.join(", "),
+      bankname: bankname,
+      fee: fee,
       experience: experience,
       promotion: promotion.join(", "),
       customer_age: age.join(", "),
@@ -352,6 +356,22 @@ function Signup (){
                       onClick={() => setShowCPassword(!showCPassword)}
                   />
                 </div>
+                <div className={`input-container d-flex flex-column mb-3 ${errors.bankname ? 'error' : ''}`} style={{width: '49%', marginRight: 10}}>
+                  <label htmlFor="">Bank Account <strong style={{color: 'red'}}>*</strong></label>
+                  <input placeholder='Bank Account' maxLength='30' value={bankname} onChange={(e) => {setBankname(e.target.value)}} />
+                </div>
+                <div className={`input-container d-flex flex-column mb-3 ${errors.fee ? 'error' : ''}`} style={{width: '49%'}}>
+                  <label htmlFor="">Fee <strong style={{color: 'red'}}>*</strong></label>
+                  <input type='text' maxLength='35' placeholder='Fee' value={fee} onChange={(e) => {setFee(e.target.value)}} required />
+                </div>
+                <div className={`input-container d-flex flex-column mb-3 ${errors.facility ? 'error' : ''}`} style={{width: '98%', marginRight: 10}}>
+                  <label htmlFor="">Facility <strong style={{color: 'red'}}>*</strong></label>
+                  <select className='form-control'>
+                      <option value="story">Story</option>
+                      <option value="post">Post</option>
+                  </select>
+                </div>
+              
                 <div className={`input-container d-flex flex-column mb-3 ${errors.country ? 'error' : ''}`}>
                   <label htmlFor="">Country <strong style={{color: 'red'}}>*</strong></label>
                   <Select options={options} value={country} onChange={changeHandler} className='select' placeholder="Choose your country"/>
