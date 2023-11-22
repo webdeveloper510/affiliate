@@ -21,6 +21,7 @@ import CampList from './CampList';
 import SaleImg from '../../assets/sales.png';
 import ProfileImg from '../../assets/profile.png';
 import CampNew from '../../assets/campaign-new.png';
+import Transfer from './Transfer';
 
 const SideBar = () => {
     const userName = localStorage.getItem("username");
@@ -256,6 +257,12 @@ const SideBar = () => {
                                 Profile
                             </Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="five">
+                                <img src={ProfileImg} className="me-2" alt='menu-img' />
+                                Transfer
+                            </Nav.Link>
+                        </Nav.Item>
                         <div className="button pay-btn d-flex justify-content-center align-items-center mt-5">
                             <button type='button' onClick={(e) => {handleShowPayment(e)}}>Set up Payment</button>
                         </div>
@@ -275,6 +282,9 @@ const SideBar = () => {
                         </Tab.Pane>
                         <Tab.Pane eventKey="four">
                             <Profile />
+                        </Tab.Pane>
+                        <Tab.Pane  eventKey="five">
+                             <Transfer/>
                         </Tab.Pane>
                     </Tab.Content>
                     </Col>
