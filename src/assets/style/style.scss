@@ -4153,6 +4153,9 @@ button[disabled] {
     }
 }
 
+.sales.p-4.page {
+    margin-top: 70px;
+}
 .login-content{
     height:100%;
 }
@@ -4421,6 +4424,7 @@ button[disabled] {
 }
 
 .profile {
+    margin-top: 70px !important;
     .profile-form {
         max-width: 600px;
         margin: 0 auto;

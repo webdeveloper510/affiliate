@@ -38,7 +38,7 @@ function Profile() {
     }, [token])
 
   return (
-    <div className="profile p-4 page">
+    <div className="profile p-4 page pt-4">
         {loading && <div className='d-flex loader-container flex-column'><div className='loader'><span></span></div> <p className='text-white'>Processing...</p></div>}
         <div className="heading">
             <h2>Profile</h2>

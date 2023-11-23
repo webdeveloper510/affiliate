@@ -166,7 +166,7 @@ function Marketplace () {
                                                   Product Name: <strong>{prod.product_name}</strong>
                                                   </h6>
 
-                                                  <p className="card-text">Influencer Fee: <strong>{(item?.influencer_fee)}</strong></p>
+                                                  {/* <p className="card-text">Influencer Fee: <strong>{(item?.influencer_fee)}</strong></p> */}
 
                                                   <p className="card-text">Discount Type: <strong>{prod?.discount_type}</strong></p>
 

@@ -194,9 +194,9 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                     <div className="details-content">
                       <h6>Description: </h6>
                       <p>{userDetails?.description}</p></div>
-                    <div className="details-content">
+                    {/* <div className="details-content">
                       <h6>Influencer Fee: </h6>
-                      <p>{userDetails?.influencer_fee}</p></div>
+                      <p>{userDetails?.influencer_fee}</p></div> */}
                     <div className="details-content">
                       <h6>Influencer Visit: </h6>
                       <p>{userDetails?.influencer_visit}</p></div>

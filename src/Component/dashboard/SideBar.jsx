@@ -263,9 +263,9 @@ const SideBar = () => {
                                 Transfer
                             </Nav.Link>
                         </Nav.Item>
-                        <div className="button pay-btn d-flex justify-content-center align-items-center mt-5">
+                        {/* <div className="button pay-btn d-flex justify-content-center align-items-center mt-5">
                             <button type='button' onClick={(e) => {handleShowPayment(e)}}>Set up Payment</button>
-                        </div>
+                        </div> */}
                     </Nav>
                     
                     </Col>

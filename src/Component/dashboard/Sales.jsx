@@ -79,7 +79,7 @@ function Sales() {
       <div className="sales p-4 page">
       {loading && <div className='d-flex loader-container flex-column'><div className='loader'><span></span></div> <p className='text-white'>Processing...</p></div>}
         <div className="sales-container">
-          <h2 className="my-5">Campaign Sales</h2>
+          <h2 className="">Campaign Sales</h2>
           <div className="earnings-list d-flex flex-column justify-content-center align-items-center">
 
             <div className="chart my-5 d-flex flex-column w-100">
