@@ -57,8 +57,8 @@ function Transfer() {
               <tr>
                 <th>Campaign Name</th>
                 <th>Vendor Name</th>
-                {/* <th>Influencer Name</th> */}
                 <th>Amount Paid</th>
+                <th>Remaining Fee</th>
               </tr>
             </thead>
             <tbody>
@@ -66,8 +66,8 @@ function Transfer() {
                 <tr key={i}>
                   <td>{list.campaign_id__campaignid__campaign_name}</td>
                   <td>{list.vendorid_id__username}</td>
-                  {/* <td>{list.influecerid_id__username}</td> */}
                   <td>{list.influ_amount}</td>
+                  <td>{list.remaining_fee}</td>
                 </tr>
               ))}
             </tbody>
