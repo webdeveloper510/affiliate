@@ -172,6 +172,7 @@ function Marketplace() {
                                 {/* <p className="card-text">Influencer Fee: <strong>{(item?.influencer_fee)}</strong></p> */}
 
                                 <p className="card-text">Discount Type: <strong>{prod?.discount_type}</strong></p>
+                                <p className="card-text">Commission Fee: <strong>300/-</strong></p>
 
                                 <button className="buttonfx angleindouble color-2" onClick={(e) => { handleApplied(e, item.campaignid_id) }}>Apply</button>
                               </div>

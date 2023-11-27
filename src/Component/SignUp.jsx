@@ -1,4 +1,4 @@
-import React , { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import signup from '../assets/sign1.webp';
 import countryList from 'react-select-country-list';
 import Select from 'react-select';
@@ -9,43 +9,44 @@ import MailPop from '../assets/mail-pop.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import {  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-function Signup (){
-   const [step, setstep] = useState(1);
-   const [name, setName] = useState('');
-   const [bankname, setBankname] = useState('');
-   const [fee, setFee] = useState('');
-   const [email, setEmail] = useState('');
-   const [password, setPassword] = useState('');
-   const [confirmPassword, setConfirmPassword] = useState('');
-   const [country, setCountry] = useState('');
-   const [userHandle, setUserHandle] = useState('');
-   const [experience, setExperience] = useState('');
-   const [industries, setIndustries] = useState([]);
-   const [age, setAge] = useState([]);
-   const [gender, setGender] = useState([]);
-   const [promotion, setPromotion] = useState([]);
-   const [location, setLocation] = useState([]);
-   const [stepOne, setStepOne] = useState(true);
-   const [stepTwo, setStepTwo] = useState(false);
-   const [showOptions, setShowOptions] = useState(false);
-   const [showAge, setShowAge] = useState(false);
-   const [showGender, setShowGender] = useState(false);
-   const [showPromotionOptions, setShowPromotionOptions] = useState(false);
-   const [showLocation, setShowLocation] = useState(false);
-   const [mailPopup, setMailPopup] = useState(false);
-   const navigate = useNavigate();
-   const [loading, setLoading] = useState(false);
-   const inputRef = useRef(null);
-   const ageRef = useRef(null);
-   const genderRef = useRef(null);
-   const [showPassword, setShowPassword] = useState(false);
-   const [showCPassword,setShowCPassword]=useState(false)
-   const locationRef = useRef(null);
-   const promotionRef = useRef(null);
-   const [errors, setErrors] = useState({});
-   const [locationInput, setLocationInput] = useState("");
+function Signup() {
+  const [step, setstep] = useState(1);
+  const [name, setName] = useState('');
+  const [bankname, setBankname] = useState('');
+  const [fee, setFee] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [country, setCountry] = useState('');
+  const [userHandle, setUserHandle] = useState('');
+  const [phone, setPhone] = useState('');
+  const [experience, setExperience] = useState('');
+  const [industries, setIndustries] = useState([]);
+  const [age, setAge] = useState([]);
+  const [gender, setGender] = useState([]);
+  const [promotion, setPromotion] = useState([]);
+  const [location, setLocation] = useState([]);
+  const [stepOne, setStepOne] = useState(true);
+  const [stepTwo, setStepTwo] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
+  const [showAge, setShowAge] = useState(false);
+  const [showGender, setShowGender] = useState(false);
+  const [showPromotionOptions, setShowPromotionOptions] = useState(false);
+  const [showLocation, setShowLocation] = useState(false);
+  const [mailPopup, setMailPopup] = useState(false);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const inputRef = useRef(null);
+  const ageRef = useRef(null);
+  const genderRef = useRef(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showCPassword, setShowCPassword] = useState(false)
+  const locationRef = useRef(null);
+  const promotionRef = useRef(null);
+  const [errors, setErrors] = useState({});
+  const [locationInput, setLocationInput] = useState("");
 
   const options = useMemo(() => countryList().getData(), [])
 
@@ -58,7 +59,7 @@ function Signup (){
     if (!name || /^\s*$/.test(name)) {
       newErrors.name = true;
     }
-  
+
     if (!email || /^\s*$/.test(email)) {
       newErrors.email = true;
     } else {
@@ -70,23 +71,23 @@ function Signup (){
         return;
       }
     }
-  
+
     if (!password || /^\s*$/.test(password)) {
       newErrors.password = true;
     }
-  
+
     if (!confirmPassword || /^\s*$/.test(confirmPassword)) {
       newErrors.confirmPassword = true;
     }
-  
+
     if (!country) {
       newErrors.country = true;
     }
-  
+
     if (!userHandle || /^\s*$/.test(userHandle)) {
       newErrors.userHandle = true;
     }
-  
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       toast.warn("Please fill in all the required fields");
@@ -100,7 +101,7 @@ function Signup (){
       setStepTwo(true);
     }
   };
-  
+
 
   const stepBehind = () => {
     setStepOne(true)
@@ -147,7 +148,7 @@ function Signup (){
     (location) =>
       location.toLowerCase().indexOf(locationInput.toLowerCase()) !== -1
   );
-  
+
   const handleLocationInputChange = (e) => {
     setLocationInput(e.target.value);
   };
@@ -235,59 +236,59 @@ function Signup (){
       gender: gender.join(", "),
       location: location.join(", ")
     })
-    .then(function (response) {
-      console.log("Vendor Signup", response);
-      toast.success("Sign Up Successfully!");
-      localStorage.setItem("Token", response.data.token);
-      localStorage.setItem("id", response.data.id);
-      setMailPopup(true);
-    })
-    .catch(function (error) {
-      console.log(error);
-      if(error.response.data.password && error.response.data.password[0] == "Password must be more than 8 character.") {
-        toast.warn("Password must be more than 8 character.")
-      }
-      else if(error.response.data.email && error.response.data.email[0] == "user with this email already exists.") {
-        toast.warn("User with this email already exists")
-      }
-      else if(error.response.data.email && error.response.data.email[0] == "This email is already registered.") {
-        toast.warn("User with this email already exists")
-      }
-      else if(error.response.data.industries && error.response.data.industries[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one industry")
-      }
-      else if(error.response.data.promotion && error.response.data.promotion[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one promotion")
-      }
-      else if(error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
-        toast.warn("Please select an age")
-      }
-      else if(error.response.data.gender && error.response.data.gender[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one gender")
-      }
-      else if(error.response.data.location && error.response.data.location[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one country")
-      }
-      else if(error.response.data.password == "Password must contain at least one digit.") {
+      .then(function (response) {
+        console.log("Vendor Signup", response);
+        toast.success("Sign Up Successfully!");
+        localStorage.setItem("Token", response.data.token);
+        localStorage.setItem("id", response.data.id);
+        setMailPopup(true);
+      })
+      .catch(function (error) {
+        console.log(error);
+        if (error.response.data.password && error.response.data.password[0] == "Password must be more than 8 character.") {
+          toast.warn("Password must be more than 8 character.")
+        }
+        else if (error.response.data.email && error.response.data.email[0] == "user with this email already exists.") {
+          toast.warn("User with this email already exists")
+        }
+        else if (error.response.data.email && error.response.data.email[0] == "This email is already registered.") {
+          toast.warn("User with this email already exists")
+        }
+        else if (error.response.data.industries && error.response.data.industries[0] == "This field may not be blank.") {
+          toast.warn("Please select at least one industry")
+        }
+        else if (error.response.data.promotion && error.response.data.promotion[0] == "This field may not be blank.") {
+          toast.warn("Please select at least one promotion")
+        }
+        else if (error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
+          toast.warn("Please select an age")
+        }
+        else if (error.response.data.gender && error.response.data.gender[0] == "This field may not be blank.") {
+          toast.warn("Please select at least one gender")
+        }
+        else if (error.response.data.location && error.response.data.location[0] == "This field may not be blank.") {
+          toast.warn("Please select at least one country")
+        }
+        else if (error.response.data.password == "Password must contain at least one digit.") {
           toast.warn("Password must contain at least one digit.");
-      }
-      else if(error.response.data.error.error == "retry_later" || error.response.data.error.error == "account_not_found") {
+        }
+        else if (error.response.data.error.error == "retry_later" || error.response.data.error.error == "account_not_found") {
           toast.warn("Please enter correct user handle");
-      }
-      else if(error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one age range")
-      }
-      else if(error.response.data.gender && error.response.data.gender[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one gender")
-      }
-      else if(error.response.data.location && error.response.data.location[0] == "This field may not be blank.") {
-        toast.warn("Please select at least one age location")
-      }
-      else {
-        toast.warn("Unable to Sign up right now.")
-      }
-    })
-    .finally(() => setLoading(false));
+        }
+        else if (error.response.data.customer_age && error.response.data.customer_age[0] == "This field may not be blank.") {
+          toast.warn("Please select at least one age range")
+        }
+        else if (error.response.data.gender && error.response.data.gender[0] == "This field may not be blank.") {
+          toast.warn("Please select at least one gender")
+        }
+        else if (error.response.data.location && error.response.data.location[0] == "This field may not be blank.") {
+          toast.warn("Please select at least one age location")
+        }
+        else {
+          toast.warn("Unable to Sign up right now.")
+        }
+      })
+      .finally(() => setLoading(false));
   }
 
   useEffect(() => {
@@ -320,100 +321,106 @@ function Signup (){
               <h5 className='my-3'>Step {stepOne == false && stepTwo == true ? "2" : "1"}</h5>
               <p>Sign up as affiliate to join our Marketplace and apply for the most competitive offers from our Shopify merchant!</p>
               <form className='w-100'>
-                {stepOne && 
-                <>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.name ? 'error' : ''}`} style={{width: '49%', marginRight: 10}}>
-                  <label htmlFor="">Username <strong style={{color: 'red'}}>*</strong></label>
-                  <input placeholder='UserName' maxLength='30' value={name} onChange={(e) => {setName(e.target.value)}} />
-                </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.email ? 'error' : ''}`} style={{width: '49%'}}>
-                  <label htmlFor="">Email <strong style={{color: 'red'}}>*</strong></label>
-                  <input type='email' maxLength='35' placeholder='Email' value={email} onChange={(e) => {setEmail(e.target.value)}} required />
-                </div>
-                <div className={`input-container pass d-flex flex-column mb-3 ${errors.password ? 'error' : ''}`} style={{width: '48%', marginRight: 11}}>
-                  <label htmlFor="">Password <strong style={{color: 'red'}}>*</strong></label>
-                  <input type={showPassword ? 'text' : 'password'} maxLength='30' placeholder='Password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
-                  <FontAwesomeIcon
-                      icon={showPassword ? faEyeSlash : faEye}
-                      style={{
+                {stepOne &&
+                  <>
+                    <div className='row'>
+                      <div className={`col-md-6 d-flex flex-column mb-3 ${errors.name ? 'error' : ''}`}>
+                        <label htmlFor="">Username <strong style={{ color: 'red' }}>*</strong></label>
+                        <input placeholder='UserName' maxLength='30' value={name} onChange={(e) => { setName(e.target.value) }} />
+                      </div>
+                      <div className={`d-flex col-md-6 flex-column mb-3 ${errors.email ? 'error' : ''}`}>
+                        <label htmlFor="">Email <strong style={{ color: 'red' }}>*</strong></label>
+                        <input type='email' maxLength='35' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
+                      </div>
+                    <div className={`input-container d-flex pass col-md-6 flex-column mb-3 ${errors.password ? 'error' : ''}`}>
+                      <label htmlFor="">Password <strong style={{ color: 'red' }}>*</strong></label>
+                      <input type={showPassword ? 'text' : 'password'} maxLength='30' placeholder='Password' value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                      <FontAwesomeIcon
+                        icon={showPassword ? faEyeSlash : faEye}
+                        style={{
                           color: "#1032bb",
                           width: "20px",
                           height: "20px",
-                      }}
-                      onClick={() => setShowPassword(!showPassword)}
-                  />
-                </div>
-                <div className={`input-container pass d-flex flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`} style={{width: '48%'}}>
-                  <label htmlFor="">Confirm Password <strong style={{color: 'red'}}>*</strong></label>
-                  <input type={showCPassword ? 'text' : 'password'} maxLength='30' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} />
-                  <FontAwesomeIcon
-                      icon={showCPassword ? faEyeSlash : faEye}
-                      style={{
+                        }}
+                        onClick={() => setShowPassword(!showPassword)}
+                      />
+                    </div>
+                    <div className={`input-container d-flex pass col-md-6 flex-column mb-3 ${errors.confirmPassword ? 'error' : ''}`}>
+                      <label htmlFor="">Confirm Password <strong style={{ color: 'red' }}>*</strong></label>
+                      <input type={showCPassword ? 'text' : 'password'} maxLength='30' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value) }} />
+                      <FontAwesomeIcon
+                        icon={showCPassword ? faEyeSlash : faEye}
+                        style={{
                           color: "#1032bb",
                           width: "20px",
                           height: "20px",
-                      }}
-                      onClick={() => setShowCPassword(!showCPassword)}
-                  />
-                </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.bankname ? 'error' : ''}`} style={{width: '49%', marginRight: 10}}>
-                  <label htmlFor="">Bank Account <strong style={{color: 'red'}}>*</strong></label>
-                  <input placeholder='Bank Account' maxLength='30' value={bankname} onChange={(e) => {setBankname(e.target.value)}} />
-                </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.fee ? 'error' : ''}`} style={{width: '49%'}}>
-                  <label htmlFor="">Fee <strong style={{color: 'red'}}>*</strong></label>
-                  <input type='text' maxLength='35' placeholder='Fee' value={fee} onChange={(e) => {setFee(e.target.value)}} required />
-                </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.facility ? 'error' : ''}`} style={{width: '98%', marginRight: 10}}>
-                  <label htmlFor="">Facility <strong style={{color: 'red'}}>*</strong></label>
-                  <select className='form-control'>
-                      <option value="story">Story</option>
-                      <option value="post">Post</option>
-                  </select>
-                </div>
-              
-                <div className={`input-container d-flex flex-column mb-3 ${errors.country ? 'error' : ''}`}>
-                  <label htmlFor="">Country <strong style={{color: 'red'}}>*</strong></label>
-                  <Select options={options} value={country} onChange={changeHandler} className='select' placeholder="Choose your country"/>
-                </div>
-                <div className={`input-container d-flex flex-column mb-3 ${errors.userHandle ? 'error' : ''}`}>
-                  <label htmlFor="">User Handle <strong style={{color: 'red'}}>*</strong></label>
-                  <input placeholder='User Handle' value={userHandle} onChange={(e) => {setUserHandle(e.target.value)}} />
-                </div>
-                <button type='button' style={{zIndex: 0}} className="button buttonfx color-1 angleindouble" onClick={() => {stepAhead()}}>
-                  Continue
-                </button>
-                </>
+                        }}
+                        onClick={() => setShowCPassword(!showCPassword)}
+                      />
+                    </div>
+                    <div className={`d-flex col-md-6 flex-column mb-3 ${errors.bankname ? 'error' : ''}`}>
+                      <label htmlFor="">Bank Account <strong style={{ color: 'red' }}>*</strong></label>
+                      <input placeholder='Bank Account' maxLength='30' value={bankname} onChange={(e) => { setBankname(e.target.value) }} />
+                    </div>
+                    <div className={`d-flex col-md-6 flex-column mb-3 ${errors.fee ? 'error' : ''}`}>
+                      <label htmlFor="">Fee <strong style={{ color: 'red' }}>*</strong></label>
+                      <input maxLength='3' type='number' placeholder='Fee' value={fee} onChange={(e) => { setFee(e.target.value) }} required />
+                    </div>
+                    <div className={`d-flex col-md-6 flex-column mb-3 ${errors.facility ? 'error' : ''}`} >
+                      <label htmlFor="">Facility <strong style={{ color: 'red' }}>*</strong></label>
+                      <select className='form-control'>
+                        <option value="story">Story</option>
+                        <option value="post">Post</option>
+                      </select>
+                    </div>
+                      <div className={`d-flex col-md-6 flex-column mb-3 ${errors.phone ? 'error' : ''}`}>
+                        <label htmlFor="">Phone Number <strong style={{ color: 'red' }}>*</strong></label>
+                        <input placeholder='Enter number' type='number' value={phone} onChange={(e) => { setPhone(e.target.value) }} />
+                      </div>
+                      <div className={`d-flex col-md-12 flex-column mb-3 ${errors.userHandle ? 'error' : ''}`}>
+                        <label htmlFor="">User Handle <strong style={{ color: 'red' }}>*</strong></label>
+                        <input placeholder='User Handle' value={userHandle} onChange={(e) => { setUserHandle(e.target.value) }} />
+                      </div>
+                      <div className={`d-flex col-md-12 flex-column mb-3 ${errors.country ? 'error' : ''}`}>
+                        <label htmlFor="">Country <strong style={{ color: 'red' }}>*</strong></label>
+                        <Select options={options} value={country} onChange={changeHandler} className='select' placeholder="Choose your country" />
+                      </div>
+                    </div>
+
+                    <button type='button' style={{ zIndex: 0 }} className="button buttonfx color-1 angleindouble" onClick={() => { stepAhead() }}>
+                      Continue
+                    </button>
+                  </>
                 }
                 {stepTwo && <>
                   <div className="input-container d-flex flex-column mb-3 dropdown" ref={inputRef}>
-                  <label className='mb-2'>Industry <strong style={{color: 'red'}}>*</strong></label>
-                    <input 
-                      type="text" 
-                      placeholder={industries?.length > 0 ? industries : "Your Industry "}  
-                      onClick={toggleOptions} 
+                    <label className='mb-2'>Industry <strong style={{ color: 'red' }}>*</strong></label>
+                    <input
+                      type="text"
+                      placeholder={industries?.length > 0 ? industries : "Your Industry "}
+                      onClick={toggleOptions}
                       readOnly
-                      style={industries?.length > 0 ? { fontWeight: 'bold' } : {}}  
+                      style={industries?.length > 0 ? { fontWeight: 'bold' } : {}}
                     />
-                      {showOptions && (
-                        <ul>
-                          {industry.map((option) => (
-                            <li className='d-flex' key={option} onClick={() => handleSelect(option)}>
-                              <input
-                                type="checkbox"
-                                checked={industries.includes(option)}
-                                readOnly
-                              />
-                              <span>{option}</span>
-                            </li>
-                          ))}
-                        </ul>
+                    {showOptions && (
+                      <ul>
+                        {industry.map((option) => (
+                          <li className='d-flex' key={option} onClick={() => handleSelect(option)}>
+                            <input
+                              type="checkbox"
+                              checked={industries.includes(option)}
+                              readOnly
+                            />
+                            <span>{option}</span>
+                          </li>
+                        ))}
+                      </ul>
                     )}
                   </div>
                   <div className="input-container d-flex flex-column mb-3">
-                  <label className='mb-2'>Experience <strong style={{color: 'red'}}>*</strong></label>
-                    <select onChange={(e) => {setExperience(e.target.value)}} style={{color: '#707070'}}
-                        style={experience?.length > 0 ? { fontWeight: 'bold', color: '#757575' } : {}} >
+                    <label className='mb-2'>Experience <strong style={{ color: 'red' }}>*</strong></label>
+                    <select onChange={(e) => { setExperience(e.target.value) }} style={{ color: '#707070' }}
+                      style={experience?.length > 0 ? { fontWeight: 'bold', color: '#757575' } : {}} >
                       <option disabled>Experience with Affiliate Marketing</option>
                       <option value="one">I'm starting with Affiliate Marketing and want to learn more about it</option>
                       <option value="two">I've worked with few brands but haven't optimized my promoting process</option>
@@ -421,13 +428,13 @@ function Signup (){
                     </select>
                   </div>
                   <div className="input-container d-flex flex-column mb-3 w-100 dropdown" ref={promotionRef}>
-                  <label className='mb-2'>Preferred options <strong style={{color: 'red'}}>*</strong></label>
-                    <input 
-                    type="text" 
-                    placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"} 
-                    onClick={promotionToggleOptions} 
-                    readOnly
-                    style={promotion?.length > 0 ? { fontWeight: 'bold' } : {}}  
+                    <label className='mb-2'>Preferred options <strong style={{ color: 'red' }}>*</strong></label>
+                    <input
+                      type="text"
+                      placeholder={promotion?.length > 0 ? promotion : "Preferred promotion options"}
+                      onClick={promotionToggleOptions}
+                      readOnly
+                      style={promotion?.length > 0 ? { fontWeight: 'bold' } : {}}
                     />
                     {showPromotionOptions && (
                       <ul>
@@ -447,13 +454,13 @@ function Signup (){
                   <div className='target w-100 mb-4'>
                     <p className='w-100'>Your Target Customers</p>
                     <div className="input-container d-flex flex-column mb-3" ref={ageRef}>
-                      <label className='mb-2'>Age <strong style={{color: 'red'}}>*</strong></label>
-                      <input 
-                        type="text" 
-                        placeholder= {age?.length > 0 ? age : "Select age range (max 3 options)"} 
-                        onClick={toggleAgeOptions} 
-                        readOnly 
-                        style={age?.length > 0 ? { fontWeight: 'bold' } : {}} 
+                      <label className='mb-2'>Age <strong style={{ color: 'red' }}>*</strong></label>
+                      <input
+                        type="text"
+                        placeholder={age?.length > 0 ? age : "Select age range (max 3 options)"}
+                        onClick={toggleAgeOptions}
+                        readOnly
+                        style={age?.length > 0 ? { fontWeight: 'bold' } : {}}
                       />
                       {showAge && (
                         <ul>
@@ -471,13 +478,13 @@ function Signup (){
                       )}
                     </div>
                     <div className="input-container d-flex flex-column mb-3" ref={genderRef}>
-                    <label className='mb-2'>Gender <strong style={{color: 'red'}}>*</strong></label>
+                      <label className='mb-2'>Gender <strong style={{ color: 'red' }}>*</strong></label>
                       <input
-                        type="text" 
-                        placeholder={gender?.length > 0 ? gender : "Please Select Gender"} 
-                        onClick={toggleGenderOptions} 
-                        readOnly 
-                        style={gender?.length > 0 ? { fontWeight: 'bold' } : {}} 
+                        type="text"
+                        placeholder={gender?.length > 0 ? gender : "Please Select Gender"}
+                        onClick={toggleGenderOptions}
+                        readOnly
+                        style={gender?.length > 0 ? { fontWeight: 'bold' } : {}}
                       />
                       {showGender && (
                         <ul>
@@ -495,7 +502,7 @@ function Signup (){
                       )}
                     </div>
                     <div className="input-container d-flex flex-column mb-3" ref={locationRef}>
-                    <label className='mb-2'>Country <strong style={{color: 'red'}}>*</strong></label>
+                      <label className='mb-2'>Country <strong style={{ color: 'red' }}>*</strong></label>
                       <input
                         type="text"
                         placeholder={location?.length > 0 ? location.join(", ") : "Search and select country (max 10 options)"}
@@ -517,8 +524,8 @@ function Signup (){
                     </div>
                   </div>
                   <div className="buttons d-flex flex-column">
-                    <button type='button' style={{minWidth: 140}} className='buttonfx color-1 angleindouble' onClick={() => {stepBehind()}}>Previous</button>
-                    <button type='button w-100' style={{marginTop: 15, minWidth: 140 }} className='buttonfx color-1 angleindouble' onClick={(e) => {handleSignUp(e)}}>Sign Up</button>
+                    <button type='button' style={{ minWidth: 140 }} className='buttonfx color-1 angleindouble' onClick={() => { stepBehind() }}>Previous</button>
+                    <button type='button w-100' style={{ marginTop: 15, minWidth: 140 }} className='buttonfx color-1 angleindouble' onClick={(e) => { handleSignUp(e) }}>Sign Up</button>
                   </div>
                 </>}
               </form>
@@ -540,7 +547,7 @@ function Signup (){
                     <p>Please check you mail to confirm</p>
                     <Link to='/' className='button buttonfx color-1 angleindouble'>Go Back</Link>
                   </div>
-                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -550,5 +557,5 @@ function Signup (){
   )
 
 }
-  
+
 export default Signup;

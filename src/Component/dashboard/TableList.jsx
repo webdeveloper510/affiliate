@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark, faEye, faClose, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDetails, userDetails, couponCross, showAll=true ,showButtons = true, pending = true, sign = false, declined = false, requested = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 8;
+  const ITEMS_PER_PAGE = 10;
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
