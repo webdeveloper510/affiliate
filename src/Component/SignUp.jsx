@@ -31,6 +31,7 @@ function Signup() {
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const [facility, setFacility] = useState("");
   const [showAge, setShowAge] = useState(false);
   const [showGender, setShowGender] = useState(false);
   const [showPromotionOptions, setShowPromotionOptions] = useState(false);
@@ -197,6 +198,10 @@ function Signup() {
     }
   };
 
+  const handleFacilitySelect = (e) => {
+    setFacility(e.target.value);
+  };
+
   const toggleOptions = () => {
     setShowOptions(!showOptions);
   };
@@ -229,6 +234,7 @@ function Signup() {
       user_handle: userHandle,
       industries: industries.join(", "),
       bankname: bankname,
+      facility: facility,
       fee: fee,
       experience: experience,
       promotion: promotion.join(", "),
@@ -250,6 +256,9 @@ function Signup() {
         }
         else if (error.response.data.email && error.response.data.email[0] == "user with this email already exists.") {
           toast.warn("User with this email already exists")
+        }
+        else if (error.response.data.facility && error.response.data.facility[0] === "This field may not be blank.") {
+          toast.warn("Please select a facility");
         }
         else if (error.response.data.email && error.response.data.email[0] == "This email is already registered.") {
           toast.warn("User with this email already exists")
@@ -368,7 +377,7 @@ function Signup() {
                     </div>
                     <div className={`d-flex col-md-6 flex-column mb-3 ${errors.facility ? 'error' : ''}`} >
                       <label htmlFor="">Facility <strong style={{ color: 'red' }}>*</strong></label>
-                      <select className='form-control'>
+                      <select className='form-control'   value={facility}    onChange={handleFacilitySelect}>
                         <option value="story">Story</option>
                         <option value="post">Post</option>
                       </select>

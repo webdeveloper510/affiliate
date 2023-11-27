@@ -106,6 +106,7 @@ function VendorSignup() {
         formData.append('shopify_url', shopifyUrl);
         formData.append('password', password);
         formData.append('confirm_password', confirmPassword);
+        formData.append('phone_number', phone);
         formData.append('type', 'normal');
         console.log(formData);
         const errorObj = {}
