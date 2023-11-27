@@ -77,10 +77,11 @@ function Marketplace() {
           navigate('/dashboard');
         })
         .catch(function (error) {
+          toast.warn("Already Applied")
           console.log(error);
         });
-    } else {
-      toast.warn("Sign in to continue");
+      } else {
+        toast.warn("Sign in to continue");
       setInfluStatus(1)
       console.log("influStatus", influStatus)
       navigate('/login');
