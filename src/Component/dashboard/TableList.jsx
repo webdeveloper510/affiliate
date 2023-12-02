@@ -7,7 +7,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
+console.log('list ----------->>>>>', currentItems)
   const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -30,8 +30,8 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
         <tr>
           <th>Campaign Name</th>
           <th>Vendor Name</th>
-          <th>Product Name</th>
-          <th>Coupon Price</th>
+          {declined === true ? (<></>) : (<th>Product Name</th>) }
+          {declined === true ? (<></>) : (<th>Coupon Price</th>) }
           {showButtons && (<th>Action</th>)}
         </tr>
       </thead>
@@ -42,7 +42,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
             <tr key={list.product.product_name}>
               <td>{list?.campaign_name}</td>
               <td>{list.vendor_name ? list.vendor_name : "No Vendor Name"}</td>
-              <td>
+              {declined === true ? (<></>) : (<td>
                 {list?.product?.map((prod, index) => (
                   <React.Fragment key={index}>
                     {prod?.product_name ? prod?.product_name  + ' - ' : ""}
@@ -59,7 +59,8 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                     )} 
                   </React.Fragment>
                 ))}
-              </td>
+              </td> ) }
+              {declined === true ? (<></>) : (
               <td>
               {pending == true ? (
                 "Please accept for price"
@@ -87,7 +88,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                   </>
                 )
               ))}
-              </td>
+              </td> ) }
               {showButtons && (
                 <td className="d-flex justify-content-center">
                   {showAll && (
@@ -184,7 +185,7 @@ const TableList = ({ data, marketApplied=false,handleAction, viewDetails, showDe
                   <button className='close' onClick={couponCross}>
                     <FontAwesomeIcon icon={faClose} style={{ color: "#000", width: "25px", height: "25px"}} />
                   </button>
-                  <div className="details d-flex">
+                  <div className="details ">
                     <div className="details-content">
                       <h6>Campaign Name: </h6>
                       <p>{userDetails?.campaign_name}</p></div>

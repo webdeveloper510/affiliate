@@ -252,15 +252,15 @@ const SideBar = () => {
                         </Nav.Item>
 
                         <Nav.Item>
-                            <Nav.Link eventKey="four">
+                            <Nav.Link eventKey="five">
                                 <img src={ProfileImg} className="me-2" alt='menu-img' />
-                                Profile
+                                Earnings
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link eventKey="five">
+                            <Nav.Link eventKey="four">
                                 <img src={ProfileImg} className="me-2" alt='menu-img' />
-                                Transfer
+                                Profile
                             </Nav.Link>
                         </Nav.Item>
                         {/* <div className="button pay-btn d-flex justify-content-center align-items-center mt-5">

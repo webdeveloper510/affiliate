@@ -263,15 +263,14 @@ function CampList({marketList = true}) {
                       <Nav.Link eventKey="second">Accepted</Nav.Link>
                   </Nav.Item>
                 )}
-                
-                <Nav.Item>
-                    <Nav.Link eventKey="third">Declined</Nav.Link>
-                </Nav.Item>
                 {marketList && (
                   <Nav.Item>
                       <Nav.Link eventKey="four">Active</Nav.Link>
                   </Nav.Item>
                 )}
+                <Nav.Item>
+                    <Nav.Link eventKey="third">Declined</Nav.Link>
+                </Nav.Item>
             </Nav>
             </Col>
             <Col sm={12}>

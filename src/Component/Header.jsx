@@ -42,12 +42,21 @@ function Header (){
                 <li>
                 <NavLink to="/marketplace"> Marketplace </NavLink>
                 </li>
+               {localStorage.getItem("logToken") == null ? (
+                <>
                 <li>
                 <NavLink to="/login" className='login'> Login</NavLink>
                 </li>
                 <li>
                 <NavLink to="/signup" className='buttonfx angleindouble color-1 Signup'> <i class="icofont-sign-in"></i> SignUp</NavLink>
                 </li>
+                </>
+               ) : (
+                   <></>
+               )
+                
+              }
+
             </ul>
           </nav>
         </div>
