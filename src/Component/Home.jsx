@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 // import Icofont from 'react-icofont';
 // import { useLocation } from 'react-router-dom';
+import Howitwork from './Howitwork';
 import growimage1 from '../assets/coontent.webp';
+import getstarted from '../assets/getstarted.png'
 import growimage2 from '../assets/market.webp';
 import growimage3 from '../assets/online.webp';
 import growimage4 from '../assets/grow5.png';
@@ -10,10 +12,27 @@ import feature2 from '../assets/Group2.avif';
 import feature3 from '../assets/Group3.avif';
 import feature4 from '../assets/Group4.avif';
 import feature5 from '../assets/Group5.avif';
-import heroimage from '../assets/top-image.png';
+import heroimage from '../assets/left-side.webp';
 import growimage6 from '../assets/grow6.webp';
+import arrowbtn from '../assets/btn-img.png';
+import influ1 from '../assets/influ1.png';
+import workimg from '../assets/workimg.png';
+import watch from '../assets/watch.png';
+import facebook from '../assets/socail (1).png';
+import play from '../assets/play.png'
+import insta from '../assets/socail (2).png';
+import youtube from '../assets/socail (3).png';
+import cam1 from '../assets/cam1.png'
+import overviwpinkk from '../assets/overviwpinkk.png'
+import extraimage from '../assets/bg-1.png';
+import filter from '../assets/filter (2).png';
+import over1 from '../assets/over1.png';
+import over2 from '../assets/over2.png';
+import over3 from '../assets/over3.png';
+import ser from '../assets/ser.png'
 import Testimonial from './Testimonial';
 import Accordian from './Accordian';
+import SliderTestimonial from './Slidertest';
 import Footer from './Footer';
 import axios from 'axios';
 
@@ -37,17 +56,23 @@ function Home() {
   }, [])
   return (
     <>
-      <div className="hero-area style-1">
-        <div className="hero-content-wrap">
+      <div className="top-section">
+        <div className="hero-section-content">
           <div className="container">
-            <div className="row">
+            <div className="row align-center">
               <div className="col-md-6">
                 <div className="hero-content text-start">
-                  <h1>Your Risk Free <br></br> Influencer Marketing <br></br>Platform</h1>
+                <h1 className="color-black">Your risk free <br></br> Influencer <span className="add-before colro-sky">Marketing</span> <br></br><span className="colro-sky">Platform</span></h1>
                   <p>Contact and expand your reach with the right content creators from different categories including: Fashion, Beauty, Health, Fitness, Travel</p>
-                  <a className="buttonfx angleindouble color-1 mb-2" href="/">
-                    <i className="icofont-airplane-alt"></i>Start For Free </a>
-                  <a className="starting" href="/">Watch a Demo Video</a>
+				   <div className="row align-center">
+				     <div className="col-md-6">
+                  <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+                    start For Free <img src={arrowbtn}></img> </a>
+					</div>
+					  <div className="col-md-6 ">
+                  <a className=" video-watch" href="/">Watch a Video<span className="circle-img"><img src={watch}></img></span></a>
+				  </div>
+				  </div>
                 </div>
               </div>
               <div className="col-md-6">
@@ -66,254 +91,457 @@ function Home() {
           </div>
         </div>
       </div>
+      <div className='img-extra'>
+        <img src={extraimage}>
 
+        </img>
 
-
-
-
-      <div className="feature-area pt-110pb-68" id="features">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="section-title width-80" data-aos="fade-up">
-                <h2>HOW IT WORKS</h2>
-                <p>Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her.</p>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="single-feature animation-1 d-flex flex-column justify-content-start align-items-start" data-aos="fade-right">
-                    <img src={feature1} alt="feature" />
-                    <h3>Pick one or more influencers</h3>
-                    <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="single-feature animation-1 d-flex flex-column justify-content-start align-items-start" data-aos="fade-right">
-                    <img src={feature2} alt="feature" />
-                    <h3>Fill out your store and product info</h3>
-                    <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="single-feature d-flex flex-column justify-content-start align-items-start" data-aos="fade-up">
-                    <img src={feature3} alt="feature" />
-                    <h3>Request <br></br>Campaign</h3>
-                    <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="single-feature d-flex flex-column justify-content-start align-items-start" data-aos="fade-down">
-                    <img src={feature4} alt="feature" />
-                    <h3>Once accepted, Share the tracking coupon to the influencer</h3>
-                    <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="single-feature  d-flex flex-column justify-content-start align-items-start" data-aos="fade-up">
-                    <img src={feature5} alt="feature" />
-                    <h3>Watch your sales grow</h3>
-                    <p>Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
+<div className='how-it-work'>
+<div className="container">
+  <div className='girl-image'>
+  <div className='how-work-bg'>
+    <div className='row align-center'>
+<div className='col-md-4'>
+<img src={workimg}></img>
+<h1>How it <span className=' colro-sky'>Works</span></h1>
+<p>Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her.</p>
+</div>
+<div className='col-md-1'>
+<div className='border-di'></div>
+</div>
+<div className='col-md-7'>
+<Howitwork></Howitwork>
+</div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div className='find-infulancer'>
+<div className="container">
+<div className='infulancer-bg'>
+  <div className='row'>
+    <div className="col-md-8">
+    <h1 className='font-equal'>Find your Perfect<br></br>
+<span className=' colro-sky'>Influencers </span></h1>
+    </div>
+    <div className="col-md-4">
+    <div className='bg-white-search c'>
+     <a href="#"> <img src={ser}></img></a>
+      <input type="text"placeholder='Search Influencers'/>
+    </div>
+    <div class="filter-image">
+<a href="">
+  <img src={filter}>
 
-      <div id="video" className="video-area" data-aos="fade-up">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-8 col-lg-8">
-              <div className="section-title white text-center">
-                <h2>OVERVIEW </h2>
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-              </div>
-            </div>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-md-12">
-              <div className="video">
+  </img>
+</a>
+    </div>
+    </div>
+  </div>
 
-                <img src={growimage2} alt="markte place video" />
+</div>
+</div>
+<div className='influncer-info'>
+<div className="container">
+<div className='row'>
+  <div className='col-md-3'>
+    <div className='influncer-info-with orangebox'>
+<div className='img-infulcer'>
+<img src={influ1}></img>
+</div>
+<div className='name-influ'>Chiara Ferragni</div>
+<div className='border-influ'></div>
+<div className='count-flowers'>5.4M Followers</div>
+<div className='soacial-media'>
+<ul className='social-icon'>
+  <li>
+<a href=""><img src={facebook}></img></a>
+  </li>
+  <li>
+<a href=""><img src={insta}></img></a>
+  </li>
+  <li>
+  <a href=""><img src={youtube}></img></a>
+  </li>
+</ul>
+</div>
+    </div>
 
-              </div>
-            </div>
-          </div>
+  </div>
+  <div className='col-md-3'>
+    <div className='influncer-info-with sky'>
+<div className='img-infulcer'>
+<img src={influ1}></img>
+</div>
+<div className='name-influ'>Chiara Ferragni</div>
+<div className='border-influ'></div>
+<div className='count-flowers'>5.4M Followers</div>
+<div className='soacial-media'>
+<ul className='social-icon'>
+  <li>
+<a href=""><img src={facebook}></img></a>
+  </li>
+  <li>
+<a href=""><img src={insta}></img></a>
+  </li>
+  <li>
+  <a href=""><img src={youtube}></img></a>
+  </li>
+</ul>
+</div>
+    </div>
+
+  </div>
+
+  <div className='col-md-3'>
+    <div className='influncer-info-with pinkbox'>
+<div className='img-infulcer'>
+<img src={influ1}></img>
+</div>
+<div className='name-influ'>Chiara Ferragni</div>
+<div className='border-influ'></div>
+<div className='count-flowers'>5.4M Followers</div>
+<div className='soacial-media'>
+<ul className='social-icon'>
+  <li>
+<a href=""><img src={facebook}></img></a>
+  </li>
+  <li>
+<a href=""><img src={insta}></img></a>
+  </li>
+  <li>
+  <a href=""><img src={youtube}></img></a>
+  </li>
+</ul>
+</div>
+    </div>
+
+  </div>
+
+  <div className='col-md-3 '>
+    <div className='influncer-info-with yellowbox'>
+<div className='img-infulcer'>
+<img src={influ1}></img>
+</div>
+<div className='name-influ'>Chiara Ferragni</div>
+<div className='border-influ'></div>
+<div className='count-flowers'>5.4M Followers</div>
+<div className='soacial-media'>
+<ul className='social-icon'>
+  <li>
+<a href=""><img src={facebook}></img></a>
+  </li>
+  <li>
+<a href=""><img src={insta}></img></a>
+  </li>
+  <li>
+  <a href=""><img src={youtube}></img></a>
+  </li>
+</ul>
+</div>
+    </div>
+
+  </div>
+<div className='all-influcer'>
+<a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+View all Influencers</a>
+
+</div>
+  </div>
+</div>
+</div>
+
+</div>
+<div className='Campaigns'>
+<div className="container">
+    <div className='sec-heading'>
+      <h2>Campaigns</h2>
+<p>It is a long established fact that a reader will be distractedby the <br></br>readable content of a page when looking at its layout.</p>
+    </div>
+    <div className="container">
+<div className='row'>
+  <div className='col-md-3'>
+    <div className='cam-outer'>
+      
+    <div className='camp-image'>
+      <img src={cam1}>
+
+      </img>
+
+    </div>
+    <div className='infor-cam'>
+    <div className='camp-name'>
+    Tea Herbal TH
+    </div>
+    <div className='sub-cam'>
+    Rick Bewell
+    </div>
+<div className='cat-cam'>
+Herbal Tea
+  </div>
+  <div class="cam-price">
+  $89.00
+  </div>
+  </div>
+  </div>
+  </div>
+  <div className='col-md-3'>
+    <div className='cam-outer'>
+      
+    <div className='camp-image'>
+      <img src={cam1}>
+
+      </img>
+
+    </div>
+    <div className='infor-cam'>
+    <div className='camp-name'>
+    Tea Herbal TH
+    </div>
+    <div className='sub-cam'>
+    Rick Bewell
+    </div>
+<div className='cat-cam'>
+Herbal Tea
+  </div>
+  <div class="cam-price">
+  $89.00
+  </div>
+  </div>
+  </div>
+  </div>
+  <div className='col-md-3'>
+    <div className='cam-outer'>
+      
+    <div className='camp-image'>
+      <img src={cam1}>
+
+      </img>
+
+    </div>
+    <div className='infor-cam'>
+    <div className='camp-name'>
+    Tea Herbal TH
+    </div>
+    <div className='sub-cam'>
+    Rick Bewell
+    </div>
+<div className='cat-cam'>
+Herbal Tea
+  </div>
+  <div class="cam-price">
+  $89.00
+  </div>
+  </div>
+  </div>
+  </div>
+  <div className='col-md-3'>
+    <div className='cam-outer'>
+      
+    <div className='camp-image'>
+      <img src={cam1}>
+
+      </img>
+
+    </div>
+    <div className='infor-cam'>
+    <div className='camp-name'>
+    Tea Herbal TH
+    </div>
+    <div className='sub-cam'>
+    Rick Bewell
+    </div>
+<div className='cat-cam'>
+Herbal Tea
+  </div>
+  <div class="cam-price">
+  $89.00
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+  </div>
+
+</div>
+
+
+<div className='Overview'>
+  <div className='Overview-outer'>
+
+<div className="container">
+  <div class="row">
+    <div className='col-md-4'>
+      <img src={overviwpinkk} className='img-top'>
+
+      </img>
+
+    </div>
+    <div className='col-md-1'>
+
+    </div>
+<div className='col-md-7'>
+<div className='overview-content'>
+  <div className='Overview-heading'>
+  Overview
+  <p>It is a long established fact that a reader will be distractedby the <br></br>readable content of a page when looking at its layout.</p>
+  </div>
+<div className='play-img'>
+<img src={play}></img>
+</div>
+</div>
+</div>
+  </div>
+  </div>
+  </div>
+
+</div>
+
+
+<div className='how-itgrow'>
+<div className="container">
+    <div className='sec-heading'>
+      <h2>How It<span className=' colro-sky'> Grow</span></h2>
+<p>It is a long established fact that a reader will be distractedby the readable content of a page when looking at its layout.</p>
+    </div>
+    </div>
+    <div class="bg-grow">
+    <div className="container">
+      <div className='row'>
+      <div className='col-md-5'>
+        <div className='left-image-grow pink-line'>
+<img src={over1}></img>
         </div>
+
       </div>
+      <div className='col-md-1'>
 
-
-
-
-      <div className="notification-area pt-120pb-115">
-        <div className="container">
-          <div className="section-title white text-center custom-color">
-            <h2>HOW TO GROW </h2>
-            <p>It is a long established fact that a reader will be distracted <br /> by the readable content of a page when looking at its layout.</p>
-          </div>
-          <div className="row mb-60">
-            <div className="col-md-6">
-              <div className="notification-img">
-                <img src={growimage1} alt="notification" />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="notification-content" data-aos="fade-up">
-                <h3>Reach Influencers</h3>
-                <p>Hand pick content creators to promote your products with just a few clicks</p>
-
-                <a className="buttonfx angleindouble color-2" href="/">
-                  <i className="icofont-read-book-alt"></i> Learn More </a>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="notification-content" data-aos="fade-right">
-                <h3>For Marketplace</h3>
-                <p>Increase your revenue stream to your business collect recurring fees from stors who use affeli in your Market place.</p>
-
-                <a className="buttonfx angleindouble color-2" href="/">
-                  <i className="icofont-read-book-alt"></i> Learn More </a>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="notification-img">
-                <img src={growimage2} alt="notification" />
-              </div>
-            </div>
-          </div>
-          <div className="row mb-60">
-            <div className="col-md-6">
-              <div className="notification-img">
-                <img src={growimage3} alt="notification" />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="notification-content" data-aos="fade-up">
-                <h3>For Vendor</h3>
-                <p>With our partners smart payment solutions, you will get instant payouts!</p>
-
-                <a className="buttonfx angleindouble color-2" href="/cart">
-                  <i className="icofont-read-book-alt"></i> Learn More </a>
-              </div>
-            </div>
-          </div>
+</div>
+      <div className='col-md-5'>
+      <div className='left-image-content'>
+        <h3 className=' colro-sky'>Reach Influencer</h3>
+        <p>Hand pick content creators to <br></br>promote your products with just a <br></br>few clicks</p>
+       
+        <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+        Learn More</a>
         </div>
+</div>
+</div>
+<div className='margin-top-60 order-change'>
+<div className='row'>
+
+<div className='col-md-6 bottom-co'>
+      <div className='left-image-content'>
+        <h3 className=' colro-sky'>For Marketplace</h3>
+        <p>Increase your revenue stream to your <br></br>business collect recurring fees from stors<br></br> who use affeli in your Market place.</p>
+       
+        <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+        Learn More</a>
+        </div>
+</div>
+<div className='col-md-1'>
+
+</div>
+      <div className='col-md-5'>
+        <div className='left-image-grow  yellow-line'>
+<img src={over2}></img>
+        </div>
+
       </div>
+    
+</div>
 
-      <div className="faq-area pt-115pb-100" data-aos="fade-up">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-6">
-              <div className="section-title white text-center">
-                <h2>Get started quickly</h2>
-                <p> Begin building on day one. Airtable's pre-made templates and intuitive design help you tackle even your most complex needs, right away.</p>
-              </div>
-            </div>
-          </div>
+</div>
 
 
-          <div className="row">
-            <div className="col-lg-6">
-              <Accordian />
-            </div>
-            <div className="col-lg-6">
-              <img src={growimage6} alt="notification" />
-            </div>
+<div className='margin-top-60'>
+<div className='row'>
 
-          </div>
 
-          {influencer.length > 0 ? (
-            <div className='my-5'>
-              <div className="section-title white text-center">
-                <h2>TOP INFLUENCER</h2>
-              </div>
-              <div className='row'>
-                {influencer?.map((tab, index) => (
-                  <div className='col-md-4 mb-3 priview' key={index}>
-                    <div className='priview-image'>
-                      <img src={tab.image} height='170px' width='170px' alt={tab.fullname} />
-                    </div>
-                    <h3>{tab.fullname}</h3>
-                    <p><i>@{tab.username} </i></p>
-                  </div>
-                ))}
-              </div>
-              <div className='text-center'>
-              <a className="buttonfx angleindouble color-2 mb-2" href="/#/Influencers">
-                    View All <i class="icofont-thin-double-right"></i></a>
-                </div>
-            </div>
-          ) : (
-            <></>
-          )}
+      <div className='col-md-5'>
+        <div className='left-image-grow blue-line'>
+<img src={over3}></img>
         </div>
+
       </div>
+<div className='col-md-1'>
 
-      <Testimonial />
+</div>
 
-
-      <section className="google-assistant pt-120 pb-120">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="section-title text-center">
-                <h2>CORE VALUES</h2>
-                <p>Delay rapid joy share allow age manor six. Went why far saw many knew.<br></br> Exquisite excellent son gentleman acuteness her.</p>
-              </div>
-            </div>
-          </div>
-          <div className="row text-center">
-
-            <div className="col-lg-6 align-self-center">
-              <div className="content-part">
-                <div className="google-icon">
-                  <div className="image-wrapper">
-                    <i className="icofont-hand-drag1"></i>
-                  </div>
-                  <p>EASY TO USE</p>
-                </div>
-                <div className="google-icon">
-                  <div className="image-wrapper">
-                    <i className="icofont-tick-boxed"></i>
-                  </div>
-                  <p>RELIABLE</p>
-                </div>
-                <div className="google-icon">
-                  <div className="image-wrapper">
-                    <i className="icofont-dart"></i>
-                  </div>
-                  <p>ACCURATE</p>
-                </div>
-                <div className="google-icon">
-                  <div className="image-wrapper">
-                    <i className="icofont-database"></i>
-                  </div>
-                  <p>CUSTOMIZABLE</p>
-                </div>
-                <div className="google-icon">
-                  <div className="image-wrapper">
-                    <i className="icofont-unique-idea"></i>
-                  </div>
-                  <p>INNOVATIVE</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="img-wrap">
-                <img src={growimage4} alt="notification" />
-              </div>
-            </div>
-          </div>
+      <div className='col-md-6'>
+      <div className='left-image-content'>
+        <h3 className=' colro-sky'>For Vendor</h3>
+        <p> With our partners smart <br></br>payment solutions, you will get <br></br>instant payouts!</p>
+       
+        <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+        Learn More</a>
         </div>
-      </section>
+</div>
+    
+</div>
+
+</div>
+
+
+
+      </div>
+    </div>
+</div>
+
+
+<div className='margin-top-60'>
+  <div className='accordian-sec'>
+
+  <div className="container">
+      <div className='row'>
+        <div className='col-md-6'>
+        <div className='sec-heading left-align'>
+      <h2>Get Started <span className=' colro-sky'> Quickly</span></h2>
+      <p>Begin building on day one. Airtable's pre-made templates<br></br> and intuitive design help you tackle even your most<br></br> complex needs, right away.</p>
+    </div>
+    <img src={getstarted}></img>
+        </div>
+
+        <div className='col-md-6'>
+        <Accordian />
+        </div>
+        </div>
+
+        <div className='testimonials'>
+          <div className='slider-test'>
+         < div className='sec-heading'>
+          <center>
+      <h2>What People <span className=' colro-sky'> Says</span></h2>
+<p>Delay rapid joy share allow age manor six. Went why far saw <br></br>many knew.
+Exquisite excellent son gentleman acuteness her.</p>
+</center>
+    </div>
+    <SliderTestimonial></SliderTestimonial>
+          </div>
+
+        </div>
+
+</div>  
+  </div>
+
+</div>
+
+
+
+    
+
+
+
+
+   
+     
+
+
+  
 
 
       <Footer />

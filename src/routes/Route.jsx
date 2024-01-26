@@ -12,7 +12,7 @@ import Dashboard from '../Component/dashboard/Dashboard';
 import CampList from '../Component/dashboard/CampList';
 import Verify from '../Component/Verify';
 import Influencers from '../Component/Influencers';
-
+import NewHome from '../Component/Homebackup';
 const Routing = () => {
     
     return(
@@ -20,6 +20,7 @@ const Routing = () => {
         <Header />
         <Routes>
             <Route exact path='/' element={< Home />}></Route>
+            <Route exact path='/newhome' element={< NewHome />}></Route>
             <Route exact path='/product' element={< Product />}></Route>
             <Route exact path='/marketplace' element={< Marketplace />}></Route>
             <Route exact path='/login' element={< Login />}></Route>

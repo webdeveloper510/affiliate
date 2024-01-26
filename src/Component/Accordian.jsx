@@ -18,7 +18,7 @@ function Accordian (){
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">
-        <Accordion.Header>Develop solutions</Accordion.Header>
+        <Accordion.Header> <p class="icon-acc"></p> Develop solutions</Accordion.Header>
         <Accordion.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
