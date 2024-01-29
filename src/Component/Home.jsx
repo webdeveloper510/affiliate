@@ -29,7 +29,12 @@ import filter from '../assets/filter (2).png';
 import over1 from '../assets/over1.png';
 import over2 from '../assets/over2.png';
 import over3 from '../assets/over3.png';
-import ser from '../assets/ser.png'
+import ser from '../assets/ser.png';
+import cam2 from '../assets/camimag.png';
+import cam3 from '../assets/cam2 (2).png';
+import cam4 from '../assets/cam2 (1).png';
+import social1 from '../assets/socail (1).png';
+import social2 from '../assets/social (2).png';
 import Testimonial from './Testimonial';
 import Accordian from './Accordian';
 import SliderTestimonial from './Slidertest';
@@ -155,6 +160,7 @@ function Home() {
 <div className='name-influ'>Chiara Ferragni</div>
 <div className='border-influ'></div>
 <div className='count-flowers'>5.4M Followers</div>
+<div class="cam-price social-price">AED 200</div>
 <div className='soacial-media'>
 <ul className='social-icon'>
   <li>
@@ -179,6 +185,7 @@ function Home() {
 <div className='name-influ'>Chiara Ferragni</div>
 <div className='border-influ'></div>
 <div className='count-flowers'>5.4M Followers</div>
+<div class="cam-price social-price">AED 200</div>
 <div className='soacial-media'>
 <ul className='social-icon'>
   <li>
@@ -204,6 +211,7 @@ function Home() {
 <div className='name-influ'>Chiara Ferragni</div>
 <div className='border-influ'></div>
 <div className='count-flowers'>5.4M Followers</div>
+<div class="cam-price social-price">AED 200</div>
 <div className='soacial-media'>
 <ul className='social-icon'>
   <li>
@@ -229,6 +237,7 @@ function Home() {
 <div className='name-influ'>Chiara Ferragni</div>
 <div className='border-influ'></div>
 <div className='count-flowers'>5.4M Followers</div>
+<div class="cam-price social-price">AED 200</div>
 <div className='soacial-media'>
 <ul className='social-icon'>
   <li>
@@ -292,20 +301,20 @@ Herbal Tea
     <div className='cam-outer'>
       
     <div className='camp-image'>
-      <img src={cam1}>
+      <img src={cam2}>
 
       </img>
 
     </div>
     <div className='infor-cam'>
     <div className='camp-name'>
-    Tea Herbal TH
+    Fashioned
     </div>
     <div className='sub-cam'>
     Rick Bewell
     </div>
 <div className='cat-cam'>
-Herbal Tea
+Pink Hand Bag
   </div>
   <div class="cam-price">
   $89.00
@@ -317,20 +326,20 @@ Herbal Tea
     <div className='cam-outer'>
       
     <div className='camp-image'>
-      <img src={cam1}>
+      <img src={cam4}>
 
       </img>
 
     </div>
     <div className='infor-cam'>
     <div className='camp-name'>
-    Tea Herbal TH
+    Tree Hostel
     </div>
     <div className='sub-cam'>
-    Rick Bewell
+    Edward Vashior
     </div>
 <div className='cat-cam'>
-Herbal Tea
+Tree House Stay
   </div>
   <div class="cam-price">
   $89.00
@@ -342,20 +351,20 @@ Herbal Tea
     <div className='cam-outer'>
       
     <div className='camp-image'>
-      <img src={cam1}>
+      <img src={cam3}>
 
       </img>
 
     </div>
     <div className='infor-cam'>
     <div className='camp-name'>
-    Tea Herbal TH
+    Asty yummy
     </div>
     <div className='sub-cam'>
     Rick Bewell
     </div>
 <div className='cat-cam'>
-Herbal Tea
+Restaurant Food Items
   </div>
   <div class="cam-price">
   $89.00

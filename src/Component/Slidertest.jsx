@@ -5,6 +5,8 @@ import arrow1 from '../assets/arrow-slider.png';
 import sliderarrow1 from '../assets/sliderarrow1.png';
 import sliderarrow2 from '../assets/blackarrow.png';
 import test1 from '../assets/imgtest.png';
+import test2 from '../assets/social (1).png';
+import test3 from '../assets/social (2).png';
 import star from '../assets/star.png';
 import qoute from '../assets/qoute.png';
 
@@ -42,7 +44,7 @@ const SliderTestimonial = () => {
        
         paragraph: 'Ipsum vel nobis doloremque est aut non accusantium vero molestias. Et est minima dolorem eum modi atque sint nobis. '
       },     {
-        imageautthor:test1,
+        imageautthor:test2,
         Nametest:"Rolando Hintz",
       
         destination: "District Division Orchestrator",
@@ -52,7 +54,7 @@ const SliderTestimonial = () => {
         paragraph: 'Ipsum vel nobis doloremque est aut non accusantium vero molestias. Et est minima dolorem eum modi atque sint nobis. '
       },
       {
-        imageautthor:test1,
+        imageautthor:test3,
         Nametest:"Rolando Hintz",
       
         destination: "District Division Orchestrator",
@@ -62,7 +64,7 @@ const SliderTestimonial = () => {
         paragraph: 'Ipsum vel nobis doloremque est aut non accusantium vero molestias. Et est minima dolorem eum modi atque sint nobis. '
       },
       {
-        imageautthor:test1,
+        imageautthor:test3,
         Nametest:"Rolando Hintz",
       
         destination: "District Division Orchestrator",

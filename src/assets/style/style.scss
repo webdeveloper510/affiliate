@@ -5201,6 +5201,7 @@ background: url("../influncer-bg.png");
     color: #5072FC;
     font-weight: bold;
     font-size: 22px;
+    text-transform: capitalize;
 }
 .quoter {
     width: max-content;
@@ -5852,4 +5853,18 @@ border-radius: 0px !important;
 
 .all-influcer {
     margin-top: 50px;
+}
+
+.cam-price.social-price {
+    margin-bottom: 13px;
+    text-align: center;
+    font-size: 18px;
+}
+ul.social-icon li:last-child {
+    margin: 0px !important;
+}
+.all-influcer {
+    float: left;
+    width: 100% !IMPORTANT;
+    margin-top: 50px !important;
 }
