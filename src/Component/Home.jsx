@@ -319,13 +319,14 @@ function Home() {
                   {item?.campaign_name}
                   </div>
                   <div className='sub-cam'>
-                  {item?.offer}
-                  </div>
-                  <div className='cat-cam'>
                   {item?.product[0]?.product_name}
                   </div>
+                  <div className=' cat-cam'>
+                  {item?.description}
+                  </div>
+                 
                   <div class="cam-price">
-                  {item?.product[0]?.amount[0]} {item?.product[0]?.discount_type[0] === 'fixed_amount' ? '/-' : '%'}
+                  {item?.product[0]?.discount_type[0] === 'fixed_amount' ? ' AED ' : ''}{item?.product[0]?.amount[0]} {item?.product[0]?.discount_type[0] === 'fixed_amount' ? '' : '%'}
                   </div>
                 </div>
               </div>
