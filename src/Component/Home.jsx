@@ -316,16 +316,16 @@ function Home() {
                 </div>
                 <div className='infor-cam'>
                   <div className='camp-name'>
-                  {item.campaign_name}
+                  {item?.campaign_name}
                   </div>
                   <div className='sub-cam'>
-                  {item?.discount_type[0]}
+                  {item?.offer}
                   </div>
                   <div className='cat-cam'>
-                  {item.product_name}
+                  {item?.product[0]?.product_name}
                   </div>
                   <div class="cam-price">
-                  {item?.amount[0]} {item?.discount_type[0] === 'fixed_amount' ? '/-' : '%'}
+                  {item?.product[0]?.amount[0]} {item?.product[0]?.discount_type[0] === 'fixed_amount' ? '/-' : '%'}
                   </div>
                 </div>
               </div>
