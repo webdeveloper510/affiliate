@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import Icofont from 'react-icofont';
 // import { useLocation } from 'react-router-dom';
 import Howitwork from './Howitwork';
@@ -27,6 +27,7 @@ import overviwpinkk from '../assets/overviwpinkk.png'
 import extraimage from '../assets/bg-1.png';
 import filter from '../assets/filter (2).png';
 import over1 from '../assets/over1.png';
+import UserContext from './context/UserContext';
 import over2 from '../assets/over2.png';
 import over3 from '../assets/over3.png';
 import ser from '../assets/ser.png';
@@ -41,10 +42,15 @@ import SliderTestimonial from './Slidertest';
 import Footer from './Footer';
 import axios from 'axios';
 import { API } from '../config/Api';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Home() {
   const [influencer, setInfluencer] = useState([]);
   const [marketItems, setMarketItems] = useState([]);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("logToken");
+    const { setAppliedId, influStatus, setInfluStatus } = useContext(UserContext);
   const fetchData = async () => {
     try {
       const apiUrl = `https://api.myrefera.com/campaign/inflwebsitelist/`;
@@ -68,6 +74,35 @@ function Home() {
       });
     fetchData();
   }, [])
+
+  const handleApplied = (e, id) => {
+    e.preventDefault();
+    setAppliedId(id);
+
+    if (token) {
+      axios.post(API.BASE_URL + `influencer/inflapplied/?value=${id}`, {
+        value: id,
+      }, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      })
+        .then(function (response) {
+          console.log("Requested", response.data);
+          toast.success("Successfully Applied")
+          navigate('/dashboard');
+        })
+        .catch(function (error) {
+          toast.warn("Already Applied")
+          console.log(error);
+        });
+      } else {
+        toast.warn("Sign in to continue");
+      setInfluStatus(1)
+      console.log("influStatus", influStatus)
+      navigate('/login');
+    }
+  };
   return (
     <>
       <div className="top-section">
@@ -328,6 +363,8 @@ function Home() {
                   <div class="cam-price">
                   {item?.product[0]?.discount_type[0] === 'fixed_amount' ? ' AED ' : ''}{item?.product[0]?.amount[0]} {item?.product[0]?.discount_type[0] === 'fixed_amount' ? '' : '%'}
                   </div>
+
+                  <button className="buttonfx angleindouble color-1 mb-2" style={{margin:'15px 0px', width:'100%'}} onClick={(e) => { handleApplied(e, item.campaignid_id) }}>Apply</button>
                 </div>
               </div>
             </div>
