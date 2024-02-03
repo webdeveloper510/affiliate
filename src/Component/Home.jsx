@@ -115,11 +115,11 @@ function Home() {
                   <p>Contact and expand your reach with the right content creators from different categories including: Fashion, Beauty, Health, Fitness, Travel</p>
                   <div className="row align-center">
                     <div className="col-md-6">
-                      <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+                      <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/#/Login">
                         start For Free <img src={arrowbtn}></img> </a>
                     </div>
                     <div className="col-md-6 ">
-                      <a className=" video-watch" href="/">Watch a Video<span className="circle-img"><img src={watch}></img></span></a>
+                      {/* <a className=" video-watch" href="/">Watch a Video<span className="circle-img"><img src={watch}></img></span></a> */}
                     </div>
                   </div>
                 </div>
@@ -326,7 +326,7 @@ function Home() {
 
               </div> */}
               <div className='all-influcer'>
-                <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+                <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/#/Influencers">
                   View all Influencers</a>
 
               </div>
@@ -508,7 +508,7 @@ function Home() {
                   <h3 className=' colro-sky'>Reach Influencer</h3>
                   <p>Hand pick content creators to <br></br>promote your products with just a <br></br>few clicks</p>
 
-                  <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+                  <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/#/Influencers">
                     Learn More</a>
                 </div>
               </div>
@@ -521,7 +521,7 @@ function Home() {
                     <h3 className=' colro-sky'>For Marketplace</h3>
                     <p>Increase your revenue stream to your <br></br>business collect recurring fees from stors<br></br> who use affeli in your Market place.</p>
 
-                    <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+                    <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/#/marketplace">
                       Learn More</a>
                   </div>
                 </div>
@@ -559,7 +559,7 @@ function Home() {
                     <h3 className=' colro-sky'>For Vendor</h3>
                     <p> With our partners smart <br></br>payment solutions, you will get <br></br>instant payouts!</p>
 
-                    <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/">
+                    <a className="buttonfx angleindouble color-1 mb-2 free-button" href="/#/vendor-signup">
                       Learn More</a>
                   </div>
                 </div>
