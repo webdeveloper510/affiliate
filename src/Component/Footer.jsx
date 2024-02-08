@@ -84,7 +84,7 @@ Privacy Policy </NavLink>
               
             </ul>
           </div>
-          <div className='col-20'>
+          {/* <div className='col-20'>
           <h3 class="footer-heading">Resources</h3>
           <ul className="menu-footer">
               <li>
@@ -100,7 +100,7 @@ Privacy Policy </NavLink>
                 <NavLink to="/"> Youtube Playlist </NavLink>
                 </li>
             </ul>
-          </div>
+          </div> */}
           <div className='col-20'>
           <h3 class="footer-heading">Contact Us</h3>
 <div className='row'>
